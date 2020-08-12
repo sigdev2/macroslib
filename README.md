@@ -14,6 +14,8 @@
 
 ## About The Project
 
+This project contains a set of macros that can be useful when programming in C/C++. A small set of *.h files contains both commonly used standard solutions and examples of complex macros.This project contains a set of macros that can be useful when programming in C/C++. A small set of *.h files contains both commonly used standard solutions and examples of complex macros. The library can be used both in real projects and as a reminder for writing a particular macro.
+
 You can read [The Change history](./CHANGELOG)
 
 ## Usage
