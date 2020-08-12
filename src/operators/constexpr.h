@@ -1,0 +1,16 @@
+//
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+#ifndef __HAS_MACROS_LIB_CONSTEXPR_H__
+#define __HAS_MACROS_LIB_CONSTEXPR_H__
+
+#ifdef CXX11
+#    define CONSTEXPR constexpr
+#else // CXX11
+#    define CONSTEXPR
+#endif // CXX11
+
+/////////////////////////////////////////////////////////////////////////////
+#endif // __HAS_MACROS_LIB_CONSTEXPR_H__

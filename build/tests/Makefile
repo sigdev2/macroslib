@@ -1,0 +1,2 @@
+tests:
+	echo "No tests"

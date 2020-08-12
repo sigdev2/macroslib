@@ -1,2 +1,25 @@
-# macroslib
-Standard c++ macros repository
+[en_EN](./README.md) [ru_RU](README.ru_RU.md)
+
+<p align="center">
+    <img src="./docs/logo.png" alt="Logo" width="80" height="80">
+    <h3 align="center">MacrosLib</h3>
+    <p align="center">Last version 0.1.0-a1</p>
+</p>
+
+## Table of Contents
+
+* [About the Project](#about-the-project)
+* [Usage](#usage)
+* [License](#license)
+
+## About The Project
+
+You can read [The Change history](./CHANGELOG)
+
+## Usage
+
+Read help for MacrosLib
+
+## License
+
+Distributed under the MIT License.

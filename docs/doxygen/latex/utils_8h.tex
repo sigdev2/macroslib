@@ -1,0 +1,201 @@
+\hypertarget{utils_8h}{}\doxysection{C\+:/\+Users/\+Sig/\+Dropbox/\+Macros\+Lib/src/preprocessor/utils.h File Reference}
+\label{utils_8h}\index{C:/Users/Sig/Dropbox/MacrosLib/src/preprocessor/utils.h@{C:/Users/Sig/Dropbox/MacrosLib/src/preprocessor/utils.h}}
+
+
+Macroses for work with preprocessor. Crosslanguage.  
+
+
+{\ttfamily \#include \char`\"{}../operators/while.\+h\char`\"{}}\newline
+Include dependency graph for utils.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{utils_8h_a3026d1c6bfb21c3e40fc020f95a17ac4}{P\+P\+\_\+\+I\+N\+D\+I\+R\+E\+C\+T\+\_\+\+E\+X\+P\+A\+ND}}(m,  args)~m args
+\begin{DoxyCompactList}\small\item\em Macros for expand indirect macroses. Used for run macros in args of macroses. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{utils_8h_ab54b8dab47b835e5318656f6c2a54e7e}{P\+P\+\_\+\+D\+O\+\_\+\+S\+A\+FE}}(...)~do \{ \+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+ ; \} whileone
+\begin{DoxyCompactList}\small\item\em Call code from one or more operators in args, is anyway converted to one operator. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{utils_8h_a1e6f6ac191d108c6c152f389d353e114}{P\+P\+\_\+\+C\+AT}}(x,  y)~\mbox{\hyperlink{utils_8h_a961c18ce03024436a1a109f72d024768}{P\+P\+\_\+\+C\+A\+T\+\_\+A}}(x, y)
+\begin{DoxyCompactList}\small\item\em Concat two values in args with two parts\+: \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{utils_8h_a961c18ce03024436a1a109f72d024768}{P\+P\+\_\+\+C\+A\+T\+\_\+A}}(x,  y)~x\#\#y
+\begin{DoxyCompactList}\small\item\em Simple concat two values in args with \#\# operator. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{utils_8h_a7eb31ee418881d28399c4efd561a7037}{P\+P\+\_\+\+V\+AR}}~\mbox{\hyperlink{utils_8h_a1e6f6ac191d108c6c152f389d353e114}{P\+P\+\_\+\+C\+AT}}(\+\_\+\+\_\+\+\_\+some\+\_\+value\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em Generate code uniq var name like \+\_\+\+\_\+\+\_\+some\+\_\+value\+\_\+$<$line\+\_\+number$>$ \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{utils_8h_a45995e9aadbc4ecd740ca584bcea8247}{P\+P\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+V\+AR}}~\mbox{\hyperlink{utils_8h_a7eb31ee418881d28399c4efd561a7037}{P\+P\+\_\+\+V\+AR}}
+\begin{DoxyCompactList}\small\item\em Example of use P\+P\+\_\+\+V\+AR. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{utils_8h_a17ce68d1983b9cca0ceb8dff733994e0}{P\+P\+\_\+\+C\+H\+E\+C\+K\+\_\+\+IF}}(x, ...)~\mbox{\hyperlink{utils_8h_ab54b8dab47b835e5318656f6c2a54e7e}{P\+P\+\_\+\+D\+O\+\_\+\+S\+A\+FE}}(const bool \mbox{\hyperlink{utils_8h_a7eb31ee418881d28399c4efd561a7037}{P\+P\+\_\+\+V\+AR}} = ( x ); if ( \mbox{\hyperlink{utils_8h_a7eb31ee418881d28399c4efd561a7037}{P\+P\+\_\+\+V\+AR}} ) \{ \+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+ ; \})
+\begin{DoxyCompactList}\small\item\em Call code if bool is true. Use for write short and safe if-\/operator in macroses. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{utils_8h_ad6679cf2c3aefaca6e010fd2fca46dd9}\label{utils_8h_ad6679cf2c3aefaca6e010fd2fca46dd9}} 
+\#define {\bfseries P\+P\+\_\+\+C\+O\+M\+MA}~,
+\item 
+\mbox{\Hypertarget{utils_8h_abb6cec4390fb70859406b410e1c313af}\label{utils_8h_abb6cec4390fb70859406b410e1c313af}} 
+\#define {\bfseries P\+P\+\_\+\+E\+M\+P\+TY}
+\item 
+\mbox{\Hypertarget{utils_8h_ae68b4f555a7bbe404e5cff2c88c2c8bf}\label{utils_8h_ae68b4f555a7bbe404e5cff2c88c2c8bf}} 
+\#define {\bfseries P\+P\+\_\+\+N\+O\+NE}~P\+P\+\_\+\+E\+M\+P\+TY
+\item 
+\mbox{\Hypertarget{utils_8h_a9230735e5c97a73723b84c2a9f9b46c7}\label{utils_8h_a9230735e5c97a73723b84c2a9f9b46c7}} 
+\#define {\bfseries P\+P\+\_\+\+N\+AN}~P\+P\+\_\+\+E\+M\+P\+TY
+\item 
+\mbox{\Hypertarget{utils_8h_abc07b9ac58f9856870197a56e634ad50}\label{utils_8h_abc07b9ac58f9856870197a56e634ad50}} 
+\#define {\bfseries P\+P\+\_\+\+V\+O\+ID}~P\+P\+\_\+\+E\+M\+P\+TY
+\item 
+\mbox{\Hypertarget{utils_8h_a8f6854400196ddabd0072568ad6b5252}\label{utils_8h_a8f6854400196ddabd0072568ad6b5252}} 
+\#define {\bfseries P\+P\+\_\+\+T\+R\+UE}~true
+\item 
+\mbox{\Hypertarget{utils_8h_ab0eb5414625a10a5bea021bfb98312b8}\label{utils_8h_ab0eb5414625a10a5bea021bfb98312b8}} 
+\#define {\bfseries P\+P\+\_\+\+F\+A\+L\+SE}~P\+P\+\_\+\+E\+M\+P\+TY
+\item 
+\mbox{\Hypertarget{utils_8h_a41d8ea59b932a26a848ef999921b12c8}\label{utils_8h_a41d8ea59b932a26a848ef999921b12c8}} 
+\#define {\bfseries P\+P\+\_\+\+A\+P\+P\+LY}(...)~\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+
+\item 
+\mbox{\Hypertarget{utils_8h_ab3cf6cfef674b6f96bfe50719c0cf063}\label{utils_8h_ab3cf6cfef674b6f96bfe50719c0cf063}} 
+\#define {\bfseries P\+P\+\_\+\+I\+N\+V\+O\+KE}(x,  y)~P\+P\+\_\+\+A\+P\+P\+LY(x y)
+\item 
+\mbox{\Hypertarget{utils_8h_a89566870e533377819cdba033faad3cd}\label{utils_8h_a89566870e533377819cdba033faad3cd}} 
+\#define {\bfseries P\+P\+\_\+\+S\+I\+N\+G\+L\+E\+\_\+\+T\+Y\+PE}(...)~\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+
+\item 
+\mbox{\Hypertarget{utils_8h_aa34219b12936163e3b137ddc24ce2f09}\label{utils_8h_aa34219b12936163e3b137ddc24ce2f09}} 
+\#define {\bfseries P\+P\+\_\+\+S\+I\+N\+G\+L\+E\+\_\+\+T\+Y\+P\+E\+\_\+\+I\+N\+H\+E\+R\+IT}(...)~\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Macroses for work with preprocessor. Crosslanguage. 
+
+Depend from\+:
+\begin{DoxyItemize}
+\item /operators/while.h 
+\end{DoxyItemize}
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{utils_8h_a1e6f6ac191d108c6c152f389d353e114}\label{utils_8h_a1e6f6ac191d108c6c152f389d353e114}} 
+\index{utils.h@{utils.h}!PP\_CAT@{PP\_CAT}}
+\index{PP\_CAT@{PP\_CAT}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{PP\_CAT}{PP\_CAT}}
+{\footnotesize\ttfamily \#define P\+P\+\_\+\+C\+AT(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})~\mbox{\hyperlink{utils_8h_a961c18ce03024436a1a109f72d024768}{P\+P\+\_\+\+C\+A\+T\+\_\+A}}(x, y)}
+
+
+
+Concat two values in args with two parts\+: 
+
+
+\begin{DoxyItemize}
+\item expansion of argument values, even if they are macros
+\item call P\+P\+\_\+\+C\+A\+T\+\_\+A with \#\# operator 
+\begin{DoxyParams}{Parameters}
+{\em x} & first value. \\
+\hline
+{\em y} & second value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Concat value of extended {\itshape x} and {\itshape y} args 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\mbox{\Hypertarget{utils_8h_a961c18ce03024436a1a109f72d024768}\label{utils_8h_a961c18ce03024436a1a109f72d024768}} 
+\index{utils.h@{utils.h}!PP\_CAT\_A@{PP\_CAT\_A}}
+\index{PP\_CAT\_A@{PP\_CAT\_A}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{PP\_CAT\_A}{PP\_CAT\_A}}
+{\footnotesize\ttfamily \#define P\+P\+\_\+\+C\+A\+T\+\_\+A(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})~x\#\#y}
+
+
+
+Simple concat two values in args with \#\# operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & first value. \\
+\hline
+{\em y} & second value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Concated x and y values 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_a17ce68d1983b9cca0ceb8dff733994e0}\label{utils_8h_a17ce68d1983b9cca0ceb8dff733994e0}} 
+\index{utils.h@{utils.h}!PP\_CHECK\_IF@{PP\_CHECK\_IF}}
+\index{PP\_CHECK\_IF@{PP\_CHECK\_IF}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{PP\_CHECK\_IF}{PP\_CHECK\_IF}}
+{\footnotesize\ttfamily \#define P\+P\+\_\+\+C\+H\+E\+C\+K\+\_\+\+IF(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{... }\end{DoxyParamCaption})~\mbox{\hyperlink{utils_8h_ab54b8dab47b835e5318656f6c2a54e7e}{P\+P\+\_\+\+D\+O\+\_\+\+S\+A\+FE}}(const bool \mbox{\hyperlink{utils_8h_a7eb31ee418881d28399c4efd561a7037}{P\+P\+\_\+\+V\+AR}} = ( x ); if ( \mbox{\hyperlink{utils_8h_a7eb31ee418881d28399c4efd561a7037}{P\+P\+\_\+\+V\+AR}} ) \{ \+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+ ; \})}
+
+
+
+Call code if bool is true. Use for write short and safe if-\/operator in macroses. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & bool value. \\
+\hline
+{\em $<$strong$>$\+V\+A\+\_\+\+A\+R\+G\+S$<$/strong$>$} & code. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Expands to {\itshape x} {\itshape {\bfseries{V\+A\+\_\+\+A\+R\+GS}}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_a45995e9aadbc4ecd740ca584bcea8247}\label{utils_8h_a45995e9aadbc4ecd740ca584bcea8247}} 
+\index{utils.h@{utils.h}!PP\_DEFINE\_VAR@{PP\_DEFINE\_VAR}}
+\index{PP\_DEFINE\_VAR@{PP\_DEFINE\_VAR}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{PP\_DEFINE\_VAR}{PP\_DEFINE\_VAR}}
+{\footnotesize\ttfamily \#define P\+P\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+V\+AR~\mbox{\hyperlink{utils_8h_a7eb31ee418881d28399c4efd561a7037}{P\+P\+\_\+\+V\+AR}}}
+
+
+
+Example of use P\+P\+\_\+\+V\+AR. 
+
+\begin{DoxyReturn}{Returns}
+\+\_\+\+\_\+\+\_\+some\+\_\+value\+\_\+$<$line\+\_\+number$>$ where has been defined this macro 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_ab54b8dab47b835e5318656f6c2a54e7e}\label{utils_8h_ab54b8dab47b835e5318656f6c2a54e7e}} 
+\index{utils.h@{utils.h}!PP\_DO\_SAFE@{PP\_DO\_SAFE}}
+\index{PP\_DO\_SAFE@{PP\_DO\_SAFE}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{PP\_DO\_SAFE}{PP\_DO\_SAFE}}
+{\footnotesize\ttfamily \#define P\+P\+\_\+\+D\+O\+\_\+\+S\+A\+FE(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})~do \{ \+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+ ; \} whileone}
+
+
+
+Call code from one or more operators in args, is anyway converted to one operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$strong$>$\+V\+A\+\_\+\+A\+R\+G\+S$<$/strong$>$} & code. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Expands to {\itshape {\bfseries{V\+A\+\_\+\+A\+R\+GS}}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_a3026d1c6bfb21c3e40fc020f95a17ac4}\label{utils_8h_a3026d1c6bfb21c3e40fc020f95a17ac4}} 
+\index{utils.h@{utils.h}!PP\_INDIRECT\_EXPAND@{PP\_INDIRECT\_EXPAND}}
+\index{PP\_INDIRECT\_EXPAND@{PP\_INDIRECT\_EXPAND}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{PP\_INDIRECT\_EXPAND}{PP\_INDIRECT\_EXPAND}}
+{\footnotesize\ttfamily \#define P\+P\+\_\+\+I\+N\+D\+I\+R\+E\+C\+T\+\_\+\+E\+X\+P\+A\+ND(\begin{DoxyParamCaption}\item[{}]{m,  }\item[{}]{args }\end{DoxyParamCaption})~m args}
+
+
+
+Macros for expand indirect macroses. Used for run macros in args of macroses. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & macros name. \\
+\hline
+{\em args} & args for macros in brekets. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Expands to {\itshape m} {\itshape args}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utils_8h_a7eb31ee418881d28399c4efd561a7037}\label{utils_8h_a7eb31ee418881d28399c4efd561a7037}} 
+\index{utils.h@{utils.h}!PP\_VAR@{PP\_VAR}}
+\index{PP\_VAR@{PP\_VAR}!utils.h@{utils.h}}
+\doxysubsubsection{\texorpdfstring{PP\_VAR}{PP\_VAR}}
+{\footnotesize\ttfamily \#define P\+P\+\_\+\+V\+AR~\mbox{\hyperlink{utils_8h_a1e6f6ac191d108c6c152f389d353e114}{P\+P\+\_\+\+C\+AT}}(\+\_\+\+\_\+\+\_\+some\+\_\+value\+\_\+, \+\_\+\+\_\+\+L\+I\+N\+E\+\_\+\+\_\+)}
+
+
+
+Generate code uniq var name like \+\_\+\+\_\+\+\_\+some\+\_\+value\+\_\+$<$line\+\_\+number$>$ 
+
+\begin{DoxyReturn}{Returns}
+\+\_\+\+\_\+\+\_\+some\+\_\+value\+\_\+$<$line\+\_\+number$>$ 
+\end{DoxyReturn}

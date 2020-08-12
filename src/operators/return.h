@@ -1,0 +1,14 @@
+//
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+#ifndef __HAS_MACROS_LIB_RETURN_H__
+#define __HAS_MACROS_LIB_RETURN_H__
+
+#include "../preprocessor/utils.h"
+
+#define return_void(...)  PP_DO_SAFE(__VA_ARGS__; return;)
+
+/////////////////////////////////////////////////////////////////////////////
+#endif // __HAS_MACROS_LIB_RETURN_H__

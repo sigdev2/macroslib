@@ -1,0 +1,593 @@
+\hypertarget{toadd_8h}{}\doxysection{C\+:/\+Users/\+Sig/\+Dropbox/\+Macros\+Lib/src/toadd.h File Reference}
+\label{toadd_8h}\index{C:/Users/Sig/Dropbox/MacrosLib/src/toadd.h@{C:/Users/Sig/Dropbox/MacrosLib/src/toadd.h}}
+
+
+The main macros of the library.  
+
+
+{\ttfamily \#include \char`\"{}xmacro.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}perfcounters\+\_\+ctr.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}perfcounter\+\_\+ctr.\+h\char`\"{}}\newline
+Include dependency graph for toadd.\+h\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{toadd_8h_a6fafc11f63598e7fde1261792e381393}\label{toadd_8h_a6fafc11f63598e7fde1261792e381393}} 
+\#define {\bfseries ushort}~unsigned short
+\item 
+\mbox{\Hypertarget{toadd_8h_ad46b2ebcd4c426b06cda147ddc1001e7}\label{toadd_8h_ad46b2ebcd4c426b06cda147ddc1001e7}} 
+\#define {\bfseries uint}~unsigned int
+\item 
+\mbox{\Hypertarget{toadd_8h_aa8ddf20cdd716b652e76e23e5e700893}\label{toadd_8h_aa8ddf20cdd716b652e76e23e5e700893}} 
+\#define {\bfseries uchar}~unsigned char
+\item 
+\mbox{\Hypertarget{toadd_8h_ae8fc5214ec1fc196a783f34d3e680378}\label{toadd_8h_ae8fc5214ec1fc196a783f34d3e680378}} 
+\#define {\bfseries loop0i}(end\+\_\+l)~for ( int i=0;i$<$end\+\_\+l;++i )
+\item 
+\mbox{\Hypertarget{toadd_8h_a1d57092a63c475769e5c804899d356d0}\label{toadd_8h_a1d57092a63c475769e5c804899d356d0}} 
+\#define {\bfseries loop0j}(end\+\_\+l)~for ( int j=0;j$<$end\+\_\+l;++j )
+\item 
+\mbox{\Hypertarget{toadd_8h_aeb23921318845dc551e3e9128ea79cda}\label{toadd_8h_aeb23921318845dc551e3e9128ea79cda}} 
+\#define {\bfseries loopi}(start\+\_\+l,  end\+\_\+l)~for ( int i=start\+\_\+l;i$<$end\+\_\+l;++i )
+\item 
+\mbox{\Hypertarget{toadd_8h_ade963200a2255a094a7d9980aa94da3c}\label{toadd_8h_ade963200a2255a094a7d9980aa94da3c}} 
+\#define {\bfseries loopj}(start\+\_\+l,  end\+\_\+l)~for ( int j=start\+\_\+l;j$<$end\+\_\+l;++j )
+\item 
+\mbox{\Hypertarget{toadd_8h_ab0c7216a3087a24ca223d55a2c370a41}\label{toadd_8h_ab0c7216a3087a24ca223d55a2c370a41}} 
+\#define {\bfseries loopk}(start\+\_\+l,  end\+\_\+l)~for ( int k=start\+\_\+l;k$<$end\+\_\+l;++k )
+\item 
+\mbox{\Hypertarget{toadd_8h_a9c72c3f3c75cedc6383f008ee960f7a3}\label{toadd_8h_a9c72c3f3c75cedc6383f008ee960f7a3}} 
+\#define {\bfseries loopl}(start\+\_\+l,  end\+\_\+l)~for ( int l=start\+\_\+l;l$<$end\+\_\+l;++l )
+\item 
+\mbox{\Hypertarget{toadd_8h_acda817af2aeeb511be9d867630ade0d8}\label{toadd_8h_acda817af2aeeb511be9d867630ade0d8}} 
+\#define {\bfseries loopm}(start\+\_\+l,  end\+\_\+l)~for ( int m=start\+\_\+l;m$<$end\+\_\+l;++m )
+\item 
+\mbox{\Hypertarget{toadd_8h_a854aaf6fd6879b401388920aa311a129}\label{toadd_8h_a854aaf6fd6879b401388920aa311a129}} 
+\#define {\bfseries loopn}(start\+\_\+l,  end\+\_\+l)~for ( int n=start\+\_\+l;n$<$end\+\_\+l;++n )
+\item 
+\mbox{\Hypertarget{toadd_8h_a7899ae343946f51d0cf03230b45fc6c2}\label{toadd_8h_a7899ae343946f51d0cf03230b45fc6c2}} 
+\#define {\bfseries loop}(a\+\_\+l,  start\+\_\+l,  end\+\_\+l)~for ( int a\+\_\+l = start\+\_\+l;a\+\_\+l$<$end\+\_\+l;++a\+\_\+l )
+\item 
+\mbox{\Hypertarget{toadd_8h_a332f8ffb1ecd57b030084774d492a988}\label{toadd_8h_a332f8ffb1ecd57b030084774d492a988}} 
+\#define {\bfseries loopij}(\+\_\+sti,  \+\_\+stj,  \+\_\+eni,  \+\_\+enj)~loopi(\+\_\+sti,\+\_\+eni)loopj (\+\_\+stj,\+\_\+enj)
+\item 
+\mbox{\Hypertarget{toadd_8h_a6758f593f16e8724d2016b63532a7437}\label{toadd_8h_a6758f593f16e8724d2016b63532a7437}} 
+\#define {\bfseries loopijk}(\+\_\+sti,  \+\_\+stj,  \+\_\+stk,  \+\_\+eni,  \+\_\+enj,  \+\_\+enk)~loopi(\+\_\+sti,\+\_\+eni) loopj (\+\_\+stj,\+\_\+enj) loopk (\+\_\+stk,\+\_\+enk)
+\item 
+\mbox{\Hypertarget{toadd_8h_aeda2657686c85b519413a0e1da841d95}\label{toadd_8h_aeda2657686c85b519413a0e1da841d95}} 
+\#define {\bfseries looplmn}(\+\_\+stl,  \+\_\+stm,  \+\_\+stn,  \+\_\+enl,  \+\_\+enm,  \+\_\+enn)~loopl(\+\_\+stl,\+\_\+enl) loopm (\+\_\+stm,\+\_\+enm) loopn (\+\_\+stn,\+\_\+enn)
+\item 
+\mbox{\Hypertarget{toadd_8h_a0a9ba7042b71d5a39f57f41138825a5e}\label{toadd_8h_a0a9ba7042b71d5a39f57f41138825a5e}} 
+\#define {\bfseries foreach}(var,  container)~for( auto var = (container).begin(); var != (container).end(); ++var)
+\item 
+\mbox{\Hypertarget{toadd_8h_a32e094f6be4b6b540fd2f641bb3450d3}\label{toadd_8h_a32e094f6be4b6b540fd2f641bb3450d3}} 
+\#define {\bfseries f\+\_\+min}~min
+\item 
+\mbox{\Hypertarget{toadd_8h_abc53e1e44f10a31bb667b43c41154f59}\label{toadd_8h_abc53e1e44f10a31bb667b43c41154f59}} 
+\#define {\bfseries f\+\_\+max}~max
+\item 
+\mbox{\Hypertarget{toadd_8h_ac6afabdc09a49a433ee19d8a9486056d}\label{toadd_8h_ac6afabdc09a49a433ee19d8a9486056d}} 
+\#define {\bfseries min}(a,  b)~(((a)$<$(b))?(a)\+:(b))
+\item 
+\mbox{\Hypertarget{toadd_8h_affe776513b24d84b39af8ab0930fef7f}\label{toadd_8h_affe776513b24d84b39af8ab0930fef7f}} 
+\#define {\bfseries max}(a,  b)~(((a)$>$(b))?(a)\+:(b))
+\item 
+\mbox{\Hypertarget{toadd_8h_a62fafa7da59b9656fe8cfd2a2dc82e52}\label{toadd_8h_a62fafa7da59b9656fe8cfd2a2dc82e52}} 
+\#define {\bfseries clamp}(a\+\_\+,  b\+\_\+,  c\+\_\+)~min(max(a\+\_\+,b\+\_\+),c\+\_\+)
+\item 
+\mbox{\Hypertarget{toadd_8h_acf346afe8951520ac2265b5fac59e851}\label{toadd_8h_acf346afe8951520ac2265b5fac59e851}} 
+\#define {\bfseries frac}(a)~(a-\/floor(a))
+\item 
+\mbox{\Hypertarget{toadd_8h_a5299638024884c2d423516a8d0189b25}\label{toadd_8h_a5299638024884c2d423516a8d0189b25}} 
+\#define {\bfseries dot3}(a,  b)~(a.\+x$\ast$b.\+x+a.\+y$\ast$b.\+y+a.\+z$\ast$b.\+z)
+\item 
+\mbox{\Hypertarget{toadd_8h_a94b9276e0b71d4d76de37c3697819e35}\label{toadd_8h_a94b9276e0b71d4d76de37c3697819e35}} 
+\#define {\bfseries cross3}(a,  b)~vec3f( a.\+y $\ast$ b.\+z -\/ a.\+z $\ast$ b.\+y, a.\+z $\ast$ b.\+x -\/ a.\+x $\ast$ b.\+z , a.\+x $\ast$ b.\+y -\/ a.\+y $\ast$ b.\+x )
+\item 
+\mbox{\Hypertarget{toadd_8h_a62ab0be4b837548b40cbcf7109d01eab}\label{toadd_8h_a62ab0be4b837548b40cbcf7109d01eab}} 
+\#define {\bfseries lerp}(a\+\_\+,  b\+\_\+,  t\+\_\+)~( a\+\_\+$\ast$(1-\/t\+\_\+) + b\+\_\+$\ast$t\+\_\+ )
+\item 
+\mbox{\Hypertarget{toadd_8h_a0c7badef648c5de7308488c6031472dc}\label{toadd_8h_a0c7badef648c5de7308488c6031472dc}} 
+\#define {\bfseries vswap}(a,  b)~\{ auto c=a;a=b;b=c; \}
+\item 
+\#define {\bfseries error\+\_\+stop}(fmt, ...)
+\item 
+\#define {\bfseries E\+N\+S\+U\+R\+E\+\_\+\+N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+S\+T\+A\+T\+E\+M\+E\+NT}(stmt)
+\item 
+\mbox{\Hypertarget{toadd_8h_a10a59554805ac7ce3905fd3540f98137}\label{toadd_8h_a10a59554805ac7ce3905fd3540f98137}} 
+\#define {\bfseries N\+O\+E\+X\+C\+E\+PT}~noexcept
+\item 
+\#define {\bfseries E\+N\+S\+U\+R\+E\+\_\+\+N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+E\+X\+P\+R\+E\+S\+S\+I\+ON}(expr)
+\item 
+\mbox{\Hypertarget{toadd_8h_a4215e4e5ac94b64ff3a13951fc90c82e}\label{toadd_8h_a4215e4e5ac94b64ff3a13951fc90c82e}} 
+\#define {\bfseries N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+C\+T\+C\+H\+E\+C\+K\+\_\+\+P\+U\+B\+\_\+\+H\+P\+P\+\_\+}
+\item 
+\mbox{\Hypertarget{toadd_8h_a696990f9ebcaec18093599d1f5f20a30}\label{toadd_8h_a696990f9ebcaec18093599d1f5f20a30}} 
+\#define {\bfseries N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+C\+T\+C\+H\+E\+C\+K\+\_\+\+V\+E\+R\+S\+I\+ON}~1000000
+\item 
+\#define {\bfseries N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+C\+T\+C\+H\+E\+C\+K\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+S\+T\+A\+T\+E\+M\+E\+NT}(stmt)
+\item 
+\#define {\bfseries N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+C\+T\+C\+H\+E\+C\+K\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+S\+T\+A\+T\+E\+M\+E\+NT}(stmt)
+\item 
+\mbox{\Hypertarget{toadd_8h_aff5dbd4a96eb7cb29e1f001a78fdc7f0}\label{toadd_8h_aff5dbd4a96eb7cb29e1f001a78fdc7f0}} 
+\#define {\bfseries N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+C\+T\+C\+H\+E\+C\+K\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT}(expr)~static\+\_\+assert(noexcept(expr), \#expr \char`\"{} is expected to be noexcept\char`\"{} )
+\item 
+\mbox{\Hypertarget{toadd_8h_aa589958a490be590fecde9a24dc3f968}\label{toadd_8h_aa589958a490be590fecde9a24dc3f968}} 
+\#define {\bfseries N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+C\+T\+C\+H\+E\+C\+K\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+A\+S\+S\+E\+R\+T\+\_\+\+N\+O\+T\+\_\+\+N\+O\+E\+X\+C\+E\+PT}(expr)~static\+\_\+assert(!noexcept(expr), \#expr \char`\"{} is not expected to be noexcept\char`\"{} )
+\item 
+\#define {\bfseries prefix\+\_\+safe\+Call}(default\+Value,  object\+Pointer,  method\+With\+Arguments)
+\item 
+\#define {\bfseries prefix\+\_\+safe\+Call\+Void}(object\+Pointer,  method\+With\+Arguments)
+\item 
+\mbox{\Hypertarget{toadd_8h_af5d5a5f66d8fe05bf9706738ba0b1d5d}\label{toadd_8h_af5d5a5f66d8fe05bf9706738ba0b1d5d}} 
+\#define {\bfseries prefix\+\_\+safe\+Call\+Base\+Expression}(default\+Value,  object\+Pointer,  method\+With\+Arguments)~((ptr) ? ((ptr)-\/$>$method\+With\+Arguments) \+: (default\+Value))
+\item 
+\#define {\bfseries prefix\+\_\+safe\+Call}(default\+Value,  object\+Pointer,  method\+With\+Arguments)
+\item 
+\#define {\bfseries prefix\+\_\+safe\+Call\+Void}(object\+Pointer,  method\+With\+Arguments)
+\item 
+\mbox{\Hypertarget{toadd_8h_ab7219607fb8a9b3e2f1896ede4f86b4f}\label{toadd_8h_ab7219607fb8a9b3e2f1896ede4f86b4f}} 
+\#define {\bfseries prefix\+\_\+unused}(variable)~((void)variable)
+\item 
+\mbox{\Hypertarget{toadd_8h_a89d7677a487aeae60b435b0c23f2eb34}\label{toadd_8h_a89d7677a487aeae60b435b0c23f2eb34}} 
+\#define {\bfseries prefix\+\_\+unused1}(variable1)~static\+\_\+cast$<$void$>$(variable1)
+\item 
+\mbox{\Hypertarget{toadd_8h_a82b6953d77db3d6ee8500281560b3271}\label{toadd_8h_a82b6953d77db3d6ee8500281560b3271}} 
+\#define {\bfseries prefix\+\_\+unused2}(variable1,  variable2)~static\+\_\+cast$<$void$>$(variable1), static\+\_\+cast$<$void$>$(variable2)
+\item 
+\mbox{\Hypertarget{toadd_8h_aa672a7d995db2bbdcb4b6ee53cbf988e}\label{toadd_8h_aa672a7d995db2bbdcb4b6ee53cbf988e}} 
+\#define {\bfseries prefix\+\_\+unused3}(variable1,  variable2,  variable3)~static\+\_\+cast$<$void$>$(variable1), static\+\_\+cast$<$void$>$(variable2), static\+\_\+cast$<$void$>$(variable3)
+\item 
+\mbox{\Hypertarget{toadd_8h_a851e7d9e4b44359f6f23f2a425868536}\label{toadd_8h_a851e7d9e4b44359f6f23f2a425868536}} 
+\#define {\bfseries prefix\+\_\+unused4}(variable1,  variable2,  variable3,  variable4)~static\+\_\+cast$<$void$>$(variable1), static\+\_\+cast$<$void$>$(variable2), static\+\_\+cast$<$void$>$(variable3), static\+\_\+cast$<$void$>$(variable4)
+\item 
+\mbox{\Hypertarget{toadd_8h_a1b0a7f35a337c816c407e5f5b91eb0d9}\label{toadd_8h_a1b0a7f35a337c816c407e5f5b91eb0d9}} 
+\#define {\bfseries prefix\+\_\+unused5}(variable1,  variable2,  variable3,  variable4,  variable5)~static\+\_\+cast$<$void$>$(variable1), static\+\_\+cast$<$void$>$(variable2), static\+\_\+cast$<$void$>$(variable3), static\+\_\+cast$<$void$>$(variable4), static\+\_\+cast$<$void$>$(variable5)
+\item 
+\mbox{\Hypertarget{toadd_8h_af809b02eacbc814e8e978aa52e2acbeb}\label{toadd_8h_af809b02eacbc814e8e978aa52e2acbeb}} 
+\#define {\bfseries unused2}(variable1,  variable2)~do \{static\+\_\+cast$<$void$>$(variable1); static\+\_\+cast$<$void$>$(variable2);\} while(false)
+\item 
+\mbox{\Hypertarget{toadd_8h_ac9e9ecef6b1656159f154ffa8342272e}\label{toadd_8h_ac9e9ecef6b1656159f154ffa8342272e}} 
+\#define {\bfseries prefix\+\_\+stringify}(something)~std\+::string(\#something)
+\item 
+\mbox{\Hypertarget{toadd_8h_a5407c7c716e484f5c2a5b1992df898d5}\label{toadd_8h_a5407c7c716e484f5c2a5b1992df898d5}} 
+\#define {\bfseries prefix\+\_\+single\+Argument}(...)~\+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+
+\item 
+\mbox{\Hypertarget{toadd_8h_a83ccbea50d889cbebcea3ede05d80af2}\label{toadd_8h_a83ccbea50d889cbebcea3ede05d80af2}} 
+\#define {\bfseries F\+OO}(type,  name)~type name
+\item 
+\mbox{\Hypertarget{toadd_8h_a60f66a56939ac17e7dff6f2b36b2fc88}\label{toadd_8h_a60f66a56939ac17e7dff6f2b36b2fc88}} 
+\#define {\bfseries forever}()~for(;;)
+\item 
+\mbox{\Hypertarget{toadd_8h_a511d6d47d499b1915262899d5e0dbd0a}\label{toadd_8h_a511d6d47d499b1915262899d5e0dbd0a}} 
+\#define {\bfseries ever}~(;;)
+\item 
+\mbox{\Hypertarget{toadd_8h_a598a3330b3c21701223ee0ca14316eca}\label{toadd_8h_a598a3330b3c21701223ee0ca14316eca}} 
+\#define {\bfseries PI}~3.\+14
+\item 
+\mbox{\Hypertarget{toadd_8h_a7f9aef7fae4da81a2bb0694b7084a9fe}\label{toadd_8h_a7f9aef7fae4da81a2bb0694b7084a9fe}} 
+\#define {\bfseries S\+UM}(A,  B)~((A)+(B))
+\item 
+\mbox{\Hypertarget{toadd_8h_a0d8b1eb12b1df133027257618fa791ba}\label{toadd_8h_a0d8b1eb12b1df133027257618fa791ba}} 
+\#define {\bfseries C\+\_\+\+M\+O\+D\+E\+\_\+\+S\+T\+A\+RT}~extern \char`\"{}C\char`\"{} \{
+\item 
+\mbox{\Hypertarget{toadd_8h_a88fa737059e67b4b17ec980e5877361e}\label{toadd_8h_a88fa737059e67b4b17ec980e5877361e}} 
+\#define {\bfseries C\+O\+N\+C\+AT}(a,  b)~a\#\#b
+\item 
+\mbox{\Hypertarget{toadd_8h_a51591cf51bdd6c1f6015532422e7770e}\label{toadd_8h_a51591cf51bdd6c1f6015532422e7770e}} 
+\#define {\bfseries Z}~((X)+(Y))
+\item 
+\mbox{\Hypertarget{toadd_8h_a5b2b19afb6db62477df78e6cce813d83}\label{toadd_8h_a5b2b19afb6db62477df78e6cce813d83}} 
+\#define {\bfseries F\+U\+N\+\_\+\+C\+A\+LL}~do \{ f(); \} while(0)
+\item 
+\mbox{\Hypertarget{toadd_8h_a26d8c7975967e3eac4c483dd5f04ad25}\label{toadd_8h_a26d8c7975967e3eac4c483dd5f04ad25}} 
+\#define {\bfseries T\+Y\+P\+E\+\_\+\+C\+H\+AR}~(char$\ast$)
+\item 
+\mbox{\Hypertarget{toadd_8h_ae7afb460abc6122c6a5f206d78bcae4e}\label{toadd_8h_ae7afb460abc6122c6a5f206d78bcae4e}} 
+\#define {\bfseries \+\_\+\+\_\+\+G\+N\+U\+G\+\_\+\+\_\+}~(\+\_\+\+\_\+\+G\+N\+U\+C\+\_\+\+\_\+\&\&\+\_\+\+\_\+cplusplus)
+\item 
+\mbox{\Hypertarget{toadd_8h_a6d5b1a034e610b9155eab11b1a12f154}\label{toadd_8h_a6d5b1a034e610b9155eab11b1a12f154}} 
+\#define {\bfseries D\+I\+FF}(A,  B)~(M\+AX((A),(B))-\/M\+IN((A),(B)))
+\item 
+\mbox{\Hypertarget{toadd_8h_a26d8c7975967e3eac4c483dd5f04ad25}\label{toadd_8h_a26d8c7975967e3eac4c483dd5f04ad25}} 
+\#define {\bfseries T\+Y\+P\+E\+\_\+\+C\+H\+AR}~(char$\ast$)
+\item 
+\mbox{\Hypertarget{toadd_8h_af9545418f4eeea2453c67180a9060fcd}\label{toadd_8h_af9545418f4eeea2453c67180a9060fcd}} 
+\#define {\bfseries A\+R\+C\+H\+I\+T\+E\+C\+T\+U\+RE}~32
+\item 
+\mbox{\Hypertarget{toadd_8h_a88fa737059e67b4b17ec980e5877361e}\label{toadd_8h_a88fa737059e67b4b17ec980e5877361e}} 
+\#define {\bfseries C\+O\+N\+C\+AT}(a,  b)~a\#\#b
+\item 
+\mbox{\Hypertarget{toadd_8h_a41bc3687e849cfb7c4486c66e2130ef1}\label{toadd_8h_a41bc3687e849cfb7c4486c66e2130ef1}} 
+\#define {\bfseries S\+L\+O\+PE}~(5.\+0 / 9.\+0)
+\item 
+\mbox{\Hypertarget{toadd_8h_a751686d8945f35c4064709bcd4b9bfc0}\label{toadd_8h_a751686d8945f35c4064709bcd4b9bfc0}} 
+\#define {\bfseries C\+EL}(T)~S\+L\+O\+PE $\ast$ (T -\/ T\+H\+R\+E\+SH)
+\item 
+\mbox{\Hypertarget{toadd_8h_a0656018abfc9fa2821827415f5d5ea57}\label{toadd_8h_a0656018abfc9fa2821827415f5d5ea57}} 
+\#define {\bfseries T\+H\+R\+E\+SH}~32.\+0
+\item 
+\mbox{\Hypertarget{toadd_8h_a598a3330b3c21701223ee0ca14316eca}\label{toadd_8h_a598a3330b3c21701223ee0ca14316eca}} 
+\#define {\bfseries PI}~3.\+14
+\item 
+\mbox{\Hypertarget{toadd_8h_ac537e6e7dad3ecef73fc3fc4f14fe020}\label{toadd_8h_ac537e6e7dad3ecef73fc3fc4f14fe020}} 
+\#define {\bfseries S\+E\+V\+EN}~3 + 4
+\item 
+\mbox{\Hypertarget{toadd_8h_a8de29f7c8bbf1a81cc6e71ac602032d3}\label{toadd_8h_a8de29f7c8bbf1a81cc6e71ac602032d3}} 
+\#define {\bfseries F\+I\+L\+E\+N\+A\+ME}~\char`\"{}header.\+h\char`\"{}
+\item 
+\mbox{\Hypertarget{toadd_8h_a955f504eccf76b4eb2489c0adab03121}\label{toadd_8h_a955f504eccf76b4eb2489c0adab03121}} 
+\#define {\bfseries A}~X
+\item 
+\#define \mbox{\hyperlink{toadd_8h_a5c71a5e59a53413cd6c270266d63b031}{R}}~10
+\begin{DoxyCompactList}\small\item\em A wrapper around static\+\_\+assert for checking that a statement is noexcept and execution of that statement. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{toadd_8h_a598a3330b3c21701223ee0ca14316eca}\label{toadd_8h_a598a3330b3c21701223ee0ca14316eca}} 
+\#define {\bfseries PI}~3.\+14
+\item 
+\mbox{\Hypertarget{toadd_8h_a7b0f40708fee1f41af7e8d9a59f3727c}\label{toadd_8h_a7b0f40708fee1f41af7e8d9a59f3727c}} 
+\#define {\bfseries A\+R\+E\+A\+\_\+\+C\+I\+R\+C\+LE}~PI $\ast$ \mbox{\hyperlink{toadd_8h_a5c71a5e59a53413cd6c270266d63b031}{R}} $\ast$ \mbox{\hyperlink{toadd_8h_a5c71a5e59a53413cd6c270266d63b031}{R}}
+\item 
+\mbox{\Hypertarget{toadd_8h_a8b43bafee90b30676faae508c21cb8d7}\label{toadd_8h_a8b43bafee90b30676faae508c21cb8d7}} 
+\#define {\bfseries P\+R\+I\+NT}~printf
+\item 
+\mbox{\Hypertarget{toadd_8h_a1319745524dbd8748dba95bb12b19f19}\label{toadd_8h_a1319745524dbd8748dba95bb12b19f19}} 
+\#define {\bfseries S\+UM}~a + b
+\item 
+\mbox{\Hypertarget{toadd_8h_a2cfb5cbcec061aecdc6e96e9f2679b0c}\label{toadd_8h_a2cfb5cbcec061aecdc6e96e9f2679b0c}} 
+\#define {\bfseries I\+N\+T\+\_\+\+V\+EC}~vector$<$int$>$
+\item 
+\mbox{\Hypertarget{toadd_8h_a45c20c14d3d8790a22153d08ab2eb2ff}\label{toadd_8h_a45c20c14d3d8790a22153d08ab2eb2ff}} 
+\#define {\bfseries U\+I\+NT}~unsigned int
+\item 
+\mbox{\Hypertarget{toadd_8h_a7677bb048c986e3f107b65200081ca05}\label{toadd_8h_a7677bb048c986e3f107b65200081ca05}} 
+\#define {\bfseries U\+I\+N\+T\+\_\+\+P\+TR}~U\+I\+NT$\ast$
+\item 
+\mbox{\Hypertarget{toadd_8h_a955f504eccf76b4eb2489c0adab03121}\label{toadd_8h_a955f504eccf76b4eb2489c0adab03121}} 
+\#define {\bfseries A}~T
+\item 
+\mbox{\Hypertarget{toadd_8h_adcd021ac91d43a62b2cdecf9a5b971a7}\label{toadd_8h_adcd021ac91d43a62b2cdecf9a5b971a7}} 
+\#define {\bfseries M\+IN}(A,  B)~((A) $<$ (B) ? (A) \+: (B))
+\item 
+\mbox{\Hypertarget{toadd_8h_a71903c71ccefacb2d1bc9f76314587d1}\label{toadd_8h_a71903c71ccefacb2d1bc9f76314587d1}} 
+\#define {\bfseries A\+S\+S\+I\+GN}(A,  B)~\{ B = A; \}
+\item 
+\mbox{\Hypertarget{toadd_8h_ac0962ac783aece4067967ad3be55ccdb}\label{toadd_8h_ac0962ac783aece4067967ad3be55ccdb}} 
+\#define {\bfseries F}(A1, ...,  An)~X
+\item 
+\mbox{\Hypertarget{toadd_8h_ac0962ac783aece4067967ad3be55ccdb}\label{toadd_8h_ac0962ac783aece4067967ad3be55ccdb}} 
+\#define {\bfseries F}(A1, ...,  An)~S
+\item 
+\mbox{\Hypertarget{toadd_8h_a570d60177b7969fd2422583b5611ba39}\label{toadd_8h_a570d60177b7969fd2422583b5611ba39}} 
+\#define {\bfseries OP}(A,  B)~(X + M\+AX((A),(B))-\/M\+IN((A),(B)))
+\item 
+\mbox{\Hypertarget{toadd_8h_a3a263e9f0217969eaf12b8a1a8f465aa}\label{toadd_8h_a3a263e9f0217969eaf12b8a1a8f465aa}} 
+\#define {\bfseries Acc}(a,  b)~\{ a += f(b); \}
+\item 
+\mbox{\Hypertarget{toadd_8h_a44b00325555a405a696b0522396348ca}\label{toadd_8h_a44b00325555a405a696b0522396348ca}} 
+\#define {\bfseries A}(T1, ...,  Tn)~X
+\item 
+\mbox{\Hypertarget{toadd_8h_a1da00cc3a83ecdccd42efaecb7e76703}\label{toadd_8h_a1da00cc3a83ecdccd42efaecb7e76703}} 
+\#define {\bfseries P\+T\+R\+\_\+\+T\+Y\+PE}(T)~T$\ast$
+\item 
+\mbox{\Hypertarget{toadd_8h_a3d8113a349d986dd2d412c335d81a8e3}\label{toadd_8h_a3d8113a349d986dd2d412c335d81a8e3}} 
+\#define {\bfseries Value\+Type}(I)~typename value\+\_\+type$<$I$>$\+::type;
+\item 
+\mbox{\Hypertarget{toadd_8h_a055d1bacd320599b9ccf387461aececc}\label{toadd_8h_a055d1bacd320599b9ccf387461aececc}} 
+\#define {\bfseries S0}(X)~S\mbox{[}X\mbox{]}
+\item 
+\mbox{\Hypertarget{toadd_8h_ab2eb92db8cb4b06738e5e7d184afb484}\label{toadd_8h_ab2eb92db8cb4b06738e5e7d184afb484}} 
+\#define {\bfseries T\+E\+M\+P\+\_\+\+K\+EL}~273 + cel
+\item 
+\mbox{\Hypertarget{toadd_8h_aa996d4524550b29be7edf90191e2eba4}\label{toadd_8h_aa996d4524550b29be7edf90191e2eba4}} 
+\#define {\bfseries T\+E\+M\+P\+\_\+\+F\+AR}~cel $\ast$ 9 / 5 + 32
+\item 
+\mbox{\Hypertarget{toadd_8h_a598a3330b3c21701223ee0ca14316eca}\label{toadd_8h_a598a3330b3c21701223ee0ca14316eca}} 
+\#define {\bfseries PI}~3.\+14
+\item 
+\mbox{\Hypertarget{toadd_8h_ac6afe99cb0ec5eb88b83209ae911c633}\label{toadd_8h_ac6afe99cb0ec5eb88b83209ae911c633}} 
+\#define {\bfseries X\+M\+A\+C\+RO}(x)~x,
+\item 
+\mbox{\Hypertarget{toadd_8h_ac6afe99cb0ec5eb88b83209ae911c633}\label{toadd_8h_ac6afe99cb0ec5eb88b83209ae911c633}} 
+\#define {\bfseries X\+M\+A\+C\+RO}(x)~case xenum\+::x\+: os $<$$<$ \char`\"{}xenum\+::\char`\"{} \#x; break;
+\item 
+\mbox{\Hypertarget{toadd_8h_abf504ce18456e833a81800938acdc276}\label{toadd_8h_abf504ce18456e833a81800938acdc276}} 
+\#define {\bfseries N\+V\+\_\+\+P\+E\+R\+F\+C\+O\+U\+N\+T\+ER}(ctr)~ctr,
+\item 
+\mbox{\Hypertarget{toadd_8h_abf504ce18456e833a81800938acdc276}\label{toadd_8h_abf504ce18456e833a81800938acdc276}} 
+\#define {\bfseries N\+V\+\_\+\+P\+E\+R\+F\+C\+O\+U\+N\+T\+ER}(ctr)~\{ static\+\_\+cast$<$int$>$(counter\+\_\+enum\+::ctr), ... \},
+\item 
+\mbox{\Hypertarget{toadd_8h_abf504ce18456e833a81800938acdc276}\label{toadd_8h_abf504ce18456e833a81800938acdc276}} 
+\#define {\bfseries N\+V\+\_\+\+P\+E\+R\+F\+C\+O\+U\+N\+T\+ER}(ctr)~inline void ctr\#\#\+\_\+tick(size\+\_\+t diff = 1) \{ /$\ast$ Увеличение счетчика counter\+\_\+enum\+::ctr $\ast$/ \}
+\item 
+\mbox{\Hypertarget{toadd_8h_abf504ce18456e833a81800938acdc276}\label{toadd_8h_abf504ce18456e833a81800938acdc276}} 
+\#define {\bfseries N\+V\+\_\+\+P\+E\+R\+F\+C\+O\+U\+N\+T\+ER}(ctr)~inline size\+\_\+t ctr\#\#\+\_\+get() \{ /$\ast$ Возврат значения счетчика counter\+\_\+enum\+::ctr $\ast$/ \}
+\item 
+\mbox{\Hypertarget{toadd_8h_a71686928f5524cc66872d576ba18cdb7}\label{toadd_8h_a71686928f5524cc66872d576ba18cdb7}} 
+\#define {\bfseries D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+M\+E\+M\+B\+ER}(name)~name,
+\item 
+\#define {\bfseries D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+UM}(name,  list)
+\item 
+\mbox{\Hypertarget{toadd_8h_ae409221c530c27c4894774832c0e32f2}\label{toadd_8h_ae409221c530c27c4894774832c0e32f2}} 
+\#define {\bfseries D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+A\+SE}(name)~case name\+: return \#name;
+\item 
+\#define {\bfseries D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+T\+O\+\_\+\+S\+T\+R\+I\+NG}(name,  list)
+\item 
+\#define {\bfseries enum\+\_\+test1}(handler)
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{toadd_8h_a6094590f58f0d48ad075a68edacfd0d1}\label{toadd_8h_a6094590f58f0d48ad075a68edacfd0d1}} 
+enum {\bfseries xenum} \{ {\bfseries X\+M\+A\+C\+RO}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{toadd_8h_a87c6a1f327ad8ca11c0d9556bb9b98ff}\label{toadd_8h_a87c6a1f327ad8ca11c0d9556bb9b98ff}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, xenum enm)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{toadd_8h_a9336ebf25087d91c818ee6e9ec29f8c1}\label{toadd_8h_a9336ebf25087d91c818ee6e9ec29f8c1}} 
+int {\bfseries x} = 10
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The main macros of the library. 
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{toadd_8h_a6575d14ff0d9c5098ba6980ab62098ea}\label{toadd_8h_a6575d14ff0d9c5098ba6980ab62098ea}} 
+\index{toadd.h@{toadd.h}!DEFINE\_ENUM@{DEFINE\_ENUM}}
+\index{DEFINE\_ENUM@{DEFINE\_ENUM}!toadd.h@{toadd.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ENUM}{DEFINE\_ENUM}}
+{\footnotesize\ttfamily \#define D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+UM(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{list }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{enum} name \{ \(\backslash\)}
+\DoxyCodeLine{    list(DEFINE\_ENUM\_MEMBER) \(\backslash\)}
+\DoxyCodeLine{    \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{toadd_8h_a17cfe02440ff8f6d3031f45395854bb6}\label{toadd_8h_a17cfe02440ff8f6d3031f45395854bb6}} 
+\index{toadd.h@{toadd.h}!DEFINE\_ENUM\_TO\_STRING@{DEFINE\_ENUM\_TO\_STRING}}
+\index{DEFINE\_ENUM\_TO\_STRING@{DEFINE\_ENUM\_TO\_STRING}!toadd.h@{toadd.h}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_ENUM\_TO\_STRING}{DEFINE\_ENUM\_TO\_STRING}}
+{\footnotesize\ttfamily \#define D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+T\+O\+\_\+\+S\+T\+R\+I\+NG(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{list }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{char}* name \#\# \_tostring(name v) \{ \(\backslash\)}
+\DoxyCodeLine{        switch (v) \{ \(\backslash\)}
+\DoxyCodeLine{            list(DEFINE\_ENUM\_CASE) \(\backslash\)}
+\DoxyCodeLine{        \} \(\backslash\)}
+\DoxyCodeLine{        return \textcolor{stringliteral}{"?"}; \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{toadd_8h_ad2862045789597e4a94c3610d083280f}\label{toadd_8h_ad2862045789597e4a94c3610d083280f}} 
+\index{toadd.h@{toadd.h}!ENSURE\_NOEXCEPT\_EXPRESSION@{ENSURE\_NOEXCEPT\_EXPRESSION}}
+\index{ENSURE\_NOEXCEPT\_EXPRESSION@{ENSURE\_NOEXCEPT\_EXPRESSION}!toadd.h@{toadd.h}}
+\doxysubsubsection{\texorpdfstring{ENSURE\_NOEXCEPT\_EXPRESSION}{ENSURE\_NOEXCEPT\_EXPRESSION}}
+{\footnotesize\ttfamily \#define E\+N\+S\+U\+R\+E\+\_\+\+N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+E\+X\+P\+R\+E\+S\+S\+I\+ON(\begin{DoxyParamCaption}\item[{}]{expr }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{([\&]() noexcept -\/> decltype(\textcolor{keyword}{auto}) \{ \(\backslash\)}
+\DoxyCodeLine{     static\_assert(noexcept(expr), \#expr \textcolor{stringliteral}{" is expected to be noexcept"}); \(\backslash\)}
+\DoxyCodeLine{     return expr; \(\backslash\)}
+\DoxyCodeLine{  \}())}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{toadd_8h_aaf29c3b939905de00b62b56d12d4dad2}\label{toadd_8h_aaf29c3b939905de00b62b56d12d4dad2}} 
+\index{toadd.h@{toadd.h}!ENSURE\_NOEXCEPT\_STATEMENT@{ENSURE\_NOEXCEPT\_STATEMENT}}
+\index{ENSURE\_NOEXCEPT\_STATEMENT@{ENSURE\_NOEXCEPT\_STATEMENT}!toadd.h@{toadd.h}}
+\doxysubsubsection{\texorpdfstring{ENSURE\_NOEXCEPT\_STATEMENT}{ENSURE\_NOEXCEPT\_STATEMENT}}
+{\footnotesize\ttfamily \#define E\+N\+S\+U\+R\+E\+\_\+\+N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+S\+T\+A\+T\+E\+M\+E\+NT(\begin{DoxyParamCaption}\item[{}]{stmt }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do} \{ \(\backslash\)}
+\DoxyCodeLine{      static\_assert(noexcept(stmt), \textcolor{stringliteral}{"this statement is expected to be noexcept: "} \#stmt); \(\backslash\)}
+\DoxyCodeLine{      stmt; \(\backslash\)}
+\DoxyCodeLine{   \} \textcolor{keywordflow}{while}(\textcolor{keyword}{false})}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{toadd_8h_a0a0a26a3ee3f64e0e41c1a689ca67a20}\label{toadd_8h_a0a0a26a3ee3f64e0e41c1a689ca67a20}} 
+\index{toadd.h@{toadd.h}!enum\_test1@{enum\_test1}}
+\index{enum\_test1@{enum\_test1}!toadd.h@{toadd.h}}
+\doxysubsubsection{\texorpdfstring{enum\_test1}{enum\_test1}}
+{\footnotesize\ttfamily \#define enum\+\_\+test1(\begin{DoxyParamCaption}\item[{}]{handler }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{handler(field1) \(\backslash\)}
+\DoxyCodeLine{    handler(field2) \(\backslash\)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{toadd_8h_ad9f4a334a036eb341462821a358f21b9}\label{toadd_8h_ad9f4a334a036eb341462821a358f21b9}} 
+\index{toadd.h@{toadd.h}!error\_stop@{error\_stop}}
+\index{error\_stop@{error\_stop}!toadd.h@{toadd.h}}
+\doxysubsubsection{\texorpdfstring{error\_stop}{error\_stop}}
+{\footnotesize\ttfamily \#define error\+\_\+stop(\begin{DoxyParamCaption}\item[{}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{\(\backslash\)}
+\DoxyCodeLine{    char text[10000];\(\backslash\)}
+\DoxyCodeLine{    sprintf(text,(\textcolor{stringliteral}{""} fmt \textcolor{stringliteral}{"\(\backslash\)n\(\backslash\)nCallstack:\(\backslash\)n\%s [\%s:\%d]\(\backslash\)n\%s"}),\(\backslash\)}
+\DoxyCodeLine{    \#\#\_\_VA\_ARGS\_\_,\_\_FUNCTION\_\_,\_\_FILE\_\_,  \_\_LINE\_\_, \textcolor{stringliteral}{""});\(\backslash\)}
+\DoxyCodeLine{    printf(text);\(\backslash\)}
+\DoxyCodeLine{    MessageBoxA(0,text,\textcolor{stringliteral}{"Error"},0);exit(0);\(\backslash\)}
+\DoxyCodeLine{    while(1);;\(\backslash\)}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{toadd_8h_a9e6af3eb9a2c329c46b860ef9403e648}\label{toadd_8h_a9e6af3eb9a2c329c46b860ef9403e648}} 
+\index{toadd.h@{toadd.h}!NOEXCEPT\_CTCHECK\_ENSURE\_NOEXCEPT\_STATEMENT@{NOEXCEPT\_CTCHECK\_ENSURE\_NOEXCEPT\_STATEMENT}}
+\index{NOEXCEPT\_CTCHECK\_ENSURE\_NOEXCEPT\_STATEMENT@{NOEXCEPT\_CTCHECK\_ENSURE\_NOEXCEPT\_STATEMENT}!toadd.h@{toadd.h}}
+\doxysubsubsection{\texorpdfstring{NOEXCEPT\_CTCHECK\_ENSURE\_NOEXCEPT\_STATEMENT}{NOEXCEPT\_CTCHECK\_ENSURE\_NOEXCEPT\_STATEMENT}}
+{\footnotesize\ttfamily \#define N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+C\+T\+C\+H\+E\+C\+K\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+S\+T\+A\+T\+E\+M\+E\+NT(\begin{DoxyParamCaption}\item[{}]{stmt }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do} \{ \(\backslash\)}
+\DoxyCodeLine{        static\_assert(noexcept(stmt), \textcolor{stringliteral}{"this statement is expected to be noexcept: "} \#stmt); \(\backslash\)}
+\DoxyCodeLine{        stmt; \(\backslash\)}
+\DoxyCodeLine{    \} \textcolor{keywordflow}{while}(\textcolor{keyword}{false})}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{toadd_8h_a1987c4cc6886754a82c8a58f8327ccc5}\label{toadd_8h_a1987c4cc6886754a82c8a58f8327ccc5}} 
+\index{toadd.h@{toadd.h}!NOEXCEPT\_CTCHECK\_ENSURE\_NOT\_NOEXCEPT\_STATEMENT@{NOEXCEPT\_CTCHECK\_ENSURE\_NOT\_NOEXCEPT\_STATEMENT}}
+\index{NOEXCEPT\_CTCHECK\_ENSURE\_NOT\_NOEXCEPT\_STATEMENT@{NOEXCEPT\_CTCHECK\_ENSURE\_NOT\_NOEXCEPT\_STATEMENT}!toadd.h@{toadd.h}}
+\doxysubsubsection{\texorpdfstring{NOEXCEPT\_CTCHECK\_ENSURE\_NOT\_NOEXCEPT\_STATEMENT}{NOEXCEPT\_CTCHECK\_ENSURE\_NOT\_NOEXCEPT\_STATEMENT}}
+{\footnotesize\ttfamily \#define N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+C\+T\+C\+H\+E\+C\+K\+\_\+\+E\+N\+S\+U\+R\+E\+\_\+\+N\+O\+T\+\_\+\+N\+O\+E\+X\+C\+E\+P\+T\+\_\+\+S\+T\+A\+T\+E\+M\+E\+NT(\begin{DoxyParamCaption}\item[{}]{stmt }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do} \{ \(\backslash\)}
+\DoxyCodeLine{        static\_assert(!noexcept(stmt), \textcolor{stringliteral}{"this statement is not expected to be noexcept: "} \#stmt); \(\backslash\)}
+\DoxyCodeLine{        stmt; \(\backslash\)}
+\DoxyCodeLine{    \} \textcolor{keywordflow}{while}(\textcolor{keyword}{false})}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{toadd_8h_a8323be5af6f4154df062b3454bb88a44}\label{toadd_8h_a8323be5af6f4154df062b3454bb88a44}} 
+\index{toadd.h@{toadd.h}!prefix\_safeCall@{prefix\_safeCall}}
+\index{prefix\_safeCall@{prefix\_safeCall}!toadd.h@{toadd.h}}
+\doxysubsubsection{\texorpdfstring{prefix\_safeCall}{prefix\_safeCall}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define prefix\+\_\+safe\+Call(\begin{DoxyParamCaption}\item[{}]{default\+Value,  }\item[{}]{object\+Pointer,  }\item[{}]{method\+With\+Arguments }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[\&](\textcolor{keyword}{auto}\&\& ptr) -\/> decltype(\textcolor{keyword}{auto})\(\backslash\)}
+\DoxyCodeLine{\{\(\backslash\)}
+\DoxyCodeLine{    return ptr ? (ptr-\/>methodWithArguments) : (defaultValue);\(\backslash\)}
+\DoxyCodeLine{\}\(\backslash\)}
+\DoxyCodeLine{(objectPointer)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{toadd_8h_a8323be5af6f4154df062b3454bb88a44}\label{toadd_8h_a8323be5af6f4154df062b3454bb88a44}} 
+\index{toadd.h@{toadd.h}!prefix\_safeCall@{prefix\_safeCall}}
+\index{prefix\_safeCall@{prefix\_safeCall}!toadd.h@{toadd.h}}
+\doxysubsubsection{\texorpdfstring{prefix\_safeCall}{prefix\_safeCall}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define prefix\+\_\+safe\+Call(\begin{DoxyParamCaption}\item[{}]{default\+Value,  }\item[{}]{object\+Pointer,  }\item[{}]{method\+With\+Arguments }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[\&](decltype((objectPointer))\&\& ptr)\(\backslash\)}
+\DoxyCodeLine{    -\/> decltype(prefix\_safeCallBaseExpression(defaultValue, ptr, methodWithArguments))\(\backslash\)}
+\DoxyCodeLine{\{\(\backslash\)}
+\DoxyCodeLine{    return prefix\_safeCallBaseExpression(defaultValue, ptr, methodWithArguments);\(\backslash\)}
+\DoxyCodeLine{\}\(\backslash\)}
+\DoxyCodeLine{(objectPointer)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{toadd_8h_ab115915287023e4859431ba6cb5debb8}\label{toadd_8h_ab115915287023e4859431ba6cb5debb8}} 
+\index{toadd.h@{toadd.h}!prefix\_safeCallVoid@{prefix\_safeCallVoid}}
+\index{prefix\_safeCallVoid@{prefix\_safeCallVoid}!toadd.h@{toadd.h}}
+\doxysubsubsection{\texorpdfstring{prefix\_safeCallVoid}{prefix\_safeCallVoid}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define prefix\+\_\+safe\+Call\+Void(\begin{DoxyParamCaption}\item[{}]{object\+Pointer,  }\item[{}]{method\+With\+Arguments }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[\&](\textcolor{keyword}{auto}\&\& ptr)\(\backslash\)}
+\DoxyCodeLine{\{\(\backslash\)}
+\DoxyCodeLine{    if(ptr)\(\backslash\)}
+\DoxyCodeLine{        (ptr-\/>methodWithArguments); \(\backslash\)}
+\DoxyCodeLine{\}\(\backslash\)}
+\DoxyCodeLine{(objectPointer)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{toadd_8h_ab115915287023e4859431ba6cb5debb8}\label{toadd_8h_ab115915287023e4859431ba6cb5debb8}} 
+\index{toadd.h@{toadd.h}!prefix\_safeCallVoid@{prefix\_safeCallVoid}}
+\index{prefix\_safeCallVoid@{prefix\_safeCallVoid}!toadd.h@{toadd.h}}
+\doxysubsubsection{\texorpdfstring{prefix\_safeCallVoid}{prefix\_safeCallVoid}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define prefix\+\_\+safe\+Call\+Void(\begin{DoxyParamCaption}\item[{}]{object\+Pointer,  }\item[{}]{method\+With\+Arguments }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[\&](decltype((objectPointer))\&\& ptr)\(\backslash\)}
+\DoxyCodeLine{\{\(\backslash\)}
+\DoxyCodeLine{    if (ptr)\(\backslash\)}
+\DoxyCodeLine{        (ptr-\/>methodWithArguments);\(\backslash\)}
+\DoxyCodeLine{\}\(\backslash\)}
+\DoxyCodeLine{(objectPointer)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{toadd_8h_a5c71a5e59a53413cd6c270266d63b031}\label{toadd_8h_a5c71a5e59a53413cd6c270266d63b031}} 
+\index{toadd.h@{toadd.h}!R@{R}}
+\index{R@{R}!toadd.h@{toadd.h}}
+\doxysubsubsection{\texorpdfstring{R}{R}}
+{\footnotesize\ttfamily \#define R~10}
+
+
+
+A wrapper around static\+\_\+assert for checking that a statement is noexcept and execution of that statement. 
+
+Usage example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{some\_class::~some\_class() noexcept \{}
+\DoxyCodeLine{    \textcolor{comment}{// We should have a guarantee that this call doesn't throw.}}
+\DoxyCodeLine{    NOEXCEPT\_CTCHECK\_ENSURE\_NOEXCEPT\_STATEMENT(m\_some\_resouce.release());}
+\DoxyCodeLine{    ...}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+A wrapper around static\+\_\+assert for checking that a statement is not noexcept and execution of that statement.
+
+Usage example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{some\_class::~some\_class() noexcept \{}
+\DoxyCodeLine{    \textcolor{comment}{// If that call throws then we have to use try-\/catch block.}}
+\DoxyCodeLine{    \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{        NOEXCEPT\_CTCHECK\_ENSURE\_NOT\_NOEXCEPT\_STATEMENT(m\_some\_resouce.release());}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{catch}(...) \{\}}
+\DoxyCodeLine{    ...}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+A wrapper around static\+\_\+assert for checking that an expression is noexcept
+
+Usage example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} remove\_appropriate\_items\_at\_front(some\_container\_t \& cnt) noexcept \{}
+\DoxyCodeLine{    NOEXCEPT\_CTCHECK\_STATIC\_ASSERT\_NOEXCEPT(cnt.empty());}
+\DoxyCodeLine{    NOEXCEPT\_CTCHECK\_STATIC\_ASSERT\_NOEXCEPT(cnt.front());}
+\DoxyCodeLine{    NOEXCEPT\_CTCHECK\_STATIC\_ASSERT\_NOEXCEPT(cnt.pop\_front());}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{while}(!cnt.empty() \&\& some\_conditions(cnt.front()) \{}
+\DoxyCodeLine{        \textcolor{comment}{// We don't expect exceptions here.}}
+\DoxyCodeLine{        cnt.pop\_front();}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+A wrapper around static\+\_\+assert for checking that an expression is not noexcept.
+
+Usage example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} some\_class::do\_something() noexcept \{}
+\DoxyCodeLine{    \textcolor{comment}{// If the constructor of 'some\_type' throws then we have to use try-\/catch block.}}
+\DoxyCodeLine{    NOEXCEPT\_CTCHECK\_STATIC\_ASSERT\_NOT\_NOEXCEPT(}
+\DoxyCodeLine{        some\_type\{}
+\DoxyCodeLine{                std::declval<some\_param\_type>(),}
+\DoxyCodeLine{                std::declval<another\_param\_type>()\});}
+\DoxyCodeLine{    \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{        some\_type resource\{first\_arg, second\_arg\};}
+\DoxyCodeLine{        ...}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{catch}(...) \{\}}
+\DoxyCodeLine{    ...}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ 

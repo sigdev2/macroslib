@@ -1,0 +1,207 @@
+.TH "C:/Users/Sig/Dropbox/MacrosLib/src/preprocessor/utils.h" 3 "Mon Jan 6 2020" "Version 0.1.0-a1" "MacrosLib" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+C:/Users/Sig/Dropbox/MacrosLib/src/preprocessor/utils.h \- Macroses for work with preprocessor\&. Crosslanguage\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include '\&.\&./operators/while\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBPP_INDIRECT_EXPAND\fP(m,  args)   m args"
+.br
+.RI "Macros for expand indirect macroses\&. Used for run macros in args of macroses\&. "
+.ti -1c
+.RI "#define \fBPP_DO_SAFE\fP(\&.\&.\&.)   do { __VA_ARGS__ ; } whileone"
+.br
+.RI "Call code from one or more operators in args, is anyway converted to one operator\&. "
+.ti -1c
+.RI "#define \fBPP_CAT\fP(x,  y)   \fBPP_CAT_A\fP(x, y)"
+.br
+.RI "Concat two values in args with two parts: "
+.ti -1c
+.RI "#define \fBPP_CAT_A\fP(x,  y)   x##y"
+.br
+.RI "Simple concat two values in args with ## operator\&. "
+.ti -1c
+.RI "#define \fBPP_VAR\fP   \fBPP_CAT\fP(___some_value_, __LINE__)"
+.br
+.RI "Generate code uniq var name like ___some_value_<line_number> "
+.ti -1c
+.RI "#define \fBPP_DEFINE_VAR\fP   \fBPP_VAR\fP"
+.br
+.RI "Example of use PP_VAR\&. "
+.ti -1c
+.RI "#define \fBPP_CHECK_IF\fP(x, \&.\&.\&.)   \fBPP_DO_SAFE\fP(const bool \fBPP_VAR\fP = ( x ); if ( \fBPP_VAR\fP ) { __VA_ARGS__ ; })"
+.br
+.RI "Call code if bool is true\&. Use for write short and safe if-operator in macroses\&. "
+.ti -1c
+.RI "#define \fBPP_COMMA\fP   ,"
+.br
+.ti -1c
+.RI "#define \fBPP_EMPTY\fP"
+.br
+.ti -1c
+.RI "#define \fBPP_NONE\fP   PP_EMPTY"
+.br
+.ti -1c
+.RI "#define \fBPP_NAN\fP   PP_EMPTY"
+.br
+.ti -1c
+.RI "#define \fBPP_VOID\fP   PP_EMPTY"
+.br
+.ti -1c
+.RI "#define \fBPP_TRUE\fP   true"
+.br
+.ti -1c
+.RI "#define \fBPP_FALSE\fP   PP_EMPTY"
+.br
+.ti -1c
+.RI "#define \fBPP_APPLY\fP(\&.\&.\&.)   __VA_ARGS__"
+.br
+.ti -1c
+.RI "#define \fBPP_INVOKE\fP(x,  y)   PP_APPLY(x y)"
+.br
+.ti -1c
+.RI "#define \fBPP_SINGLE_TYPE\fP(\&.\&.\&.)   __VA_ARGS__"
+.br
+.ti -1c
+.RI "#define \fBPP_SINGLE_TYPE_INHERIT\fP(\&.\&.\&.)   __VA_ARGS__"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Macroses for work with preprocessor\&. Crosslanguage\&. 
+
+Depend from:
+.IP "\(bu" 2
+/operators/while\&.h 
+.PP
+
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define PP_CAT(x, y)   \fBPP_CAT_A\fP(x, y)"
+
+.PP
+Concat two values in args with two parts: 
+.IP "\(bu" 2
+expansion of argument values, even if they are macros
+.IP "\(bu" 2
+call PP_CAT_A with ## operator 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx\fP first value\&. 
+.br
+\fIy\fP second value\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Concat value of extended \fIx\fP and \fIy\fP args 
+.RE
+.PP
+
+.PP
+
+.SS "#define PP_CAT_A(x, y)   x##y"
+
+.PP
+Simple concat two values in args with ## operator\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx\fP first value\&. 
+.br
+\fIy\fP second value\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Concated x and y values 
+.RE
+.PP
+
+.SS "#define PP_CHECK_IF(x,  \&.\&.\&.)   \fBPP_DO_SAFE\fP(const bool \fBPP_VAR\fP = ( x ); if ( \fBPP_VAR\fP ) { __VA_ARGS__ ; })"
+
+.PP
+Call code if bool is true\&. Use for write short and safe if-operator in macroses\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIx\fP bool value\&. 
+.br
+\fI<strong>VA_ARGS</strong>\fP code\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Expands to \fIx\fP \fI\fBVA_ARGS\fP\fP 
+.RE
+.PP
+
+.SS "#define PP_DEFINE_VAR   \fBPP_VAR\fP"
+
+.PP
+Example of use PP_VAR\&. 
+.PP
+\fBReturns\fP
+.RS 4
+___some_value_<line_number> where has been defined this macro 
+.RE
+.PP
+
+.SS "#define PP_DO_SAFE( \&.\&.\&.)   do { __VA_ARGS__ ; } whileone"
+
+.PP
+Call code from one or more operators in args, is anyway converted to one operator\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI<strong>VA_ARGS</strong>\fP code\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Expands to \fI\fBVA_ARGS\fP\fP 
+.RE
+.PP
+
+.SS "#define PP_INDIRECT_EXPAND(m, args)   m args"
+
+.PP
+Macros for expand indirect macroses\&. Used for run macros in args of macroses\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIm\fP macros name\&. 
+.br
+\fIargs\fP args for macros in brekets\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Expands to \fIm\fP \fIargs\fP\&. 
+.RE
+.PP
+
+.SS "#define PP_VAR   \fBPP_CAT\fP(___some_value_, __LINE__)"
+
+.PP
+Generate code uniq var name like ___some_value_<line_number> 
+.PP
+\fBReturns\fP
+.RS 4
+___some_value_<line_number> 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for MacrosLib from the source code\&.
