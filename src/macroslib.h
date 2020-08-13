@@ -2,15 +2,16 @@
 //
 /////////////////////////////////////////////////////////////////////////////
 
-/*! \file macroslib.h
-    \brief Main file for MacrosLib include.
-    
-    The file contains includes of all library files and macros for managing them.
-*/
 
 #pragma once
 #ifndef __HAS_MACROS_LIB_H__
 #define __HAS_MACROS_LIB_H__
+
+/*! \file macroslib.h
+    \brief Main file for MacrosLib include.
+    
+    The file contains includes of all library files and macros for managing them. If is included, then macros __HAS_MACROS_LIB_H__ is defined
+*/
 
 #include "config.h"
 

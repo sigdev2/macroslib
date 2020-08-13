@@ -6,6 +6,12 @@
 #ifndef __HAS_MACROS_LIB_DEBUG_H__
 #define __HAS_MACROS_LIB_DEBUG_H__
 
+/*! \file macroslib.h
+    \brief Main file for MacrosLib include.
+    
+    The file contains includes of all library files and macros for managing them.
+*/
+
 #include "templates.h"
 #include "versions.h"
 #include "../preprocessor/utils.h"

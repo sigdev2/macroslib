@@ -6,6 +6,12 @@
 #ifndef __HAS_MACROS_LIB_CONFIG_H__
 #define __HAS_MACROS_LIB_CONFIG_H__
 
+/*! \file config.h
+    \brief File with MacrosLib configuration.
+    
+    Define base macros then used in library. If you need you may redefine this macros before include library.
+*/
+
 // Types
 
 // operators/for.h
