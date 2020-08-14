@@ -41,6 +41,7 @@
 #include "operators/if.h"
 #include "operators/lambda.h"
 #include "operators/modules.h"
+#include "operators/main.h"
 #include "operators/noexcept.h"
 #include "operators/pointers.h"
 #include "operators/return.h"
