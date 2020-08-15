@@ -50,7 +50,7 @@
 /*!
    \brief Default case block with return
    \param key [optional] add case with value
-   \param __VA_ARGS__ code
+   \param val code
    \returns Default block with \a __VA_ARGS__ as code
 */
 #define DEFCASE(...) PP_VA_FUNC(DEFCASE, __VA_ARGS__)
