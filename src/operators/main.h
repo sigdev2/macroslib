@@ -21,7 +21,6 @@
 */
 #define MAIN_ARGS int main (int argc, char** argv)
 
-
 /*!
    \brief \brief Main function header with argc as arguments count, pointer to array of arguments argv and pointer to array of pointers to the execution environment variables.
    \returns main function header

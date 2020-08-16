@@ -49,7 +49,7 @@
 #define DEFCASE_2(key, val) default: case ( key ): { ( val ) break; }
 /*!
    \brief Default case block with return
-   \param key [optional] add case with value
+   \param key [optional, if 2 arguments (key, value)] add case with value
    \param val code
    \returns Default block with \a __VA_ARGS__ as code
 */

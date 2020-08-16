@@ -20,9 +20,9 @@
 #    define LAMBDA_2(arg, ret) [] arg { return ( ret ); }
 #    define LAMBDA_3(scope, arg, ret) scope arg { return ( ret ); }
 /*!
-   \brief Construct lambda function
-   \param scope [optional] argument passing type in square brackets
-   \param arg [optional] arguments block in parentheses
+   \brief [C++11 and greater] Construct lambda function
+   \param scope [optional, if 3 arguments (scope, arg, ret)] argument passing type in square brackets
+   \param arg [optional, if 2 arguments (arg, ret)] arguments block in parentheses
    \param ret return value expression
    \returns noexcept if supported
 */

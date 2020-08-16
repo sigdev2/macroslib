@@ -65,7 +65,7 @@
 #define PP_COMMA ,
 
 /*! 
-   \brief Empty literal, replace to nothing
+   \brief Empty literal, replace to nothing. This may use for insert skipped macro argument or return from a macro to be inserted between the name of a function macro and its arguments to allow its call
 */
 #define PP_EMPTY
 
@@ -92,12 +92,12 @@
 #define PP_REMOVE(...)
 
 /*! 
-   \brief Non empty macros. Base value is boolean true.
+   \brief Non empty macros. Base value is boolean true. This can be used to return from a macro that must be inserted between the function macro name and its arguments to prevent it from being called, and invoke an alternate with the postfix 'true'
 */
 #define PP_TRUE true
 
 /*! 
-   \brief Alias for Empty literal, replace to nothing
+   \brief Alias for Empty literal, replace to nothing.
 */
 #define PP_FALSE PP_EMPTY
 
@@ -143,7 +143,7 @@ namespace __MacrosLibPrivate
 #define PP_SINGLE_TYPE_INHERIT(...) __MacrosLibPrivate::single_argument_type< PP_FUNC_IF_BRACKETS(__VA_ARGS__) >::type
 
 /*! 
-   \brief [C++] Convert any types or type list to single literal for use in code. This is needed in some macros and templates.
+   \brief [C++] Convert any types or type list to single literal for use in code. This is needed in some macros and templates for passing in parentheses complex types contains commas
    \param __VA_ARGS__ type or type list in parentheses.
    \returns type literal whith typename keyword.
 */
