@@ -13,7 +13,7 @@
 #ifdef CXX11
 /*!
    \brief Inserting constexpr modifier if is supported else remove his.
-   \returns supported if supported
+   \returns сonstexpr if supported
 */
 #    define CONSTEXPR constexpr
 #else // CXX11

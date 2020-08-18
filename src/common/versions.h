@@ -7,7 +7,7 @@
 #define __HAS_MACROS_LIB_VERSIONS_H__
 
 /*! \file versions.h
-    \brief File with c/c++ versions macroses.
+    \brief File with C/C++ compilers versions macros.
     
     Small memo for predefined macroses:
 
@@ -94,32 +94,75 @@
 */
 
 #if __cplusplus >= 199711L
+/*!
+   \brief [C++] Defined if use C++98(1997) standard or grather
+*/
 #    define CXX98
+/*!
+   \brief [C++] Defined if use C++03(2003) standard or grather
+*/
 #    define CXX03
 #endif
 
 #if __cplusplus >= 201103L
+/*!
+   \brief [C++] Defined if use C++11(2011) standard or grather
+*/
 #    define CXX11
 #endif
 
 #if __cplusplus >= 201402L
+/*!
+   \brief [C++] Defined if use C++14(2014) standard or grather
+*/
 #    define CXX14
 #endif
 
 #if __cplusplus >= 201703L
+/*!
+   \brief [C++] Defined if use C++17(2017) standard or grather
+*/
 #    define CXX17
 #endif
 
 #if __cplusplus > 201703L
+/*!
+   \brief [C++] Defined if use C++20(2020) standard or grather
+*/
 #    define CXX20
 #endif
 
 
-#ifdef __clang__
+#ifdef __cplusplus
 #    ifndef TRIVIAL_ABI
-#        define TRIVIAL_ABI __attribute__((trivial_abi))
+#        ifdef __clang__
+#            define TRIVIAL_ABI __attribute__((trivial_abi))
+#        else // !__clang__
+/*!
+   \brief [C++] Inserting Trivial ABI attribute if is supported by compiler else remove his.
+   The Trivial ABI attribute use for classes to help the compiler understand that the class has
+   a trivial implementation of methods and is suitable for optimizing the generated code.
+
+   Example:
+       ...
+           ~Class1() = defult; // trivial
+       ...
+
+       ...
+           ~Class2() {} // non-trivial
+       ...
+
+       class TRIVIAL_ABI Class3
+       ...
+           ~Class3() {} // again trivial
+       ...
+
+   \returns Trivial ABI attribute if supported
+*/
+#            define TRIVIAL_ABI
+#        endif // __clang__
 #    endif // TRIVIAL_ABI
-#endif // __clang__
+#endif // __cplusplus
 
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_VERSIONS_H__

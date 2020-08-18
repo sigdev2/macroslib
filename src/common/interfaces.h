@@ -12,7 +12,7 @@
 
 // Iterator
 
-#define ITERATOR_INTERFACE(...)  typename __VA_ARGS__::iterator_category, \
+#define ITERATOR_INTERFACE(...) typename __VA_ARGS__::iterator_category, \
 	typename __VA_ARGS__::value_type, \
 	typename __VA_ARGS__::difference_type, \
 	typename __VA_ARGS__::pointer, \
@@ -27,25 +27,48 @@
 
 #define IS_ITERATOR_TYPE(...)  TYPE_ASSERT(ITERATOR_INTERFACE(__VA_ARGS__))
 
+// Iterable
+
+#define ITERABLE_INTERFACE(...) typename __VA_ARGS__::iterator \
+    typename __VA_ARGS__::const_iterator \
+    typename __VA_ARGS__::reverse_iterator \
+    typename __VA_ARGS__::const_reverse_iterator
+	
+#define ITERABLE_INTERFACE_MIRROR(...)\
+	typedef typename __VA_ARGS__::iterator iterator; \
+    typedef typename __VA_ARGS__::const_iterator const_iterator; \
+    typedef typename __VA_ARGS__::reverse_iterator reverse_iterator; \
+    typedef typename __VA_ARGS__::const_reverse_iterator const_reverse_iterator;
+
+#define IS_ITERABLE_TYPE(...)  TYPE_ASSERT(ITERABLE_INTERFACE(__VA_ARGS__))
+
+// Sizable
+
+#define SIZABLE_INTERFACE(...) typename __VA_ARGS__::size_type
+	
+#define SIZABLE_INTERFACE_MIRROR(...) typedef typename __VA_ARGS__::size_type size_type;
+
+#define IS_SIZABLE_TYPE(...)  TYPE_ASSERT(SIZABLE_INTERFACE(__VA_ARGS__))
+
 // Pair
 
-#define PAIR_INTERFACE(...)  typename __VA_ARGS__::first_type, \
+#define PAIR_INTERFACE(...) typename __VA_ARGS__::first_type, \
 	typename __VA_ARGS__::second_type
 	
-#define PAIR_INTERFACE_MIRROR(...)  typedef typename __VA_ARGS__::first_type first_type; \
+#define PAIR_INTERFACE_MIRROR(...) typedef typename __VA_ARGS__::first_type first_type; \
 	typedef typename __VA_ARGS__::second_type second_type;
 	
-#define IS_PAIR_INTERFACE(...)  TYPE_ASSERT(PAIR_INTERFACE(__VA_ARGS__))
+#define IS_PAIR_INTERFACE(...) TYPE_ASSERT(PAIR_INTERFACE(__VA_ARGS__))
 
 // Key-value
 
-#define KEYVALUE_INTERFACE(...)  typename __VA_ARGS__::key_type, \
+#define KEYVALUE_INTERFACE(...) typename __VA_ARGS__::key_type, \
 	typename __VA_ARGS__::value_type
 	
-#define KEYVALUE_INTERFACE_MIRROR(...)  typedef typename __VA_ARGS__::key_type key_type; \
+#define KEYVALUE_INTERFACE_MIRROR(...) typedef typename __VA_ARGS__::key_type key_type; \
 	typedef typename __VA_ARGS__::value_type value_type;
 	
-#define IS_KEYVALUE_INTERFACE(...)  TYPE_ASSERT(KEYVALUE_INTERFACE(__VA_ARGS__))
+#define IS_KEYVALUE_INTERFACE(...) TYPE_ASSERT(KEYVALUE_INTERFACE(__VA_ARGS__))
 
 #endif // __cplusplus
 
