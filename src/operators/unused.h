@@ -17,13 +17,18 @@
 #include "../preprocessor/utils.h"
 #include "../preprocessor/variadic.h"
 
-#define UNUSED_SINGLE( dummy, var ) ((void) var) PP_SEMICOLON
+/*!
+   \brief Disable warrings for single unused variable
+   \param __VA_ARGS__ variable name
+   \returns void casting variable
+*/
+#define PP_UNUSED_SINGLE(...) ((void) __VA_ARGS__ )
 /*!
    \brief Disable warrings for unused variables
    \param __VA_ARGS__ unsused variables.
    \returns void casting variables.
 */
-#define unused(...) PP_INVOKE( VA_LIST, (UNUSED_SINGLE, __VA_ARGS__ ) )
+#define unused(...) PP_INVOKE( PP_VA_SEMICOLON_LIST, (PP_UNUSED_SINGLE, __VA_ARGS__ ) )
 
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_UNUSED_H__

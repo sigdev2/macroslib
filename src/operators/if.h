@@ -35,7 +35,7 @@
    \param __VA_ARGS__ condition.
    \returns if expression without brackets
 */
-#define elifn(...) else if (!(__VA_ARGS__ ))
+#define elifn(...) else if (!( __VA_ARGS__ ))
 /*!
    \brief Else if operator. elif alias
    \param __VA_ARGS__ condition.
@@ -47,7 +47,7 @@
    \param __VA_ARGS__ condition.
    \returns if expression without brackets
 */
-#define elseifn(...) else if (!(__VA_ARGS__ ))
+#define elseifn(...) else if (!( __VA_ARGS__ ))
 
 /*!
    \brief If empty operator. Use IS_EMPTY macro to check empty state
@@ -92,7 +92,7 @@
    \param __VA_ARGS__ default value expression
    \returns if ... else expression
 */
-#define defval(val, ...) (IS_EMPTY(val) ? ( val ) : __VA_ARGS__)
+#define defval(val, ...) (IS_EMPTY( val ) ? ( val ) : __VA_ARGS__)
 
 /*!
    \brief If \a x is true then call return operator with value
@@ -100,7 +100,7 @@
    \param __VA_ARGS__ return value
    \returns if expression
 */
-#define return_if(x, ...) PP_CHECK_IF(( x ), return __VA_ARGS__)
+#define return_if(x, ...) PP_CHECK_IF( x , return __VA_ARGS__)
 /*!
    \brief If \a x is false then call return operator with value
    \param x condition.
@@ -114,39 +114,39 @@
    \param __VA_ARGS__ return value
    \returns if expression
 */
-#define retif(x, ...) return_if(( x ), __VA_ARGS__)
+#define retif(x, ...) return_if( x , __VA_ARGS__)
 /*!
    \brief If \a x is false then call return operator with value. return_ifn alias
    \param x condition.
    \param __VA_ARGS__ return value
    \returns if expression
 */
-#define retifn(x, ...) return_ifn(( x ), __VA_ARGS__)
+#define retifn(x, ...) return_ifn( x , __VA_ARGS__)
 
 /*!
    \brief If arguments is true then call return operator with true value
    \param __VA_ARGS__ condition.
    \returns if expression
 */
-#define true_if(...) return_if(__VA_ARGS__, true)
+#define true_if(...) return_if(( __VA_ARGS__ ), true)
 /*!
    \brief If arguments is true then call return operator with false value
    \param __VA_ARGS__ condition.
    \returns if expression
 */
-#define false_if(...) return_if(__VA_ARGS__, false)
+#define false_if(...) return_if(( __VA_ARGS__ ), false)
 /*!
    \brief If arguments is false then call return operator with true value
    \param __VA_ARGS__ condition.
    \returns if expression
 */
-#define true_ifn(...) return_ifn(__VA_ARGS__, true)
+#define true_ifn(...) return_ifn(( __VA_ARGS__ ), true)
 /*!
    \brief If arguments is false then call return operator with false value
    \param __VA_ARGS__ condition.
    \returns if expression
 */
-#define false_ifn(...) return_ifn(__VA_ARGS__, false)
+#define false_ifn(...) return_ifn(( __VA_ARGS__ ), false)
 
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_IF_H__

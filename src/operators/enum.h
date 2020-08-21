@@ -27,31 +27,34 @@
 
 #ifdef __cplusplus
 
-#define DEFINE_ENUM_MEMBER(name) PP_COMMA name
-
 /*!
    \brief [C++] Define enum with \a name
    \param name enum name.
    \param __VA_ARGS__ enum handle or items list.
    \returns enum definition
 */
-#define DEFINE_ENUM(name, ...) enum name {  PP_INVOKE( PP_HEAD, (__VA_ARGS__) ) PP_INVOKE( VA_LIST, ( DEFINE_ENUM_MEMBER, PP_INVOKE( PP_TAIL, (__VA_ARGS__) )) ) };
+#define DEFINE_ENUM(name, ...) enum name { __VA_ARGS__ };
 /*!
    \brief [C++] Define enum with \a name with set numeric values starting from 0
    \param name enum name.
    \param __VA_ARGS__ enum handle or items list.
    \returns enum definition
 */
-#define DEFINE_ENUM_NUM(name, ...) enum name {  PP_INVOKE( PP_HEAD, (__VA_ARGS__) ) = 0 PP_INVOKE( VA_LIST, ( DEFINE_ENUM_MEMBER, PP_INVOKE( PP_TAIL, (__VA_ARGS__) )) ) };
+#define DEFINE_ENUM_NUM(name, ...) enum name {  PP_INVOKE( PP_VA_HEAD, (__VA_ARGS__) ) = 0 PP_COMMA PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) };
 
-#define ENUM_MEMBER_TO_STR_RETCASE(name) RETCASE( name , #name )
+/*!
+   \brief [C++] Generate return switch by RETCASE from \a name for return his name
+   \param __VA_ARGS__ enum or other name
+   \returns switch case from \a name which returns his name
+*/
+#define ENUM_MEMBER_TO_STR_RETCASE(...) RETCASE( __VA_ARGS__ , #__VA_ARGS__ )
 /*!
    \brief [C++] Generate switch that process \a var as enum type and where every case return name of enum item as string. For example this use for functions thats generate translate id's
    \param var variable name contains enum value.
    \param __VA_ARGS__ enum handle or items list.
    \returns switch expression
 */
-#define ENUM_TO_STR_RETCASE(var, ...) SWITCH_BEGIN ( var ) PP_INVOKE( VA_LIST, ( ENUM_MEMBER_TO_STR_RETCASE, __VA_ARGS__) ) DEFCASE( _ass(false); return "<error>" ) SWITCH_END
+#define ENUM_TO_STR_RETCASE(var, ...) SWITCH_BEGIN ( var ) PP_INVOKE( PP_VA_LIST, ( ENUM_MEMBER_TO_STR_RETCASE, __VA_ARGS__) ) DEFCASE( _ass(false); return "<error>" ) SWITCH_END
 /*!
    \brief [C++] Macro combinator, that define enum by \a name, and generate function of the form const char* <enum_type_name>_toString(<enum_type_name> v) that returns the names of the enum elements as strings
    \param name enum name.

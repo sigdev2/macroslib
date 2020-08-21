@@ -60,9 +60,23 @@
 #define PP_SEMICOLON ;
 
 /*! 
+   \brief Append code semicolon literal
+   \param __VA_ARGS__ code.
+   \returns code ended semicolon literal
+*/
+#define PP_APPEND_SEMICOLON(...) __VA_ARGS__ PP_SEMICOLON
+
+/*! 
    \brief Comma literal, replace to ','
 */
 #define PP_COMMA ,
+
+/*! 
+   \brief Leading comma code
+   \param __VA_ARGS__ code.
+   \returns comma leaded code
+*/
+#define PP_LEAD_COMMA(...) PP_COMMA __VA_ARGS__
 
 /*! 
    \brief Empty literal, replace to nothing. This may use for insert skipped macro argument or return from a macro to be inserted between the name of a function macro and its arguments to allow its call
@@ -110,7 +124,7 @@
 
 /*! 
    \brief Concatenate macros name and argumens. Use for expand macro name from argument and call with expand arguments. PP_INVOKE(SUM, (1, 2)) is same as SUM(1, 2)
-   \param x macro name.
+   \param x functional macro name.
    \param y macro arguments in parentheses.
    \returns call of expanded macro with arguments.
 */

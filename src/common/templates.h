@@ -6,17 +6,57 @@
 #ifndef __HAS_MACROS_LIB_TEMPLATES_H__
 #define __HAS_MACROS_LIB_TEMPLATES_H__
 
+/*! \file templates.h
+    \brief Macros for C++ templates
+    
+    Depend from:
+     - /preprocessor/variadic.h
+     - /preprocessor/utils.h
+*/
+
+#include "../preprocessor/utils.h"
 #include "../preprocessor/variadic.h"
 
 #ifdef __cplusplus
 
-#define TEMPLATES_ARGS_HEAD( dummy , head ) PP_COMMA typename head
-#define TEMPLATES_ARGS(...) typename PP_INVOKE(PP_VA_HEAD, (__VA_ARGS__)) PP_VA_FOR(TEMPLATES_ARGS_HEAD, 0, PP_INVOKE(PP_VA_TAIL, (__VA_ARGS__)))
-#define TEMPLATES_ARGS_N(NUM) TEMPLATES_ARGS(PP_VA_GEN_A_N( NUM ))
+/*! 
+   \brief [C++] Leding type name with typename keyword
+   \param __VA_ARGS__ type name
+   \returns typename \a __VA_ARGS__
+*/
+#define PP_TYPENAMES_LIST_HEAD( ... ) typename __VA_ARGS__
+/*! 
+   \brief [C++] Сomma separated list of types marked typename keyword. Maximum arguments count is PP_VA_MAXARGS.
+   \param __VA_ARGS__ types or template arguments names
+   \returns typenames list
+*/
+#define TYPENAMES_LIST(...) PP_INVOKE(PP_VA_COMMA_LIST, (PP_TYPENAMES_LIST_HEAD, __VA_ARGS__))
+/*! 
+   \brief [C++] Сomma separated list of types marked typename keyword with numerated types names like _1, _2, _3 in \a NUM count and maximum as PP_VA_MAXARGS.
+   \param NUM count of types
+   \returns typenames list
+*/
+#define TYPENAMES_LIST_N(NUM) TYPENAMES_LIST(PP_VA_GEN_A_N( NUM ))
 
-#define TEMPLATES_ARGS_HEAD_VOID( dummy , head ) PP_COMMA typename head = void
-#define TEMPLATES_ARGS_VOID(...) typename PP_INVOKE(PP_VA_HEAD, (__VA_ARGS__)) = void PP_VA_FOR(TEMPLATES_ARGS_HEAD_VOID, 0, PP_INVOKE(PP_VA_TAIL, (__VA_ARGS__)))
-#define TEMPLATES_ARGS_VOID_N(NUM) TEMPLATES_ARGS_VOID(PP_VA_GEN_A_N( NUM ))
+/*! 
+   \brief [C++] Leding type name with typename keyword and set void value
+   \param __VA_ARGS__ type name
+   \returns typename \a __VA_ARGS__ = void
+*/
+#define PP_TYPENAMES_LIST_VOID_HEAD(...) typename __VA_ARGS__ = void
+/*! 
+   \brief [C++] Сomma separated list of template arguments names marked typename keyword and set default value as void.
+   Maximum arguments count is PP_VA_MAXARGS.
+   \param __VA_ARGS__ template arguments names
+   \returns typenames list with void default values
+*/
+#define TYPENAMES_LIST_VOID(...) PP_INVOKE(PP_VA_COMMA_LIST, (PP_TYPENAMES_LIST_VOID_HEAD, __VA_ARGS__))
+/*! 
+   \brief [C++] Сomma separated list of types marked typename keyword with numerated types names like _1, _2, _3 in \a NUM count with maximum as PP_VA_MAXARGS and set default value as void.
+   \param NUM count of types
+   \returns typenames list with void default values
+*/
+#define TYPENAMES_LIST_VOID_N(NUM) TYPENAMES_LIST_VOID(PP_VA_GEN_A_N( NUM ))
 
 #define TEMPLATES_LIST_HEAD_VOID( dummy1 , dummy2 ) PP_COMMA void
 #define TEMPLATES_LIST_VOID(...) void PP_VA_FOR(TEMPLATES_LIST_HEAD_VOID, 0, PP_INVOKE(PP_VA_TAIL, (__VA_ARGS__)))

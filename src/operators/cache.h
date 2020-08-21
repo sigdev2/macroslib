@@ -18,11 +18,13 @@
 
 #include <unordered_map>
 
+#ifndef CACHE_STORAGE_NAME
 /*!
-   \brief [C++] Name of variable for cache storage in function. May redefine (with #undef) to change name
+   \brief [C++] If not defined then is name of variable for cache storage in function. May redefine (with #undef) to change name
    \returns name of variable
 */
-#define CACHE_STORAGE_NAME __static_hash
+#    define CACHE_STORAGE_NAME __static_hash
+#endif // CACHE_STORAGE_NAME
 
 /*!
    \brief [C++] Inserted at the beginning of the function and declare satatic key-value storage (see CACHE_STORAGE_NAME), and also checks the presence of the cached value

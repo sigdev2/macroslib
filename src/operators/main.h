@@ -13,7 +13,7 @@
    \brief Base main function header without args
    \returns main function header
 */
-#define MAIN int main()
+#define MAIN_F int main()
 
 /*!
    \brief Main function header with argc as arguments count and pointer to array of arguments argv.

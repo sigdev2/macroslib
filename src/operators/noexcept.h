@@ -23,7 +23,7 @@
    \param __VA_ARGS__ nothing or expression of noexcept
    \returns noexcept if supported
 */
-#    define NOEXCEPT(...) noexcept VA_ARGS_LIST( __VA_ARGS__ )
+#    define NOEXCEPT(...) noexcept PP_VA_ARGS_LIST( __VA_ARGS__ )
 #else // CXX11
 #    define NOEXCEPT(...)
 #endif // CXX11

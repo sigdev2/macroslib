@@ -76,6 +76,48 @@
 #define PP_VA_GET_A(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, R, ...) R
 
 
+// VA_INCREMENT
+
+#define PP_VA_INCREMENT_0 1
+#define PP_VA_INCREMENT_1 2
+#define PP_VA_INCREMENT_2 3
+#define PP_VA_INCREMENT_3 4
+#define PP_VA_INCREMENT_4 5
+#define PP_VA_INCREMENT_5 6
+#define PP_VA_INCREMENT_6 7
+#define PP_VA_INCREMENT_7 8
+#define PP_VA_INCREMENT_8 9
+#define PP_VA_INCREMENT_9 10
+
+/*!
+   \brief Return incrementerd \a NUM numeric value, where \a NUM from 0 to PP_VA_MAXARGS
+   \param NUM numeric value from 0 to PP_VA_MAXARGS
+   \returns incrementerd \a NUM
+*/
+#define PP_VA_INCREMENT(NUM) PP_APPLY( PP_CAT( PP_VA_INCREMENT_ , NUM ) )
+
+
+// VA_DECREMENT
+
+#define PP_VA_DECREMENT_1 0
+#define PP_VA_DECREMENT_2 1
+#define PP_VA_DECREMENT_3 2
+#define PP_VA_DECREMENT_4 3
+#define PP_VA_DECREMENT_5 4
+#define PP_VA_DECREMENT_6 5
+#define PP_VA_DECREMENT_7 6
+#define PP_VA_DECREMENT_8 7
+#define PP_VA_DECREMENT_9 8
+#define PP_VA_DECREMENT_10 9
+
+/*!
+   \brief Return decremented \a NUM numeric value, where \a NUM from 1 to PP_VA_MAXARGS - 1
+   \param NUM numeric value from from 1 to PP_VA_MAXARGS - 1
+   \returns decremented \a NUM
+*/
+#define PP_VA_DECREMENT(NUM) PP_APPLY( PP_CAT( PP_VA_DECREMENT_ , NUM ) )
+
+
 // VA_LIST
 
 /*!
@@ -174,8 +216,8 @@
 
 // VA_FOR
 /*!
-   \brief Applay \a macro with \a data as first argument to every item of last arguments list as second argument. Maximum is PP_VA_MAXARGS arguments iterate.
-   \param macro macro name
+   \brief Apply \a macro with \a data as first argument to every item of last arguments list as second argument. Maximum is PP_VA_MAXARGS arguments iterate.
+   \param macro functional macro name with two arguments, where first is \a data and second is iterate item
    \param data data used as first argument of \a macro
    \param __VA_ARGS__ arguments to iterate
    \returns result of \a macro call on every arguments
@@ -193,43 +235,102 @@
 #define PP_VA_FOR_9(m,d,x)  m( d, PP_APPLY(PP_VA_HEAD x) )  PP_VA_FOR_8( m, d, (PP_APPLY(PP_VA_TAIL x)))
 #define PP_VA_FOR_10(m,d,x) m( d, PP_APPLY(PP_VA_HEAD x) )  PP_VA_FOR_9( m, d, (PP_APPLY(PP_VA_TAIL x)))
 
+/*!
+   \brief Use as default macro argument for PP_VA_FOR which returns the element itself unchanged
+   \param data data passed in PP_VA_FOR
+   \param item iterable item
+   \returns \a item
+*/
+#define PP_VA_FOR_ITEM(data, item) item
+
+/*!
+   \brief Use as default macro argument for PP_VA_FOR which returns data argument passed in PP_VA_FOR
+   \param data data passed in PP_VA_FOR
+   \param item iterable item
+   \returns \a data
+*/
+#define PP_VA_FOR_ITEM_DATA(data, item) data
+
+/*!
+   \brief Use as default macro argument for PP_VA_FOR if data argument for PP_VA_FOR is functional macro which accept one argument. Return \a macro result apply on \a item
+   \param macro functional macro passed as data argument in PP_VA_FOR which accept one argument 
+   \param item iterable item
+   \returns \a macro result apply on \a item
+*/
+#define PP_VA_FOR_ITEM_MACRO(macro, item) PP_INVOKE( macro, ( item ))
+
+/*!
+   \brief Use as default macro argument for PP_VA_FOR if data argument for PP_VA_FOR is functional macro which accept one argument. Return \a macro result apply on \a item and leading is with comma
+   \param macro functional macro passed as data argument in PP_VA_FOR which accept one argument 
+   \param item iterable item
+   \returns comma leaded \a macro result apply on \a item
+*/
+#define PP_VA_FOR_ITEM_COMMED(macro, item) PP_INVOKE( PP_LEAD_COMMA , ( PP_INVOKE( macro, ( item )) ))
+
+/*!
+   \brief Use as default macro argument for PP_VA_FOR if data argument for PP_VA_FOR is functional macro which accept one argument. Return \a macro result apply on \a item and append semicolon
+   \param macro functional macro passed as data argument in PP_VA_FOR which accept one argument 
+   \param item iterable item
+   \returns \a macro result apply on \a item with appended semicolon
+*/
+#define PP_VA_FOR_ITEM_SEMI(macro, item) PP_INVOKE( PP_APPEND_SEMICOLON , ( PP_INVOKE( macro, ( item )) ))
 
 // VA_LIST
 
 /*!
-   \brief Applay \a macro to every item of next arguments list. Maximum iterate is PP_VA_MAXARGS arguments.
-   \param macro macro name
+   \brief Apply \a macro to every item of arguments list. Maximum iterate is PP_VA_MAXARGS arguments.
+   \param macro functional macro take one argument - list item
    \param __VA_ARGS__ arguments to iterate
    \returns result of \a macro call on every arguments
 */
-#define VA_LIST(macro, ...)  PP_VA_FOR( macro , 0, __VA_ARGS__ ))
+#define PP_VA_LIST(macro, ...)  PP_INVOKE( PP_VA_FOR, ( PP_VA_FOR_ITEM_MACRO , macro, __VA_ARGS__ ))
 
 /*!
-   \brief Return arguments list with commas. Analog PP_APPLY, but with a different meaning
+   \brief Apply \a macro to every item of arguments list and separate commas. Maximum iterate is PP_VA_MAXARGS arguments.
+   \param macro functional macro take one argument - list item
    \param __VA_ARGS__ arguments list
-   \returns list of arguments with commas
+   \returns result of \a macro call on every arguments as list with commas
 */
-#define VA_COMMA_LIST(...) __VA_ARGS__
+#define PP_VA_COMMA_LIST(macro, ...) PP_INVOKE( macro , (PP_INVOKE( PP_VA_HEAD, (__VA_ARGS__) ))) PP_COMMA PP_INVOKE( PP_VA_FOR, ( PP_VA_FOR_ITEM_COMMED , macro, PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) ))
 
-#define VA_SEMICOLON_LIST_ITEM( dummy, head ) head PP_SEMICOLON
 /*!
-   \brief Return arguments list with semicolon. Maximum list length is PP_VA_MAXARGS.
+   \brief Apply \a macro to every item of arguments list and append semicolon. Maximum iterate is PP_VA_MAXARGS arguments.
+   \param macro functional macro take one argument - list item
    \param __VA_ARGS__ arguments list
-   \returns list of arguments with semicolon
+   \returns result of \a macro call on every arguments as list with separated and ended the semicolon
 */
-#define VA_SEMICOLON_LIST(...) PP_INVOKE( VA_LIST, (VA_SEMICOLON_LIST_ITEM, __VA_ARGS__ ) )
+#define PP_VA_SEMICOLON_LIST(macro, ...) PP_INVOKE( PP_VA_FOR, ( PP_VA_SEMICOLON_LIST_ITEM, macro, __VA_ARGS__ ) )
 
+
+// VA_REPEAT
+
+/*!
+   \brief Repeat some code or value passed in \a value \a count times. Maximum is PP_VA_MAXARGS times.
+   \param value some code or value
+   \param count times to repeat
+   \returns repeated \a value
+*/
+#define PP_VA_REPEAT(value, count)  PP_INVOKE( PP_VA_FOR, ( PP_VA_FOR_ITEM_DATA , value , PP_VA_GEN_A_N( count ) )) )
+
+/*!
+   \brief Repeat some code or value passed in  \a value \a count times with apply \a macro to every time. Maximum is PP_VA_MAXARGS times.
+   \param macro functional macro take one argument - \a value
+   \param value some code or value
+   \param count times to repeat
+   \returns repeated \a value with apply \a macro
+*/
+#define PP_VA_REPEAT(macro, value, count)  PP_INVOKE( PP_VA_FOR, ( PP_VA_FOR_ITEM_DATA , PP_INVOKE( macro , ( value )) , PP_VA_GEN_A_N( count ) )) )
 
 // VA_ARGS_LIST
 
-#define VA_ARGS_LIST_ARGS(skip, choose, ...) choose
-#define VA_ARGS_LIST_CHOOSER(...) PP_COMMA
+#define PP_VA_ARGS_LIST_ARGS(skip, choose, ...) choose
+#define PP_VA_ARGS_LIST_CHOOSER(...) PP_COMMA
 /*!
    \brief Return arguments list with commas in parentheses if he not empty, elese - nothong. This use for macros that can take no arguments, like NOEXCEPT for example.
    \param __VA_ARGS__ arguments list
    \returns arguments list with commas in parentheses or nothong
 */
-#define VA_ARGS_LIST(...) PP_INVOKE( VA_ARGS_LIST_ARGS, ( PP_INVOKE( VA_ARGS_LIST_CHOOSER PP_VA_HEAD( __VA_ARGS__ ), ()) , ( __VA_ARGS__ )) )
+#define PP_VA_ARGS_LIST(...) PP_INVOKE( PP_VA_ARGS_LIST_ARGS, ( PP_INVOKE( PP_VA_ARGS_LIST_CHOOSER PP_VA_HEAD( __VA_ARGS__ ), ()) , ( __VA_ARGS__ )) )
 
 
 // VA_IF
