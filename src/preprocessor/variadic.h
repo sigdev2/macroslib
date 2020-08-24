@@ -118,25 +118,6 @@
 #define PP_VA_DECREMENT(NUM) PP_APPLY( PP_CAT( PP_VA_DECREMENT_ , NUM ) )
 
 
-// VA_LIST
-
-/*!
-   \brief Return \a head of arguments list
-   \param head head of arguments list.
-   \param __VA_ARGS__ tail of arguments list.
-   \returns \a head of arguments list.
-*/
-#define PP_VA_HEAD( head , ... ) head
-
-/*!
-   \brief Return tail of arguments list
-   \param head head of arguments list.
-   \param __VA_ARGS__ tail of arguments list.
-   \returns tail of arguments list
-*/
-#define PP_VA_TAIL( head , ... ) __VA_ARGS__
-
-
 // VA_SIZE
 
 #define PP_VA_SPEC_A(...)
@@ -295,12 +276,21 @@
 
 /*!
    \brief Apply \a macro to every item of arguments list and append semicolon. Maximum iterate is PP_VA_MAXARGS arguments.
-   \param macro functional macro take one argument - list item
+   \param macro functional macro 888888888888888take one argument - list item
    \param __VA_ARGS__ arguments list
    \returns result of \a macro call on every arguments as list with separated and ended the semicolon
 */
 #define PP_VA_SEMICOLON_LIST(macro, ...) PP_INVOKE( PP_VA_FOR, ( PP_VA_SEMICOLON_LIST_ITEM, macro, __VA_ARGS__ ) )
 
+// VA_ZIP
+
+/*!
+   \brief Apply \a macro to every item of arguments list and append semicolon. Maximum iterate is PP_VA_MAXARGS arguments.
+   \param macro functional macro take one argument - list item
+   \param __VA_ARGS__ arguments list
+   \returns result of \a macro call on every arguments as list with separated and ended the semicolon
+*/
+#define PP_VA_ZIP(list1, list2, zipper) PP_INVOKE( PP_VA_FOR, ( PP_VA_SEMICOLON_LIST_ITEM, macro, __VA_ARGS__ ) )
 
 // VA_REPEAT
 
@@ -319,7 +309,25 @@
    \param count times to repeat
    \returns repeated \a value with apply \a macro
 */
-#define PP_VA_REPEAT(macro, value, count)  PP_INVOKE( PP_VA_FOR, ( PP_VA_FOR_ITEM_DATA , PP_INVOKE( macro , ( value )) , PP_VA_GEN_A_N( count ) )) )
+#define PP_VA_REPEAT(macro, value, count)  PP_INVOKE( PP_VA_FOR, ( PP_VA_FOR_ITEM_DATA , PP_INVOKE( macro , ( value )) , PP_INVOKE( PP_VA_GEN_A_N, ( count ) ) )) )
+
+/*!
+   \brief Repeat some code or value passed in  \a value \a count times with apply \a macro to every time and separate commas. Maximum is PP_VA_MAXARGS times.
+   \param macro functional macro take one argument - \a value
+   \param value some code or value
+   \param count times to repeat
+   \returns repeated \a value with apply \a macro and separate commas
+*/
+#define PP_VA_REPEAT_COMMA(macro, value, count) PP_INVOKE( macro , value ) PP_COMMA PP_INVOKE( PP_VA_FOR, ( PP_VA_FOR_ITEM_DATA , PP_INVOKE( macro , ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_INVOKE( PP_VA_DECREMENT, ( count )) ) ) ))
+
+/*!
+   \brief Repeat some code or value passed in  \a value \a count times with apply \a macro to every time and append semicolon. Maximum is PP_VA_MAXARGS times.
+   \param macro functional macro take one argument - \a value
+   \param value some code or value
+   \param count times to repeat
+   \returns repeated \a value with apply \a macro and append semicolon
+*/
+#define PP_VA_REPEAT_SEMICOLON(macro, value, count) PP_INVOKE( PP_VA_REPEAT, ( macro, value PP_SEMICOLON , count ) )
 
 // VA_ARGS_LIST
 
@@ -331,58 +339,6 @@
    \returns arguments list with commas in parentheses or nothong
 */
 #define PP_VA_ARGS_LIST(...) PP_INVOKE( PP_VA_ARGS_LIST_ARGS, ( PP_INVOKE( PP_VA_ARGS_LIST_CHOOSER PP_VA_HEAD( __VA_ARGS__ ), ()) , ( __VA_ARGS__ )) )
-
-
-// VA_IF
-
-#define PP_BOOL_TO_VA_1 PP_TRUE
-#define PP_BOOL_TO_VA_true PP_TRUE
-#define PP_BOOL_TO_VA_True PP_TRUE
-#define PP_BOOL_TO_VA_TRUE PP_TRUE
-#define PP_BOOL_TO_VA_0 PP_FALSE
-#define PP_BOOL_TO_VA_false PP_FALSE
-#define PP_BOOL_TO_VA_False PP_FALSE
-#define PP_BOOL_TO_VA_FALSE PP_FALSE
-#define PP_BOOL_TO_VA_empty PP_FALSE
-#define PP_BOOL_TO_VA_Empty PP_FALSE
-#define PP_BOOL_TO_VA_EMPTY PP_FALSE
-#define PP_BOOL_TO_VA_nan PP_FALSE
-#define PP_BOOL_TO_VA_Nan PP_FALSE
-#define PP_BOOL_TO_VA_NAN PP_FALSE
-#define PP_BOOL_TO_VA_none PP_FALSE
-#define PP_BOOL_TO_VA_None PP_FALSE
-#define PP_BOOL_TO_VA_NONE PP_FALSE
-#define PP_BOOL_TO_VA_void PP_FALSE
-#define PP_BOOL_TO_VA_Void PP_FALSE
-#define PP_BOOL_TO_VA_VOID PP_FALSE
-#define PP_BOOL_TO_VA_ PP_FALSE
-/*!
-   \brief Convertion some common terms to MacrosLib preprocessor bool value.
-   1, true, True, TRUE to PP_TRUE
-   and 0, false, False, FALSE, empty, Empty, EMPTY, nan, Nan, NAN, none, None, NONE, void, Void, VOID to PP_FALSE.
-   Note - NULL, null, Null, NaN typically is reserved
-   \param b common bool like term
-   \returns PP_TRUE or PP_FALSE
-*/
-#define PP_BOOL_TO_VA(b) PP_CAT( PP_BOOL_TO_VA_ , PP_CAT( b ,) )
-
-#define PP_VA_IF_(t, f) f
-#define PP_VA_IF_true(t, f) t
-/*!
-   \brief Return \a t if \a cont is PP_TRUE and \a f if PP_FALSE. Supported common bool like terms, see PP_BOOL_TO_VA
-   \param cond preprocessor bool like condition expression
-   \param t term if PP_TRUE
-   \param f term if PP_FALSE
-   \returns \a t or \a f
-*/
-#define PP_VA_IF(cond, t, f) PP_CAT( PP_VA_IF_ , PP_BOOL_TO_VA( cond )) ( t , f )
-
-/*!
-   \brief Convertion PP_TRUE and PP_FALSE to C/C++ bool value
-   \param c preprocessor bool like condition expression
-   \returns true or false
-*/
-#define PP_VA_TO_BOOL(c) PP_VA_IF( c , true, false )
 
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_VARIADIC_H__

@@ -79,41 +79,11 @@
 #define PP_LEAD_COMMA(...) PP_COMMA __VA_ARGS__
 
 /*! 
-   \brief Empty literal, replace to nothing. This may use for insert skipped macro argument or return from a macro to be inserted between the name of a function macro and its arguments to allow its call
-*/
-#define PP_EMPTY
-
-/*! 
-   \brief Alias for Empty literal, replace to nothing
-*/
-#define PP_NONE PP_EMPTY
-
-/*! 
-   \brief Alias for Empty literal, replace to nothing
-*/
-#define PP_NAN PP_EMPTY
-
-/*! 
-   \brief Alias for Empty literal, replace to nothing
-*/
-#define PP_VOID PP_EMPTY
-
-/*! 
    \brief Remove code inside. As an example it can be used for translation programs that scan code. PP_REMOVE(TR("SomeTranslateId"))
    \param __VA_ARGS__ code.
    \returns nothing
 */
 #define PP_REMOVE(...)
-
-/*! 
-   \brief Non empty macros. Base value is boolean true. This can be used to return from a macro that must be inserted between the function macro name and its arguments to prevent it from being called, and invoke an alternate with the postfix 'true'
-*/
-#define PP_TRUE true
-
-/*! 
-   \brief Alias for Empty literal, replace to nothing.
-*/
-#define PP_FALSE PP_EMPTY
 
 /*! 
    \brief Macro which the retrun arguments. Use for expand macros in arguments.

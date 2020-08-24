@@ -58,10 +58,22 @@
 */
 #define TYPENAMES_LIST_VOID_N(NUM) TYPENAMES_LIST_VOID(PP_VA_GEN_A_N( NUM ))
 
-#define TEMPLATES_LIST_HEAD_VOID( dummy1 , dummy2 ) PP_COMMA void
-#define TEMPLATES_LIST_VOID(...) void PP_VA_FOR(TEMPLATES_LIST_HEAD_VOID, 0, PP_INVOKE(PP_VA_TAIL, (__VA_ARGS__)))
-#define TEMPLATES_LIST_VOID_N(NUM) TEMPLATES_LIST_VOID(PP_VA_GEN_A_N( NUM ))
+/*!
+   \brief [C++] Сomma separated list of void types with size by size of arguments list. Used for generate by template arguments without default values list of unused arguments. Maximum arguments count is PP_VA_MAXARGS.
+   \param __VA_ARGS__ any arguments
+   \returns comma separated list of void
+*/
+#define VOIDS_LIST(...) PP_VA_REPEAT_COMMA(PP_APPLY, void, PP_INVOKE(PP_VA_SIZE, ( __VA_ARGS__ )))
+/*!
+   \brief [C++] Сomma separated list of void types with size by \a NUM. Used for generate for template without default values list of unused arguments. Maximum list size is PP_VA_MAXARGS.
+   \param NUM count of template arguments
+   \returns comma separated list of void
+*/
+#define VOIDS_LIST_N(NUM) PP_VA_REPEAT_COMMA(PP_APPLY, void, NUM)
 
+
+#define PP_TYPES_LIST_HEAD(type, ...) type __VA_ARGS__
+#define TYPES_LIST(type, ...) PP_INVOKE(PP_VA_COMMA_LIST, (PP_TYPENAMES_LIST_HEAD, __VA_ARGS__))
 #define TEMPLATES_ARGS_HEAD_BOOL( dummy , head ) PP_COMMA bool head
 #define TEMPLATES_ARGS_BOOL(...) bool PP_INVOKE(PP_VA_HEAD, (__VA_ARGS__)) PP_VA_FOR(TEMPLATES_ARGS_HEAD_BOOL, 0, PP_INVOKE(PP_VA_TAIL, (__VA_ARGS__)))
 #define TEMPLATES_ARGS_BOOL_N(NUM) TEMPLATES_ARGS_BOOL(PP_VA_GEN_A_N( NUM ))
