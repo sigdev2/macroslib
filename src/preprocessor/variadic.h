@@ -276,7 +276,7 @@
 
 /*!
    \brief Apply \a macro to every item of arguments list and append semicolon. Maximum iterate is PP_VA_MAXARGS arguments.
-   \param macro functional macro 888888888888888take one argument - list item
+   \param macro functional macro take one argument - list item
    \param __VA_ARGS__ arguments list
    \returns result of \a macro call on every arguments as list with separated and ended the semicolon
 */
