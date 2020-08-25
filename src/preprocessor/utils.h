@@ -92,13 +92,35 @@
 */
 #define PP_APPLY(...) __VA_ARGS__
 
-/*! 
+/*!
    \brief Concatenate macros name and argumens. Use for expand macro name from argument and call with expand arguments. PP_INVOKE(SUM, (1, 2)) is same as SUM(1, 2)
    \param x functional macro name.
    \param y macro arguments in parentheses.
    \returns call of expanded macro with arguments.
 */
 #define PP_INVOKE(x, y) PP_APPLY(x y)
+
+/*!
+   \brief Wraps the argument list with commas in parentheses
+   \param __VA_ARGS__ arguments to wrap
+   \returns wraped list with commas
+*/
+#define PP_PAREN(...) ( __VA_ARGS__ )
+
+/*!
+   \brief Unwraps list with commas in parentheses to list without parentheses
+   \param inparen arguments in parentheses
+   \returns list with commas without parentheses
+*/
+#define PP_UNPAREN(inparen) PP_APPLY inparen
+
+/*!
+   \brief Concatenate two lists with commas in parentheses
+   \param list1 first list in parentheses
+   \param list2 second list in parentheses
+   \returns list with commas in parentheses
+*/
+#define PP_CAT_PAREN(list1, list2) PP_PAREN( PP_UNPAREN(list1) PP_COMMA PP_UNPAREN(list2) )
 
 /* */
 #define PP_FUNC_IF_BRACKETS_PP_HAS_BRACKETS
