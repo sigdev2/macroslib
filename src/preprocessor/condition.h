@@ -11,9 +11,11 @@
     
     Depend from:
      - /preprocessor/utils.h
+     - /preprocessor/variadic.h
 */
 
 #include "utils.h"
+#include "variadic.h"
 
 // BOOL VALUES
 
@@ -58,13 +60,51 @@
 #define PP_TRUE true
 
 
+// BOOL OPERATORS
+
+/*! 
+   \brief AND boolean operator, return PP_TRUE only if \a a and \a b is PP_TRUE
+   \param a first boolean value
+   \param b second boolean value
+   \return boolean value
+*/
+#define PP_AND(a, b) PP_IF( a , PP_IF( b , PP_TRUE, PP_FALSE), PP_FALSE)
+
+/*! 
+   \brief OR boolean operator, return PP_TRUE if \a a or \a b is PP_TRUE
+   \param a first boolean value
+   \param b second boolean value
+   \return boolean value
+*/
+#define PP_OR(a, b) PP_IF( a , PP_TRUE, PP_IF( b , PP_TRUE, PP_FALSE))
+
+/*! 
+   \brief NOT boolean operator, return PP_TRUE if \a x is PP_FALSE
+   \param x boolean value
+   \return boolean value
+*/
+#define PP_NOT(x) PP_IF( x , PP_FALSE, PP_TRUE )
+
+/*! 
+   \brief XOR boolean operator, return PP_TRUE only if \a a and \a b is not equal 
+   \param a first boolean value
+   \param b second boolean value
+   \return boolean value
+*/
+#define PP_XOR(a, b) PP_IF( a , PP_IF( b , PP_FALSE, PP_TRUE), PP_IF( b , PP_TRUE, PP_FALSE))
+
+
 // IF
 
 #define PP_BOOL_TO_1 PP_TRUE
 #define PP_BOOL_TO_true PP_TRUE
 #define PP_BOOL_TO_True PP_TRUE
 #define PP_BOOL_TO_TRUE PP_TRUE
+#define PP_BOOL_TO_T PP_TRUE
+#define PP_BOOL_TO_t PP_TRUE
 #define PP_BOOL_TO_0 PP_FALSE
+#define PP_BOOL_TO_T PP_FALSE
+#define PP_BOOL_TO_f PP_FALSE
 #define PP_BOOL_TO_false PP_FALSE
 #define PP_BOOL_TO_False PP_FALSE
 #define PP_BOOL_TO_FALSE PP_FALSE
@@ -86,8 +126,8 @@
 #define PP_BOOL_TO_ PP_FALSE
 /*!
    \brief Convertion some common terms to MacrosLib preprocessor bool value.
-   1, true, True, TRUE to PP_TRUE
-   and 0, false, False, FALSE, empty, Empty, EMPTY, nil, Nil, NIL, nan, Nan, NAN, none, None, NONE, void, Void, VOID to PP_FALSE.
+   1, f, T, true, True, TRUE to PP_TRUE
+   and 0, f, F, false, False, FALSE, empty, Empty, EMPTY, nil, Nil, NIL, nan, Nan, NAN, none, None, NONE, void, Void, VOID to PP_FALSE.
    Note - NULL, null, Null, NaN typically is reserved
    \param b common bool like term
    \returns PP_TRUE or PP_FALSE
