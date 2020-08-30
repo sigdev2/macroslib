@@ -54,6 +54,52 @@
 
 // PP_F_ENDED
 
+// VA_ZIP
+
+/*!
+   \brief Apply \a macro to every item of arguments list and append semicolon. Maximum iterate is PP_VA_MAXARGS arguments.
+   \param macro functional macro take one argument - list item
+   \param __VA_ARGS__ arguments list
+   \returns result of \a macro call on every arguments as list with separated and ended the semicolon
+*/
+#define PP_VA_ZIP(list1, list2, zipper) PP_INVOKE( PP_VA_FOR, ( PP_VA_SEMICOLON_LIST_ITEM, macro, __VA_ARGS__ ) )
+
+// VA_REPEAT
+
+/*!
+   \brief Repeat some code or value passed in \a value \a count times. Maximum is PP_VA_MAXARGS times.
+   \param value some code or value
+   \param count times to repeat
+   \returns repeated \a value
+*/
+#define PP_VA_REPEAT(value, count)  PP_INVOKE( PP_VA_FOR, ( PP_VA_FOR_ITEM_DATA , value , PP_VA_GEN_A_N( count ) )) )
+
+/*!
+   \brief Repeat some code or value passed in  \a value \a count times with apply \a macro to every time. Maximum is PP_VA_MAXARGS times.
+   \param macro functional macro take one argument - \a value
+   \param value some code or value
+   \param count times to repeat
+   \returns repeated \a value with apply \a macro
+*/
+#define PP_VA_REPEAT(macro, value, count)  PP_INVOKE( PP_VA_FOR, ( PP_VA_FOR_ITEM_DATA , PP_INVOKE( macro , ( value )) , PP_INVOKE( PP_VA_GEN_A_N, ( count ) ) )) )
+
+/*!
+   \brief Repeat some code or value passed in  \a value \a count times with apply \a macro to every time and separate commas. Maximum is PP_VA_MAXARGS times.
+   \param macro functional macro take one argument - \a value
+   \param value some code or value
+   \param count times to repeat
+   \returns repeated \a value with apply \a macro and separate commas
+*/
+#define PP_VA_REPEAT_COMMA(macro, value, count) PP_INVOKE( macro , value ) PP_COMMA PP_INVOKE( PP_VA_FOR, ( PP_VA_FOR_ITEM_DATA , PP_INVOKE( macro , ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_INVOKE( PP_VA_DECREMENT, ( count )) ) ) ))
+
+/*!
+   \brief Repeat some code or value passed in  \a value \a count times with apply \a macro to every time and append semicolon. Maximum is PP_VA_MAXARGS times.
+   \param macro functional macro take one argument - \a value
+   \param value some code or value
+   \param count times to repeat
+   \returns repeated \a value with apply \a macro and append semicolon
+*/
+#define PP_VA_REPEAT_SEMICOLON(macro, value, count) PP_INVOKE( PP_VA_REPEAT, ( macro, value PP_SEMICOLON , count ) )
 
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_FUNCTIONAL_H__

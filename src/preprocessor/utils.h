@@ -8,19 +8,15 @@
 
 /*! \file utils.h
     \brief Macros for work with preprocessor. Crosslanguage.
-    
-    Depend from:
-     - /operators/while.h
 */
-
-#include "../operators/while.h"
 
 /*!
-   \brief Call code from one or more operators  in args, is anyway converted to one operator.
-   \param __VA_ARGS__ code.
-   \returns Expands to \a __VA_ARGS__
+   \brief Simple concat two values in args with ## operator.
+   \param x first value.
+   \param y second value.
+   \returns Concated x and y values
 */
-#define PP_DO_SAFE(...) do { __VA_ARGS__ ; } whileone
+#define PP_CAT_A(x, y) x##y
 
 /*!
    \brief Concat two values in args with two parts:
@@ -33,26 +29,10 @@
 #define PP_CAT(x, y) PP_CAT_A(x, y)
 
 /*! 
-   \brief Simple concat two values in args with ## operator.
-   \param x first value.
-   \param y second value.
-   \returns Concated x and y values
-*/
-#define PP_CAT_A(x, y) x##y
-
-/*! 
    \brief Generate code uniq var name like ___some_value_<line_number>
    \returns ___some_value_<line_number>
 */
 #define PP_VAR PP_CAT(___some_value_, __LINE__)
-
-/*! 
-   \brief Call code if bool is true. Use for write short and safe if-operator in macroses.
-   \param x bool value.
-   \param __VA_ARGS__ code.
-   \returns Expands to \a x \a __VA_ARGS__
-*/
-#define PP_CHECK_IF(x, ...) PP_DO_SAFE(const bool PP_VAR = ( x ); if ( PP_VAR ) { __VA_ARGS__ ; })
 
 /*! 
    \brief Semicolon literal, replace to ';'
@@ -78,6 +58,14 @@
 */
 #define PP_LEAD_COMMA(...) PP_COMMA __VA_ARGS__
 
+/*!
+   \brief Functional macro that insert comma if called. Used in macro for skip argument if called.
+   Example: PP_INVOKE( PP_SKIP_COMMA TEST_ARG, () ) - insert comma TEST_ARG is empty, else PP_SKIP_COMMA <TEST_ARG> () code
+   \param __VA_ARGS__ anything
+   \returns comma or not empty code
+*/
+#define PP_SKIP_COMMA(...) PP_COMMA
+
 /*! 
    \brief Remove code inside. As an example it can be used for translation programs that scan code. PP_REMOVE(TR("SomeTranslateId"))
    \param __VA_ARGS__ code.
@@ -93,7 +81,7 @@
 #define PP_APPLY(...) __VA_ARGS__
 
 /*!
-   \brief Concatenate macros name and argumens. Use for expand macro name from argument and call with expand arguments. PP_INVOKE(SUM, (1, 2)) is same as SUM(1, 2)
+   \brief Concatenate macros name and argumens. Use for expand macro name from argument and call with expand arguments in other macros. PP_INVOKE(SUM, (1, 2)) is same as SUM(1, 2)
    \param x functional macro name.
    \param y macro arguments in parentheses.
    \returns call of expanded macro with arguments.
@@ -101,18 +89,38 @@
 #define PP_INVOKE(x, y) PP_APPLY(x y)
 
 /*!
-   \brief Wraps the argument list with commas in parentheses
-   \param __VA_ARGS__ arguments to wrap
-   \returns wraped list with commas
+   \brief Choose argument by \a skip argument use manipulations with commas. For example use PP_SKIP_COMMA_TEST to return empy \a choose for empty arguments
+   \param skip argument for skip
+   \param choose returned choose
+   \param __VA_ARGS__ anything
+   \returns choose argument
 */
-#define PP_PAREN(...) ( __VA_ARGS__ )
+#define PP_SKIP_OR_CHOOSE(skip, choose, ...) choose
 
 /*!
-   \brief Unwraps list with commas in parentheses to list without parentheses
-   \param inparen arguments in parentheses
-   \returns list with commas without parentheses
+   \brief Short entry for arguments skip testing.
+   If there is at least \a one non-empty argument then return not empty terms, else return comma.
+   If \a one argument non-empty but in parentheses then return nothing (this is implementation specific, since parentheses are control characters).
+   Used for skip empty arguments in macros.
+   \param one first non-empty argument
+   \param __VA_ARGS__ anything
+   \returns comma, not empty code or nothing
 */
-#define PP_UNPAREN(inparen) PP_APPLY inparen
+#define PP_SKIP_COMMA_TEST(one, ...) PP_INVOKE(  PP_SKIP_OR_CHOOSE, (PP_INVOKE( PP_SKIP_COMMA,  one), PP_INVOKE( PP_SKIP_COMMA one, () )) )
+
+/*!
+   \brief Wraps the argument list with commas in parentheses. If \a __VA_ARGS__ empty, then return nothing
+   \param __VA_ARGS__ arguments to wrap
+   \returns wraped list with commas or nothing
+*/
+#define PP_PAREN(...) PP_INVOKE( PP_SKIP_OR_CHOOSE, (PP_SKIP_COMMA_TEST( __VA_ARGS__ ) , ( __VA_ARGS__ )) )
+
+/*!
+   \brief Unwraps list with commas in parentheses to list without parentheses. If \a inparen empty, then return nothing
+   \param inparen arguments in parentheses
+   \returns list with commas without parentheses or nothing
+*/
+#define PP_UNPAREN(inparen) PP_SKIP_OR_CHOOSE( PP_LEAD_COMMA inparen , inparen )
 
 /*!
    \brief Concatenate two lists with commas in parentheses
@@ -121,47 +129,6 @@
    \returns list with commas in parentheses
 */
 #define PP_CAT_PAREN(list1, list2) PP_PAREN( PP_UNPAREN(list1) PP_COMMA PP_UNPAREN(list2) )
-
-/* */
-#define PP_FUNC_IF_BRACKETS_PP_HAS_BRACKETS
-#define PP_HAS_BRACKETS(...) void (__VA_ARGS__)
-#define PP_FUNC_IF_BRACKETS_void void
-/*! 
-   \brief Determines whether arguments are enclosed in parentheses, if so, converts them to the function type. This is used to convert type lists into a single type.
-   \param __VA_ARGS__ type or type list in parentheses.
-   \returns type or function type.
-*/
-#define PP_FUNC_IF_BRACKETS(...) PP_CAT(PP_FUNC_IF_BRACKETS_, PP_HAS_BRACKETS __VA_ARGS__)
-
-/* */
-#ifdef __cplusplus
-
-namespace __MacrosLibPrivate
-{
-    template<typename T> struct single_argument_type { typedef T type; };
-    template<typename T, typename U> struct single_argument_type<T(U)> { typedef U type; };
-}
-/*! 
-   \brief [C++] Convert any types or type list to single literal for use in code. This is needed in some macros and templates. May use for inherit classes.
-   \param __VA_ARGS__ type or type list in parentheses.
-   \returns type literal whithout typename keyword.
-*/
-#define PP_SINGLE_TYPE_INHERIT(...) __MacrosLibPrivate::single_argument_type< PP_FUNC_IF_BRACKETS(__VA_ARGS__) >::type
-
-/*! 
-   \brief [C++] Convert any types or type list to single literal for use in code. This is needed in some macros and templates for passing in parentheses complex types contains commas
-   \param __VA_ARGS__ type or type list in parentheses.
-   \returns type literal whith typename keyword.
-*/
-#define PP_SINGLE_TYPE(...) typename __MacrosLibPrivate::single_argument_type< PP_FUNC_IF_BRACKETS(__VA_ARGS__) >::type
-
-
-#else // !__cplusplus
-
-#define PP_SINGLE_TYPE_INHERIT(...) __VA_ARGS__
-#define PP_SINGLE_TYPE(...) __VA_ARGS__
-
-#endif // __cplusplus
 
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_UTILS_H__

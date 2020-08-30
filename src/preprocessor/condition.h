@@ -60,40 +60,6 @@
 #define PP_TRUE true
 
 
-// BOOL OPERATORS
-
-/*! 
-   \brief AND boolean operator, return PP_TRUE only if \a a and \a b is PP_TRUE
-   \param a first boolean value
-   \param b second boolean value
-   \return boolean value
-*/
-#define PP_AND(a, b) PP_IF( a , PP_IF( b , PP_TRUE, PP_FALSE), PP_FALSE)
-
-/*! 
-   \brief OR boolean operator, return PP_TRUE if \a a or \a b is PP_TRUE
-   \param a first boolean value
-   \param b second boolean value
-   \return boolean value
-*/
-#define PP_OR(a, b) PP_IF( a , PP_TRUE, PP_IF( b , PP_TRUE, PP_FALSE))
-
-/*! 
-   \brief NOT boolean operator, return PP_TRUE if \a x is PP_FALSE
-   \param x boolean value
-   \return boolean value
-*/
-#define PP_NOT(x) PP_IF( x , PP_FALSE, PP_TRUE )
-
-/*! 
-   \brief XOR boolean operator, return PP_TRUE only if \a a and \a b is not equal 
-   \param a first boolean value
-   \param b second boolean value
-   \return boolean value
-*/
-#define PP_XOR(a, b) PP_IF( a , PP_IF( b , PP_FALSE, PP_TRUE), PP_IF( b , PP_TRUE, PP_FALSE))
-
-
 // IF
 
 #define PP_BOOL_TO_1 PP_TRUE
@@ -132,7 +98,7 @@
    \param b common bool like term
    \returns PP_TRUE or PP_FALSE
 */
-#define PP_BOOL_TO_PP(b) PP_CAT( PP_BOOL_TO_VA_ , PP_CAT( b ,) )
+#define PP_BOOL_TO_PP(b) PP_CAT( PP_BOOL_TO_ , PP_CAT( b ,) )
 
 #define PP_IF_(t, f) f
 #define PP_IF_true(t, f) t
@@ -153,6 +119,39 @@
 #define PP_TO_BOOL(c) PP_IF( c , true, false )
 
 // todo: COND
+
+// BOOL OPERATORS
+
+/*! 
+   \brief AND boolean operator, return PP_TRUE only if \a a and \a b is PP_TRUE
+   \param a first boolean value
+   \param b second boolean value
+   \return boolean value
+*/
+#define PP_AND(a, b) PP_IF( a , PP_IF( b , PP_TRUE, PP_FALSE), PP_FALSE)
+
+/*! 
+   \brief OR boolean operator, return PP_TRUE if \a a or \a b is PP_TRUE
+   \param a first boolean value
+   \param b second boolean value
+   \return boolean value
+*/
+#define PP_OR(a, b) PP_IF( a , PP_TRUE, PP_IF( b , PP_TRUE, PP_FALSE))
+
+/*! 
+   \brief NOT boolean operator, return PP_TRUE if \a x is PP_FALSE
+   \param x boolean value
+   \return boolean value
+*/
+#define PP_NOT(x) PP_IF( x , PP_FALSE, PP_TRUE )
+
+/*! 
+   \brief XOR boolean operator, return PP_TRUE only if \a a and \a b is not equal 
+   \param a first boolean value
+   \param b second boolean value
+   \return boolean value
+*/
+#define PP_XOR(a, b) PP_IF( a , PP_IF( b , PP_FALSE, PP_TRUE), PP_IF( b , PP_TRUE, PP_FALSE))
 
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_CONDITION_H__

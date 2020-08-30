@@ -94,6 +94,14 @@
 */
 #define defval(val, ...) (IS_EMPTY( val ) ? ( val ) : __VA_ARGS__)
 
+/*! 
+   \brief Call code if bool is true. Use for write short and safe if-operator in macroses.
+   \param x bool value.
+   \param __VA_ARGS__ code.
+   \returns Expands to \a x \a __VA_ARGS__
+*/
+#define PP_CHECK_IF(x, ...) PP_DO_SAFE(const bool PP_VAR = ( x ); if ( PP_VAR ) { __VA_ARGS__ ; })
+
 /*!
    \brief If \a x is true then call return operator with value
    \param x condition.

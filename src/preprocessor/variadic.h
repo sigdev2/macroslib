@@ -22,7 +22,7 @@
 #define PP_VA_MAXARGS 10
 
 
-// Internals utils
+// Internals consts, defined by PP_VA_MAXARGS
 
 #define PP_VA_GEN_NUMLIST_0
 #define PP_VA_GEN_NUMLIST_1 1
@@ -72,50 +72,27 @@
 #define PP_VA_GET_POS_1(_1, NAME, ...) NAME
 #define PP_VA_GET_POS_0(NAME, ...) NAME
 
-#define PP_VA_GET(...) PP_INVOKE( PP_VA_GET_A, (__VA_ARGS__) )
+#define PP_VA_SIZE_ZERO_FIRST 0, 1, 1, 1, 1, 1, 1, 1, 1, 1
+#define PP_VA_SIZE_CHOOSER 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 01
+
 #define PP_VA_GET_A(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, R, ...) R
 
-
-// VA_INCREMENT
-
-#define PP_VA_INCREMENT_0 1
-#define PP_VA_INCREMENT_1 2
-#define PP_VA_INCREMENT_2 3
-#define PP_VA_INCREMENT_3 4
-#define PP_VA_INCREMENT_4 5
-#define PP_VA_INCREMENT_5 6
-#define PP_VA_INCREMENT_6 7
-#define PP_VA_INCREMENT_7 8
-#define PP_VA_INCREMENT_8 9
-#define PP_VA_INCREMENT_9 10
+// VA_GET
 
 /*!
-   \brief Return incrementerd \a NUM numeric value, where \a NUM from 0 to PP_VA_MAXARGS
-   \param NUM numeric value from 0 to PP_VA_MAXARGS
-   \returns incrementerd \a NUM
+   \brief Take argument with position PP_VA_MAXARGS + 1. Use for choose one from PP_VA_MAXARGS variants for arguments list size 
+   \param __VA_ARGS__ minimum PP_VA_MAXARGS + 1 arguments list size
+   \returns argument with position PP_VA_MAXARGS + 1
 */
-#define PP_VA_INCREMENT(NUM) PP_APPLY( PP_CAT( PP_VA_INCREMENT_ , NUM ) )
-
-
-// VA_DECREMENT
-
-#define PP_VA_DECREMENT_1 0
-#define PP_VA_DECREMENT_2 1
-#define PP_VA_DECREMENT_3 2
-#define PP_VA_DECREMENT_4 3
-#define PP_VA_DECREMENT_5 4
-#define PP_VA_DECREMENT_6 5
-#define PP_VA_DECREMENT_7 6
-#define PP_VA_DECREMENT_8 7
-#define PP_VA_DECREMENT_9 8
-#define PP_VA_DECREMENT_10 9
+#define PP_VA_GET(...) PP_INVOKE( PP_VA_GET_A, (__VA_ARGS__) )
 
 /*!
-   \brief Return decremented \a NUM numeric value, where \a NUM from 1 to PP_VA_MAXARGS - 1
-   \param NUM numeric value from from 1 to PP_VA_MAXARGS - 1
-   \returns decremented \a NUM
+   \brief Take choose with \a NUM position from end of chooses list.
+   \param NUM position in chooses list, max is PP_VA_MAXARGS
+   \param __VA_ARGS__ chooses list with PP_VA_MAXARGS size
+   \returns choose with \a NUM position from end of chooses list.
 */
-#define PP_VA_DECREMENT(NUM) PP_APPLY( PP_CAT( PP_VA_DECREMENT_ , NUM ) )
+#define PP_VA_GET_N(NUM, ...) PP_VA_GET(PP_INVOKE(PP_CAT, (PP_VA_GEN_NUMLIST_, NUM )), __VA_ARGS__)
 
 
 // VA_SIZE
@@ -125,14 +102,14 @@
 #define PP_VA_SPEC_N0 PP_VA_GEN_NUMLIST_10
 
 #define PP_VA_SIZE_1N(_,...) PP_VA_GET(__VA_ARGS__, PP_VA_GEN_RNUMLIST_10)
-#define PP_VA_SIZE_01(_,x) PP_VA_GET( PP_INVOKE( PP_VA_SPEC_B, PP_INVOKE(PP_VA_SPEC_A, x (N1)) PP_EMPTY (N0)),0,1,1,1,1,1,1,1,1,1,__)
+#define PP_VA_SIZE_01(_,x) PP_VA_GET( PP_INVOKE( PP_VA_SPEC_B, PP_INVOKE(PP_VA_SPEC_A, x (N1)) PP_EMPTY (N0)), PP_VA_SIZE_ZERO_FIRST, __)
 
 /*!
    \brief Return size of arguments list with maximum size is PP_VA_MAXARGS
    \param __VA_ARGS__ arguments list
    \returns size of arguments list
 */
-#define PP_VA_SIZE(...) PP_CAT(PP_VA_SIZE_, PP_VA_GET(__VA_ARGS__,1N,1N,1N,1N,1N,1N,1N,1N,1N,01,_) ) (,__VA_ARGS__)
+#define PP_VA_SIZE(...) PP_INVOKE(PP_CAT, (PP_VA_SIZE_, PP_VA_GET(__VA_ARGS__, PP_VA_SIZE_CHOOSER, _) )) (,__VA_ARGS__)
 
 
 // VA_FUNC
@@ -147,6 +124,7 @@
 
 
 // VA_GEN_NUMLIST
+
 /*!
    \brief Return numbers list with commas like "1, 2, 3" by size of arguments list with maximum is PP_VA_MAXARGS.
    This macro use for replace real arguments, to displace arguments or numerate arguments
@@ -159,10 +137,11 @@
    \param NUM size of numebrs list
    \returns numbers list with commas
 */
-#define PP_VA_GEN_NUMLIST_N(NUM) PP_CAT(PP_VA_GEN_NUMLIST_, NUM )
+#define PP_VA_GEN_NUMLIST_N(NUM) PP_INVOKE(PP_CAT, (PP_VA_GEN_NUMLIST_, NUM ))
 
 
 // VA_GEN_RNUMLIST
+
 /*!
    \brief Return numbers list in reverse order with commas like "3, 2, 1" by size of arguments list with maximum is PP_VA_MAXARGS.
    This macro use for replace real arguments, to displace arguments or numerate arguments
@@ -178,7 +157,29 @@
 #define PP_VA_GEN_RNUMLIST_N(NUM) PP_CAT(PP_VA_GEN_RNUMLIST_, NUM )
 
 
+// VA_INCREMENT
+
+/*!
+   \brief Return incrementerd \a NUM numeric value, where \a NUM from 0 to PP_VA_MAXARGS
+   \param NUM numeric value from 0 to PP_VA_MAXARGS
+   \returns incrementerd \a NUM
+*/
+#define PP_VA_INCREMENT(NUM) PP_VA_GET_N(NUM, _, PP_VA_GEN_RNUMLIST_N( PP_VA_MAXARGS ))
+
+
+// VA_DECREMENT
+
+/*!
+   \brief Return decremented \a NUM numeric value, where \a NUM from 1 to PP_VA_MAXARGS - 1
+   \param NUM numeric value from from 1 to PP_VA_MAXARGS - 1
+   \returns decremented \a NUM
+*/
+
+#define PP_VA_DECREMENT(NUM) PP_VA_GET_N(NUM, PP_VA_GEN_RNUMLIST_N( PP_VA_MAXARGS ), 0)
+
+
 // VA_GEN_A
+
 /*!
    \brief Return list of numeric postfixes for functional macros with commas like "_1, _2, _3" by size of arguments list with maximum is PP_VA_MAXARGS.
    This macro use for generate call list of functional macros.
@@ -196,6 +197,7 @@
 
 
 // VA_FOR
+
 /*!
    \brief Apply \a macro with \a data as first argument to every item of last arguments list as second argument. Maximum is PP_VA_MAXARGS arguments iterate.
    \param macro functional macro name with two arguments, where first is \a data and second is iterate item
@@ -281,64 +283,6 @@
    \returns result of \a macro call on every arguments as list with separated and ended the semicolon
 */
 #define PP_VA_SEMICOLON_LIST(macro, ...) PP_INVOKE( PP_VA_FOR, ( PP_VA_SEMICOLON_LIST_ITEM, macro, __VA_ARGS__ ) )
-
-// VA_ZIP
-
-/*!
-   \brief Apply \a macro to every item of arguments list and append semicolon. Maximum iterate is PP_VA_MAXARGS arguments.
-   \param macro functional macro take one argument - list item
-   \param __VA_ARGS__ arguments list
-   \returns result of \a macro call on every arguments as list with separated and ended the semicolon
-*/
-#define PP_VA_ZIP(list1, list2, zipper) PP_INVOKE( PP_VA_FOR, ( PP_VA_SEMICOLON_LIST_ITEM, macro, __VA_ARGS__ ) )
-
-// VA_REPEAT
-
-/*!
-   \brief Repeat some code or value passed in \a value \a count times. Maximum is PP_VA_MAXARGS times.
-   \param value some code or value
-   \param count times to repeat
-   \returns repeated \a value
-*/
-#define PP_VA_REPEAT(value, count)  PP_INVOKE( PP_VA_FOR, ( PP_VA_FOR_ITEM_DATA , value , PP_VA_GEN_A_N( count ) )) )
-
-/*!
-   \brief Repeat some code or value passed in  \a value \a count times with apply \a macro to every time. Maximum is PP_VA_MAXARGS times.
-   \param macro functional macro take one argument - \a value
-   \param value some code or value
-   \param count times to repeat
-   \returns repeated \a value with apply \a macro
-*/
-#define PP_VA_REPEAT(macro, value, count)  PP_INVOKE( PP_VA_FOR, ( PP_VA_FOR_ITEM_DATA , PP_INVOKE( macro , ( value )) , PP_INVOKE( PP_VA_GEN_A_N, ( count ) ) )) )
-
-/*!
-   \brief Repeat some code or value passed in  \a value \a count times with apply \a macro to every time and separate commas. Maximum is PP_VA_MAXARGS times.
-   \param macro functional macro take one argument - \a value
-   \param value some code or value
-   \param count times to repeat
-   \returns repeated \a value with apply \a macro and separate commas
-*/
-#define PP_VA_REPEAT_COMMA(macro, value, count) PP_INVOKE( macro , value ) PP_COMMA PP_INVOKE( PP_VA_FOR, ( PP_VA_FOR_ITEM_DATA , PP_INVOKE( macro , ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_INVOKE( PP_VA_DECREMENT, ( count )) ) ) ))
-
-/*!
-   \brief Repeat some code or value passed in  \a value \a count times with apply \a macro to every time and append semicolon. Maximum is PP_VA_MAXARGS times.
-   \param macro functional macro take one argument - \a value
-   \param value some code or value
-   \param count times to repeat
-   \returns repeated \a value with apply \a macro and append semicolon
-*/
-#define PP_VA_REPEAT_SEMICOLON(macro, value, count) PP_INVOKE( PP_VA_REPEAT, ( macro, value PP_SEMICOLON , count ) )
-
-// VA_ARGS_LIST
-
-#define PP_VA_ARGS_LIST_ARGS(skip, choose, ...) choose
-#define PP_VA_ARGS_LIST_CHOOSER(...) PP_COMMA
-/*!
-   \brief Return arguments list with commas in parentheses if he not empty, elese - nothong. This use for macros that can take no arguments, like NOEXCEPT for example.
-   \param __VA_ARGS__ arguments list
-   \returns arguments list with commas in parentheses or nothong
-*/
-#define PP_VA_ARGS_LIST(...) PP_INVOKE( PP_VA_ARGS_LIST_ARGS, ( PP_INVOKE( PP_VA_ARGS_LIST_CHOOSER PP_VA_HEAD( __VA_ARGS__ ), ()) , ( __VA_ARGS__ )) )
 
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_VARIADIC_H__
