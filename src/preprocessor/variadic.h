@@ -16,50 +16,138 @@
 #include "utils.h"
 
 /*!
-   \brief Maximum of argument counts in variadic macros. Now is 10.
+   \brief Maximum of argument counts in variadic macros. Now is 32.
    \returns number
 */
-#define PP_VA_MAXARGS 10
+#define PP_VA_MAXARGS 32
 
 
 // Internals consts, defined by PP_VA_MAXARGS
 
 #define PP_VA_GEN_NUMLIST_0
 #define PP_VA_GEN_NUMLIST_1 1
-#define PP_VA_GEN_NUMLIST_2 1, 2
-#define PP_VA_GEN_NUMLIST_3 1, 2, 3
-#define PP_VA_GEN_NUMLIST_4 1, 2, 3, 4
-#define PP_VA_GEN_NUMLIST_5 1, 2, 3, 4, 5
-#define PP_VA_GEN_NUMLIST_6 1, 2, 3, 4, 5, 6
-#define PP_VA_GEN_NUMLIST_7 1, 2, 3, 4, 5, 6, 7
-#define PP_VA_GEN_NUMLIST_8 1, 2, 3, 4, 5, 6, 7, 8
-#define PP_VA_GEN_NUMLIST_9 1, 2, 3, 4, 5, 6, 7, 8, 9
-#define PP_VA_GEN_NUMLIST_10 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+#define PP_VA_GEN_NUMLIST_2 PP_VA_GEN_NUMLIST_1, 2
+#define PP_VA_GEN_NUMLIST_3 PP_VA_GEN_NUMLIST_2, 3
+#define PP_VA_GEN_NUMLIST_4 PP_VA_GEN_NUMLIST_3, 4
+#define PP_VA_GEN_NUMLIST_5 PP_VA_GEN_NUMLIST_4, 5
+#define PP_VA_GEN_NUMLIST_6 PP_VA_GEN_NUMLIST_5, 6
+#define PP_VA_GEN_NUMLIST_7 PP_VA_GEN_NUMLIST_6, 7
+#define PP_VA_GEN_NUMLIST_8 PP_VA_GEN_NUMLIST_7, 8
+#define PP_VA_GEN_NUMLIST_9 PP_VA_GEN_NUMLIST_8, 9
+#define PP_VA_GEN_NUMLIST_10 PP_VA_GEN_NUMLIST_9, 10
+#define PP_VA_GEN_NUMLIST_11 PP_VA_GEN_NUMLIST_10, 11
+#define PP_VA_GEN_NUMLIST_12 PP_VA_GEN_NUMLIST_11, 12
+#define PP_VA_GEN_NUMLIST_13 PP_VA_GEN_NUMLIST_12, 13
+#define PP_VA_GEN_NUMLIST_14 PP_VA_GEN_NUMLIST_13, 14
+#define PP_VA_GEN_NUMLIST_15 PP_VA_GEN_NUMLIST_14, 15
+#define PP_VA_GEN_NUMLIST_16 PP_VA_GEN_NUMLIST_15, 16
+#define PP_VA_GEN_NUMLIST_17 PP_VA_GEN_NUMLIST_16, 17
+#define PP_VA_GEN_NUMLIST_18 PP_VA_GEN_NUMLIST_17, 18
+#define PP_VA_GEN_NUMLIST_19 PP_VA_GEN_NUMLIST_18, 19
+#define PP_VA_GEN_NUMLIST_20 PP_VA_GEN_NUMLIST_19, 20
+#define PP_VA_GEN_NUMLIST_21 PP_VA_GEN_NUMLIST_20, 21
+#define PP_VA_GEN_NUMLIST_22 PP_VA_GEN_NUMLIST_21, 22
+#define PP_VA_GEN_NUMLIST_23 PP_VA_GEN_NUMLIST_22, 23
+#define PP_VA_GEN_NUMLIST_24 PP_VA_GEN_NUMLIST_23, 24
+#define PP_VA_GEN_NUMLIST_25 PP_VA_GEN_NUMLIST_24, 25
+#define PP_VA_GEN_NUMLIST_26 PP_VA_GEN_NUMLIST_25, 26
+#define PP_VA_GEN_NUMLIST_27 PP_VA_GEN_NUMLIST_26, 27
+#define PP_VA_GEN_NUMLIST_28 PP_VA_GEN_NUMLIST_27, 28
+#define PP_VA_GEN_NUMLIST_29 PP_VA_GEN_NUMLIST_28, 29
+#define PP_VA_GEN_NUMLIST_30 PP_VA_GEN_NUMLIST_29, 30
+#define PP_VA_GEN_NUMLIST_31 PP_VA_GEN_NUMLIST_30, 31
+#define PP_VA_GEN_NUMLIST_32 PP_VA_GEN_NUMLIST_31, 32
 
 #define PP_VA_GEN_RNUMLIST_0
 #define PP_VA_GEN_RNUMLIST_1 1
-#define PP_VA_GEN_RNUMLIST_2 2, 1
-#define PP_VA_GEN_RNUMLIST_3 3, 2, 1
-#define PP_VA_GEN_RNUMLIST_4 4, 3, 2, 1
-#define PP_VA_GEN_RNUMLIST_5 5, 4, 3, 2, 1
-#define PP_VA_GEN_RNUMLIST_6 6, 5, 4, 3, 2, 1
-#define PP_VA_GEN_RNUMLIST_7 7, 6, 5, 4, 3, 2, 1
-#define PP_VA_GEN_RNUMLIST_8 8, 7, 6, 5, 4, 3, 2, 1
-#define PP_VA_GEN_RNUMLIST_9 9, 8, 7, 6, 5, 4, 3, 2, 1
-#define PP_VA_GEN_RNUMLIST_10 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+#define PP_VA_GEN_RNUMLIST_2 2, PP_VA_GEN_RNUMLIST_1
+#define PP_VA_GEN_RNUMLIST_3 3, PP_VA_GEN_RNUMLIST_2
+#define PP_VA_GEN_RNUMLIST_4 4, PP_VA_GEN_RNUMLIST_3
+#define PP_VA_GEN_RNUMLIST_5 5, PP_VA_GEN_RNUMLIST_4
+#define PP_VA_GEN_RNUMLIST_6 6, PP_VA_GEN_RNUMLIST_5
+#define PP_VA_GEN_RNUMLIST_7 7, PP_VA_GEN_RNUMLIST_6
+#define PP_VA_GEN_RNUMLIST_8 8, PP_VA_GEN_RNUMLIST_8
+#define PP_VA_GEN_RNUMLIST_9 9, PP_VA_GEN_RNUMLIST_8
+#define PP_VA_GEN_RNUMLIST_10 10, PP_VA_GEN_RNUMLIST_9
+#define PP_VA_GEN_RNUMLIST_11 11, PP_VA_GEN_RNUMLIST_10
+#define PP_VA_GEN_RNUMLIST_12 12, PP_VA_GEN_RNUMLIST_11
+#define PP_VA_GEN_RNUMLIST_13 13, PP_VA_GEN_RNUMLIST_12
+#define PP_VA_GEN_RNUMLIST_14 14, PP_VA_GEN_RNUMLIST_13
+#define PP_VA_GEN_RNUMLIST_15 15, PP_VA_GEN_RNUMLIST_14
+#define PP_VA_GEN_RNUMLIST_16 16, PP_VA_GEN_RNUMLIST_15
+#define PP_VA_GEN_RNUMLIST_17 17, PP_VA_GEN_RNUMLIST_16
+#define PP_VA_GEN_RNUMLIST_18 18, PP_VA_GEN_RNUMLIST_17
+#define PP_VA_GEN_RNUMLIST_19 19, PP_VA_GEN_RNUMLIST_18
+#define PP_VA_GEN_RNUMLIST_20 20, PP_VA_GEN_RNUMLIST_19
+#define PP_VA_GEN_RNUMLIST_21 21, PP_VA_GEN_RNUMLIST_20
+#define PP_VA_GEN_RNUMLIST_22 22, PP_VA_GEN_RNUMLIST_21
+#define PP_VA_GEN_RNUMLIST_23 23, PP_VA_GEN_RNUMLIST_22
+#define PP_VA_GEN_RNUMLIST_24 24, PP_VA_GEN_RNUMLIST_23
+#define PP_VA_GEN_RNUMLIST_25 25, PP_VA_GEN_RNUMLIST_24
+#define PP_VA_GEN_RNUMLIST_26 26, PP_VA_GEN_RNUMLIST_25
+#define PP_VA_GEN_RNUMLIST_27 27, PP_VA_GEN_RNUMLIST_26
+#define PP_VA_GEN_RNUMLIST_28 28, PP_VA_GEN_RNUMLIST_27
+#define PP_VA_GEN_RNUMLIST_29 29, PP_VA_GEN_RNUMLIST_28
+#define PP_VA_GEN_RNUMLIST_30 30, PP_VA_GEN_RNUMLIST_29
+#define PP_VA_GEN_RNUMLIST_31 31, PP_VA_GEN_RNUMLIST_30
+#define PP_VA_GEN_RNUMLIST_32 32, PP_VA_GEN_RNUMLIST_31
 
 #define PP_VA_GEN_A_0
 #define PP_VA_GEN_A_1 _1
-#define PP_VA_GEN_A_2 _1, _2
-#define PP_VA_GEN_A_3 _1, _2, _3
-#define PP_VA_GEN_A_4 _1, _2, _3, _4
-#define PP_VA_GEN_A_5 _1, _2, _3, _4, _5
-#define PP_VA_GEN_A_6 _1, _2, _3, _4, _5, _6
-#define PP_VA_GEN_A_7 _1, _2, _3, _4, _5, _6, _7
-#define PP_VA_GEN_A_8 _1, _2, _3, _4, _5, _6, _7, _8
-#define PP_VA_GEN_A_9 _1, _2, _3, _4, _5, _6, _7, _8, _9
-#define PP_VA_GEN_A_10 _1, _2, _3, _4, _5, _6, _7, _8, _9, _10
+#define PP_VA_GEN_A_2 PP_VA_GEN_A_1, _2
+#define PP_VA_GEN_A_3 PP_VA_GEN_A_2, _3
+#define PP_VA_GEN_A_4 PP_VA_GEN_A_3, _4
+#define PP_VA_GEN_A_5 PP_VA_GEN_A_4, _5
+#define PP_VA_GEN_A_6 PP_VA_GEN_A_5, _6
+#define PP_VA_GEN_A_7 PP_VA_GEN_A_6, _7
+#define PP_VA_GEN_A_8 PP_VA_GEN_A_7, _8
+#define PP_VA_GEN_A_9 PP_VA_GEN_A_8, _9
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_9, _10
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_10, _11
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_11, _12
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_12, _13
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_13, _14
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_14, _15
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_15, _16
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_16, _17
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_17, _18
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_18, _19
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_19, _20
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_20, _21
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_21, _22
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_22, _23
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_23, _24
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_24, _25
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_25, _26
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_26, _27
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_27, _28
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_28, _29
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_29, _30
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_30, _31
+#define PP_VA_GEN_A_10 PP_VA_GEN_A_31, _32
 
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, NAME, ...) NAME
+#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, NAME, ...) NAME
 #define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, NAME, ...) NAME
 #define PP_VA_GET_POS_9(_1, _2, _3, _4, _5, _6, _7, _8, _9, NAME, ...) NAME
 #define PP_VA_GET_POS_8(_1, _2, _3, _4, _5, _6, _7, _8, NAME, ...) NAME
@@ -72,10 +160,10 @@
 #define PP_VA_GET_POS_1(_1, NAME, ...) NAME
 #define PP_VA_GET_POS_0(NAME, ...) NAME
 
-#define PP_VA_SIZE_ZERO_FIRST 0, 1, 1, 1, 1, 1, 1, 1, 1, 1
-#define PP_VA_SIZE_CHOOSER 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 01
+#define PP_VA_SIZE_ZERO_FIRST 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+#define PP_VA_SIZE_CHOOSER 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 1N, 01
 
-#define PP_VA_GET_A(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, R, ...) R
+#define PP_VA_GET_A(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, R, ...) R
 
 // VA_GET
 
