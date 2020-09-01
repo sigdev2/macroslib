@@ -103,51 +103,51 @@
 #define PP_VA_GEN_A_8 PP_VA_GEN_A_7, _8
 #define PP_VA_GEN_A_9 PP_VA_GEN_A_8, _9
 #define PP_VA_GEN_A_10 PP_VA_GEN_A_9, _10
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_10, _11
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_11, _12
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_12, _13
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_13, _14
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_14, _15
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_15, _16
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_16, _17
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_17, _18
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_18, _19
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_19, _20
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_20, _21
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_21, _22
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_22, _23
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_23, _24
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_24, _25
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_25, _26
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_26, _27
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_27, _28
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_28, _29
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_29, _30
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_30, _31
-#define PP_VA_GEN_A_10 PP_VA_GEN_A_31, _32
+#define PP_VA_GEN_A_11 PP_VA_GEN_A_10, _11
+#define PP_VA_GEN_A_12 PP_VA_GEN_A_11, _12
+#define PP_VA_GEN_A_13 PP_VA_GEN_A_12, _13
+#define PP_VA_GEN_A_14 PP_VA_GEN_A_13, _14
+#define PP_VA_GEN_A_15 PP_VA_GEN_A_14, _15
+#define PP_VA_GEN_A_16 PP_VA_GEN_A_15, _16
+#define PP_VA_GEN_A_17 PP_VA_GEN_A_16, _17
+#define PP_VA_GEN_A_18 PP_VA_GEN_A_17, _18
+#define PP_VA_GEN_A_19 PP_VA_GEN_A_18, _19
+#define PP_VA_GEN_A_20 PP_VA_GEN_A_19, _20
+#define PP_VA_GEN_A_21 PP_VA_GEN_A_20, _21
+#define PP_VA_GEN_A_22 PP_VA_GEN_A_21, _22
+#define PP_VA_GEN_A_23 PP_VA_GEN_A_22, _23
+#define PP_VA_GEN_A_24 PP_VA_GEN_A_23, _24
+#define PP_VA_GEN_A_25 PP_VA_GEN_A_24, _25
+#define PP_VA_GEN_A_26 PP_VA_GEN_A_25, _26
+#define PP_VA_GEN_A_27 PP_VA_GEN_A_26, _27
+#define PP_VA_GEN_A_28 PP_VA_GEN_A_27, _28
+#define PP_VA_GEN_A_29 PP_VA_GEN_A_28, _29
+#define PP_VA_GEN_A_30 PP_VA_GEN_A_29, _30
+#define PP_VA_GEN_A_31 PP_VA_GEN_A_30, _31
+#define PP_VA_GEN_A_32 PP_VA_GEN_A_31, _32
 
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, NAME, ...) NAME
-#define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, NAME, ...) NAME
+#define PP_VA_GET_POS_32(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, NAME, ...) NAME
+#define PP_VA_GET_POS_31(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, NAME, ...) NAME
+#define PP_VA_GET_POS_30(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, NAME, ...) NAME
+#define PP_VA_GET_POS_29(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, NAME, ...) NAME
+#define PP_VA_GET_POS_28(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, NAME, ...) NAME
+#define PP_VA_GET_POS_27(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, NAME, ...) NAME
+#define PP_VA_GET_POS_26(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, NAME, ...) NAME
+#define PP_VA_GET_POS_25(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, NAME, ...) NAME
+#define PP_VA_GET_POS_24(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, NAME, ...) NAME
+#define PP_VA_GET_POS_23(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, NAME, ...) NAME
+#define PP_VA_GET_POS_22(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, NAME, ...) NAME
+#define PP_VA_GET_POS_21(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, NAME, ...) NAME
+#define PP_VA_GET_POS_20(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, NAME, ...) NAME
+#define PP_VA_GET_POS_19(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, NAME, ...) NAME
+#define PP_VA_GET_POS_18(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, NAME, ...) NAME
+#define PP_VA_GET_POS_17(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, NAME, ...) NAME
+#define PP_VA_GET_POS_16(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, NAME, ...) NAME
+#define PP_VA_GET_POS_15(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, NAME, ...) NAME
+#define PP_VA_GET_POS_14(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, NAME, ...) NAME
+#define PP_VA_GET_POS_13(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, NAME, ...) NAME
+#define PP_VA_GET_POS_12(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, NAME, ...) NAME
+#define PP_VA_GET_POS_11(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, NAME, ...) NAME
 #define PP_VA_GET_POS_10(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, NAME, ...) NAME
 #define PP_VA_GET_POS_9(_1, _2, _3, _4, _5, _6, _7, _8, _9, NAME, ...) NAME
 #define PP_VA_GET_POS_8(_1, _2, _3, _4, _5, _6, _7, _8, NAME, ...) NAME
