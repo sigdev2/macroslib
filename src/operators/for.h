@@ -99,8 +99,8 @@
 #define forij_6(len1, len2, type1, name1, type2, name2) fori(len1, name1, type1) fori(len2, name2, type2)
 /*!
    \brief Iterate nested loops on two variables with default names 'i' and 'j' from 0 to len (or len1 and len2) with numeric types. For compatibility it is better to use the full set of arguments
-   \param type2[optional, default 'auto' for C++11 and greater and 'TSize' for less than C++11, if 6 agruments (len1, len2, type1, name1, type2, name2)] type of second iterable value
-   \param type1[optional, default 'auto' for C++11 and greater and 'TSize' for less than C++11, if 6 agruments (len1, len2, type1, name1, type2, name2)] type of first iterable value
+   \param type2 [optional, default 'auto' for C++11 and greater and 'TSize' for less than C++11, if 6 agruments (len1, len2, type1, name1, type2, name2)] type of second iterable value
+   \param type1 [optional, default 'auto' for C++11 and greater and 'TSize' for less than C++11, if 6 agruments (len1, len2, type1, name1, type2, name2)] type of first iterable value
    \param type [optional, default 'auto' for C++11 and greater and 'TSize' for less than C++11, if 5 agruments (len1, len2, type, name1, name2)] type of iterable values
    \param name2 [optional, default 'j', if 4 agruments (len1, len2, name1, name2)] name of second variable
    \param name1 [optional, default 'i', if 4 agruments (len1, len2, name1, name2)] name of first variable

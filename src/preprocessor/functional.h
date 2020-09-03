@@ -257,30 +257,30 @@
 #define PP_ITERATE_ITEM_DATA(data, item) data
 
 /*!
-   \brief Iteration modifier used if data argument for PP_ITERATE is functional macro which accept one argument. Return \a macro result apply on \a item. Use as default macro argument for PP_ITERATE.
+   \brief Iteration modifier used if data argument for PP_ITERATE is functional macro which accept one argument. Returning result of \a macro applied on \a item. Use as default macro argument for PP_ITERATE.
    \param macro functional macro passed as data argument in PP_ITERATE which accept one argument 
    \param item iterable item
-   \returns \a macro result apply on \a item
+   \returns result of \a macro applied on \a item
 */
 #define PP_ITERATE_ITEM_MACRO(macro, item) PP_INVOKE( macro, ( item ))
 
 /*!
    \brief Iteration modifier which returns \a item with seporator before \a sep. Use as default macro argument for PP_ITERATE.
-   \param sep seporator symbol 
+   \param sep separating literal, except for comma and parentheses
    \param item iterable item
    \returns \a item with seporator before \a sep
 */
 #define PP_ITERATE_ITEM_SEP(sep, item) sep item
 
 /*!
-   \brief Iteration modifier which returns \a item with comma before.
+   \brief Iteration modifier which returns result of \a macro applied on \a item with comma before.
    A separate function so that a macro with a symbol does not expand ahead of time, because a comma is a control character.
    Use as default macro argument for PP_ITERATE.
-   \param data data passed in PP_ITERATE
+   \param macro functional macro passed as data argument in PP_ITERATE which accept one argument 
    \param item iterable item
-   \returns \a item with comma before
+   \returns result of \a macro applied on \a item with comma before
 */
-#define PP_ITERATE_ITEM_COMMA(data, item) PP_COMMA item
+#define PP_ITERATE_ITEM_COMMA(macro, item) PP_COMMA PP_INVOKE( macro, ( item ))
 
 /*!
    \brief Iteration modifier which returns the name of the function macro with an open parenthesis before the \a item. Used for reduce realization. Use as default macro argument for PP_ITERATE.
@@ -299,108 +299,109 @@
 #define PP_ITERATE_ITEM_FOLDR(data, item) PP_CLOSE_PAREN PP_COMMA item
 
 
-// 
+// MAP-REDUCE
 
 /*!
-   \brief Strip commas of arguments list.
-   \param __VA_ARGS__ arguments list with commas
+   \brief Strip commas of arguments list. Maximum iterate is PP_VA_MAXARGS arguments.
+   \param __VA_ARGS__ arguments list
    \returns arguments list without commas
 */
-#define PP_STRIP_COMMAS( ... ) PP_ITERATE()
+#define PP_STRIP_COMMAS( ... ) PP_ITERATE(PP_ITERATE_ITEM, _, __VA_ARGS__)
 
+/*!
+   \brief A short record of applying a \a macro to each item in the argument list, omitting commas at the same time. Maximum iterate is PP_VA_MAXARGS arguments.
+   \param macro functional macro take one argument - arguments list item
+   \param __VA_ARGS__ arguments list
+   \returns list without commas of result apply \a macro on every item of arguments list
+*/
+#define PP_STRIP_COMMAS_M(macro, ... ) PP_ITERATE(PP_ITERATE_ITEM_MACRO, macro, __VA_ARGS__)
 
-map 
-reduce|foldl = FOLDL( m, acc, a, b, c )  >>>  m( m( m( acc, a ), b ), c )|foldr = FOLDR( f, acc, a, b, c )  >>>  f( a, f( b, f( c, acc ) ) )
-filter
+/*!
+   \brief Use \a separator to separating arguments list. Maximum iterate is PP_VA_MAXARGS arguments.
+   \param separator separating literal, except for comma and parentheses
+   \param __VA_ARGS__ arguments list
+   \returns arguments list separated by \a separator
+*/
+#define PP_SEPARATE_LIST(separator, ...) PP_INVOKE( PP_HEAD, (__VA_ARGS__)) separator PP_ITERATE( PP_ITERATE_ITEM_SEP , separator, PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) )
 
-repeat|fill
-
-revert
-
-separate = INTERSPERSE( s, a, b, c )  >>>  ( a ) s( a ) ( b ) s( b ) ( c )
-
-zip
-unzip
-
-zip-repeat
-
-// PP_F_ENDED
-
-
-// VA_FOR
-
-// VA_LIST
+/*!
+   \brief A short record of applying a \a macro to each item in the argument list and separating arguments list with \a separator. Maximum iterate is PP_VA_MAXARGS arguments.
+   \param macro functional macro take one argument - arguments list item
+   \param separator separating literal, except for comma and parentheses
+   \param __VA_ARGS__ arguments list
+   \returns list separated by \a separator with results of apply \a macro on every item of arguments list
+*/
+#define PP_SEPARATE_LIST_M(macro, separator, ... ) PP_INVOKE( macro , (PP_INVOKE( PP_HEAD, (__VA_ARGS__) ))) separator PP_ITERATE( PP_ITERATE_ITEM_MACRO , separator macro , PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) )
 
 /*!
    \brief Apply \a macro to every item of arguments list. Maximum iterate is PP_VA_MAXARGS arguments.
-   \param macro functional macro take one argument - list item
-   \param __VA_ARGS__ arguments to iterate
-   \returns result of \a macro call on every arguments
-*/
-#define PP_VA_LIST(macro, ...)  PP_INVOKE( PP_ITERATE, ( PP_ITERATE_ITEM_MACRO , macro, __VA_ARGS__ ))
-
-/*!
-   \brief Apply \a macro to every item of arguments list and separate commas. Maximum iterate is PP_VA_MAXARGS arguments.
-   \param macro functional macro take one argument - list item
+   \param macro functional macro take one argument - arguments list item
    \param __VA_ARGS__ arguments list
-   \returns result of \a macro call on every arguments as list with commas
+   \returns list with commas of result apply \a macro on every item of arguments list
 */
-#define PP_VA_COMMA_LIST(macro, ...) PP_INVOKE( macro , (PP_INVOKE( PP_VA_HEAD, (__VA_ARGS__) ))) PP_COMMA PP_INVOKE( PP_ITERATE, ( PP_ITERATE_ITEM_COMMED , macro, PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) ))
+#define PP_MAP(macro, ...) PP_INVOKE( macro , (PP_INVOKE( PP_HEAD, (__VA_ARGS__) ))) PP_COMMA PP_ITERATE( PP_ITERATE_ITEM_COMMA , macro, PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) )
 
 /*!
-   \brief Apply \a macro to every item of arguments list and append semicolon. Maximum iterate is PP_VA_MAXARGS arguments.
-   \param macro functional macro take one argument - list item
+   \brief Short alias for PP_SEPARATE_LIST_M. Applying a \a macro to each item in the argument list and separating arguments list with \a separator. Maximum iterate is PP_VA_MAXARGS arguments.
+   \param macro functional macro take one argument - arguments list item
+   \param separator separating literal, except for comma and parentheses
    \param __VA_ARGS__ arguments list
-   \returns result of \a macro call on every arguments as list with separated and ended the semicolon
+   \returns list separated by \a separator with results of apply \a macro on every item of arguments list
 */
-#define PP_VA_SEMICOLON_LIST(macro, ...) PP_INVOKE( PP_ITERATE, ( PP_VA_SEMICOLON_LIST_ITEM, macro, __VA_ARGS__ ) )
+#define PP_MAP_SEP(macro, separator, ... )  PP_INVOKE( PP_SEPARATE_LIST_M, ( macro , separator, __VA_ARGS__ ) )
 
-// VA_ZIP
+#define PP_REPEAT_0
+#define PP_REPEAT_1
+#define PP_REPEAT_2(value, count) PP_INVOKE( macro , value ) PP_COMMA PP_ITERATE( PP_ITERATE_ITEM_DATA , PP_INVOKE( macro , ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_INVOKE( PP_VA_DECREMENT, ( count )) ) ) )
+#define PP_REPEAT_3(macro, value, count) PP_INVOKE( macro , value ) PP_COMMA PP_ITERATE( PP_ITERATE_ITEM_DATA , PP_INVOKE( macro , ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_INVOKE( PP_VA_DECREMENT, ( count )) ) ) )
+#define PP_REPEAT_4(macro, value, count, seporator) PP_INVOKE( macro , value ) seporator PP_ITERATE( PP_ITERATE_ITEM_DATA , separator PP_INVOKE( macro , ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_INVOKE( PP_VA_DECREMENT, ( count )) ) ) )
+/*!
+   \brief Repeat some code or value passed in \a value \a count times with applying \a macro to every time and separate with \a separator. Maximum is PP_VA_MAXARGS times.
+   \param macro [optional, if 3 agruments (macro, value, count)] functional macro take one argument - \a value
+   \param value [if 2 agruments (value, count)] some code or value
+   \param count [if 2 agruments (value, count)] times to repeat
+   \param separator [optional, if 4 agruments (macro, value, count, seporator)] separating literal, except for comma and parentheses
+   \returns Separated by \a separator list of repeated \a value with applyed \a macro
+*/
+#define PP_REPEAT(...)  PP_VA_FUNC(PP_REPEAT, __VA_ARGS__)
+
+// todo: repeat commas, repeat parenthesis, repeat parenthesis with function name
 
 /*!
-   \brief Apply \a macro to every item of arguments list and append semicolon. Maximum iterate is PP_VA_MAXARGS arguments.
-   \param macro functional macro take one argument - list item
+   \brief Reduce function. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDL( m, acc, a, b, c )  >>>  m( acc, m( a, m( b, c ) ) )
+   \param macro functional macro, binary operator witch take two arguments - accumulator and arguments list item
+   \param acc initial accumulator
    \param __VA_ARGS__ arguments list
-   \returns result of \a macro call on every arguments as list with separated and ended the semicolon
-*/
-#define PP_VA_ZIP(list1, list2, zipper) PP_INVOKE( PP_ITERATE, ( PP_VA_SEMICOLON_LIST_ITEM, macro, __VA_ARGS__ ) )
+   \returns result of reduce arguments list
 
-// VA_REPEAT
-
-/*!
-   \brief Repeat some code or value passed in \a value \a count times. Maximum is PP_VA_MAXARGS times.
-   \param value some code or value
-   \param count times to repeat
-   \returns repeated \a value
+   TODO: test, is FOLDR ?
 */
-#define PP_VA_REPEAT(value, count)  PP_INVOKE( PP_ITERATE, ( PP_ITERATE_ITEM_DATA , value , PP_VA_GEN_A_N( count ) )) )
+#define PP_FOLDL(macro, acc, ...) PP_INVOKE( macro,  ( acc , PP_ITERATE(PP_ITERATE_ITEM_FOLDL, macro, __VA_ARGS__) PP_REPEAT( PP_CLOSE_PAREN , PP_VA_SIZE( __VA_ARGS__ ) ) ) )
 
 /*!
-   \brief Repeat some code or value passed in  \a value \a count times with apply \a macro to every time. Maximum is PP_VA_MAXARGS times.
-   \param macro functional macro take one argument - \a value
-   \param value some code or value
-   \param count times to repeat
-   \returns repeated \a value with apply \a macro
+   \brief Reduce function. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)
+   \param macro functional macro, binary operator witch take two arguments - accumulator and arguments list item
+   \param acc initial accumulator
+   \param __VA_ARGS__ arguments list
+   \returns result of reduce arguments list
+
+   TODO: test , is FOLDL ?
 */
-#define PP_VA_REPEAT(macro, value, count)  PP_INVOKE( PP_ITERATE, ( PP_ITERATE_ITEM_DATA , PP_INVOKE( macro , ( value )) , PP_INVOKE( PP_VA_GEN_A_N, ( count ) ) )) )
+#define PP_FOLDR(macro, acc, ...) PP_REPEAT( macro PP_CLOSE_PAREN , PP_VA_SIZE( __VA_ARGS__ ) ) ) acc PP_COMMA PP_INVOKE( macro,  ( acc , PP_ITERATE(PP_ITERATE_ITEM_FOLDR, macro, __VA_ARGS__) )
 
 /*!
-   \brief Repeat some code or value passed in  \a value \a count times with apply \a macro to every time and separate commas. Maximum is PP_VA_MAXARGS times.
-   \param macro functional macro take one argument - \a value
-   \param value some code or value
-   \param count times to repeat
-   \returns repeated \a value with apply \a macro and separate commas
-*/
-#define PP_VA_REPEAT_COMMA(macro, value, count) PP_INVOKE( macro , value ) PP_COMMA PP_INVOKE( PP_ITERATE, ( PP_ITERATE_ITEM_DATA , PP_INVOKE( macro , ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_INVOKE( PP_VA_DECREMENT, ( count )) ) ) ))
+   \brief Reduce function. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)
+   \param macro functional macro, binary operator witch take two arguments - accumulator and arguments list item
+   \param acc initial accumulator
+   \param __VA_ARGS__ arguments list
+   \returns result of reduce arguments list
 
-/*!
-   \brief Repeat some code or value passed in  \a value \a count times with apply \a macro to every time and append semicolon. Maximum is PP_VA_MAXARGS times.
-   \param macro functional macro take one argument - \a value
-   \param value some code or value
-   \param count times to repeat
-   \returns repeated \a value with apply \a macro and append semicolon
+   TODO: test , is FOLDL ?
 */
-#define PP_VA_REPEAT_SEMICOLON(macro, value, count) PP_INVOKE( PP_VA_REPEAT, ( macro, value PP_SEMICOLON , count ) )
+#define PP_REDUCE(macro, acc, ...) PP_FOLDL(macro, acc, __VA_ARGS__) 
+
+// todo: filter, revert, zip, unzip, zip-repeat
+// todo: filter to condition ?
 
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_FUNCTIONAL_H__

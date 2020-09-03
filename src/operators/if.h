@@ -156,5 +156,7 @@
 */
 #define false_ifn(...) return_ifn(( __VA_ARGS__ ), false)
 
+// todo: ifor, ifand
+
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_IF_H__
