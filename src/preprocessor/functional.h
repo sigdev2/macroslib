@@ -288,7 +288,7 @@
    \param item iterable item
    \returns the name of the function macro with an open parenthesis before the \a item
 */
-#define PP_ITERATE_ITEM_FOLDL(fn, item) fn PP_OPEN_PAREN item
+#define PP_ITERATE_ITEM_FOLDR(fn, item) fn PP_OPEN_PAREN item
 
 /*!
    \brief Iteration modifier which returns close parenthesis with comma before the \a item. Used for reduce realization. Use as default macro argument for PP_ITERATE.
@@ -296,7 +296,7 @@
    \param item iterable item
    \returns close parenthesis with comma before the \a item
 */
-#define PP_ITERATE_ITEM_FOLDR(data, item) PP_CLOSE_PAREN PP_COMMA item
+#define PP_ITERATE_ITEM_FOLDL(data, item) PP_COMMA item PP_CLOSE_PAREN
 
 
 // MAP-REDUCE
@@ -366,39 +366,48 @@
 #define PP_REPEAT(...)  PP_VA_FUNC(PP_REPEAT, __VA_ARGS__)
 
 /*!
-   \brief Reduce function. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDL( m, acc, a, b, c )  >>>  m( acc, m( a, m( b, c ) ) )
+   \brief Reduce arguments list from end. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDL( m, acc, a, b, c )  >>>  m( a, m( b, m( c, acc ) ) )
    \param macro functional macro, binary operator witch take two arguments - accumulator and arguments list item
    \param acc initial accumulator
    \param __VA_ARGS__ arguments list
-   \returns result of reduce arguments list
-
-   TODO: test, is FOLDR ?
+   \returns result of reduce arguments list from end
 */
-#define PP_FOLDL(macro, acc, ...) PP_INVOKE( macro,  ( acc , PP_ITERATE( PP_ITERATE_ITEM_FOLDL , macro , __VA_ARGS__ ) PP_REPEAT( PP_INSERT_CLOSE_PAREN , _ ,  PP_VA_SIZE( __VA_ARGS__ ) ) ) )
+#define PP_FOLDR(macro, acc, ...) PP_ITERATE( PP_ITERATE_ITEM_FOLDR , macro , __VA_ARGS__ ) PP_COMMA acc PP_REPEAT( PP_INSERT_CLOSE_PAREN , _ ,  PP_VA_SIZE( __VA_ARGS__ ) ) ) )
 
 /*!
-   \brief Reduce function. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)
+   \brief Reduce arguments list from begin. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)
    \param macro functional macro, binary operator witch take two arguments - accumulator and arguments list item
    \param acc initial accumulator
    \param __VA_ARGS__ arguments list
-   \returns result of reduce arguments list
-
-   TODO: test , is FOLDL ?
+   \returns result of reduce arguments list from begin
 */
-#define PP_FOLDR(macro, acc, ...) PP_REPEAT( PP_OPEN_FUNC , macro , PP_VA_SIZE( __VA_ARGS__ ) ) ) acc PP_COMMA PP_INVOKE( macro ,  ( acc , PP_ITERATE( PP_ITERATE_ITEM_FOLDR , macro , __VA_ARGS__ ) )
+#define PP_FOLDL(macro, acc, ...) PP_REPEAT( PP_OPEN_FUNC , macro , PP_VA_SIZE( __VA_ARGS__ ) ) ) acc PP_ITERATE( PP_ITERATE_ITEM_FOLDL , _ , __VA_ARGS__ )
 
 /*!
-   \brief Reduce function. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)
+   \brief Reduce arguments list from begin. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)
    \param macro functional macro, binary operator witch take two arguments - accumulator and arguments list item
    \param acc initial accumulator
    \param __VA_ARGS__ arguments list
-   \returns result of reduce arguments list
-
-   TODO: test , is FOLDL ?
+   \returns result of reduce arguments list from begin
 */
-#define PP_REDUCE(macro, acc, ...) PP_FOLDL(macro, acc, __VA_ARGS__) 
+#define PP_REDUCE(macro, acc, ...) PP_INVOKE( PP_FOLDL, (macro, acc, __VA_ARGS__) )
 
-// todo: filter, revert, zip, unzip, zip-repeat
+/*!
+   \brief Swap pair order
+   \param first first argument
+   \param second second argument
+   \returns list with comma swapped first and second arguments
+*/
+#define PP_SWAP( first, second ) second PP_COMMA first
+
+/*!
+   \brief Reverse arguments list. Maximum size of arguments is PP_VA_MAXARGS.
+   \param __VA_ARGS__ arguments list
+   \returns arguments list in reversed order
+*/
+#define PP_REVERSE( ... ) PP_REPEAT( PP_OPEN_FUNC , macro , PP_VA_SIZE( PP_TAIL( __VA_ARGS__ ) ) ) ) PP_HEAD( __VA_ARGS__ ) PP_ITERATE( PP_ITERATE_ITEM_FOLDL , _ , PP_TAIL( __VA_ARGS__ ) )
+
+// todo: filter, zip, unzip, zip-repeat
 // todo: filter to condition ?
 
 /////////////////////////////////////////////////////////////////////////////
