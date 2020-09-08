@@ -405,7 +405,7 @@
    \param __VA_ARGS__ arguments list
    \returns arguments list in reversed order
 */
-#define PP_REVERSE( ... ) PP_REPEAT( PP_OPEN_FUNC , macro , PP_VA_SIZE( PP_TAIL( __VA_ARGS__ ) ) ) ) PP_HEAD( __VA_ARGS__ ) PP_ITERATE( PP_ITERATE_ITEM_FOLDL , _ , PP_TAIL( __VA_ARGS__ ) )
+#define PP_REVERSE( ... ) PP_INVOKE( PP_FOLDR, (PP_SWAP, PP_HEAD( __VA_ARGS__ ), PP_TAIL( __VA_ARGS__ )) )
 
 // todo: filter, zip, unzip, zip-repeat
 // todo: filter to condition ?
