@@ -60,11 +60,11 @@
 
 /*!
    \brief Functional macro that insert comma if called. Used in macro for skip argument if called.
-   Example: PP_INVOKE( PP_REPLACE_COMMA TEST_ARG, () ) - insert comma TEST_ARG is empty, else PP_REPLACE_COMMA <TEST_ARG> () code
+   Example: PP_INVOKE( PP_INSERT_COMMA TEST_ARG, () ) - insert comma TEST_ARG is empty, else PP_INSERT_COMMA <TEST_ARG> () code
    \param __VA_ARGS__ anything
    \returns comma
 */
-#define PP_REPLACE_COMMA(...) PP_COMMA
+#define PP_INSERT_COMMA(...) PP_COMMA
 
 /*! 
    \brief Remove code inside. As an example it can be used for translation programs that scan code. PP_REMOVE(TR("SomeTranslateId"))
@@ -89,7 +89,7 @@
 #define PP_INVOKE(x, y) PP_APPLY(x y)
 
 /*!
-   \brief Choose argument by \a skip argument use manipulations with commas. For example use PP_REPLACE_COMMA_TEST to return empy \a choose for empty arguments
+   \brief Choose argument by \a skip argument use manipulations with commas. For example use PP_COMMA_TEST to return empty \a choose for empty arguments
    \param skip argument for skip
    \param choose returned choose
    \param __VA_ARGS__ anything
@@ -106,24 +106,46 @@
    \param __VA_ARGS__ anything
    \returns comma, not empty code or nothing
 */
-#define PP_REPLACE_COMMA_TEST(one, ...) PP_INVOKE(  PP_SKIP_OR_CHOOSE, (PP_INVOKE( PP_REPLACE_COMMA,  one), PP_INVOKE( PP_REPLACE_COMMA one, () )) )
+#define PP_COMMA_TEST(one, ...) PP_INVOKE(  PP_SKIP_OR_CHOOSE, (PP_INVOKE( PP_INSERT_COMMA,  one), PP_INVOKE( PP_INSERT_COMMA one, () )) )
 
 /*!
-   \brief Open parenthesis literal, replace to '('
+   \brief Opening parentheses literal, replace to '('
 */
 #define PP_OPEN_PAREN (
 
 /*!
-   \brief Close parenthesis literal, replace to ')'
+   \brief Closing parentheses literal, replace to ')'
 */
 #define PP_CLOSE_PAREN )
+
+/*!
+   \brief A function macro that, when called, inserts a opening parenthesis because it is a control character.
+   \param __VA_ARGS__ anything
+   \returns opening parentheses literal
+*/
+#define PP_INSERT_OPEN_PAREN(...) PP_OPEN_PAREN
+
+/*!
+   \brief A function macro that, when called, inserts a closing parenthesis because it is a control character.
+   \param __VA_ARGS__ anything
+   \returns closing parentheses literal
+*/
+#define PP_INSERT_CLOSE_PAREN(...) PP_CLOSE_PAREN
+
+/*!
+   \brief Inserting function name and opening parenthesis.
+   Used for construct functional macros calls.
+   \param __VA_ARGS__ anything
+   \returns function name and open parenthesis control literal
+*/
+#define PP_OPEN_FUNC(name) name PP_OPEN_PAREN
 
 /*!
    \brief Wraps the argument list with commas in parentheses. If \a __VA_ARGS__ empty, then return nothing
    \param __VA_ARGS__ arguments to wrap
    \returns wraped list with commas or nothing
 */
-#define PP_PAREN(...) PP_INVOKE( PP_SKIP_OR_CHOOSE, (PP_REPLACE_COMMA_TEST( __VA_ARGS__ ) , ( __VA_ARGS__ )) )
+#define PP_PAREN(...) PP_INVOKE( PP_SKIP_OR_CHOOSE, (PP_COMMA_TEST( __VA_ARGS__ ) , ( __VA_ARGS__ )) )
 
 /*!
    \brief Unwraps list with commas in parentheses to list without parentheses. If \a inparen empty, then return nothing

@@ -365,8 +365,6 @@
 */
 #define PP_REPEAT(...)  PP_VA_FUNC(PP_REPEAT, __VA_ARGS__)
 
-// todo: repeat commas, repeat parenthesis, repeat parenthesis with function name
-
 /*!
    \brief Reduce function. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDL( m, acc, a, b, c )  >>>  m( acc, m( a, m( b, c ) ) )
    \param macro functional macro, binary operator witch take two arguments - accumulator and arguments list item
@@ -376,7 +374,7 @@
 
    TODO: test, is FOLDR ?
 */
-#define PP_FOLDL(macro, acc, ...) PP_INVOKE( macro,  ( acc , PP_ITERATE(PP_ITERATE_ITEM_FOLDL, macro, __VA_ARGS__) PP_REPEAT( PP_CLOSE_PAREN , PP_VA_SIZE( __VA_ARGS__ ) ) ) )
+#define PP_FOLDL(macro, acc, ...) PP_INVOKE( macro,  ( acc , PP_ITERATE( PP_ITERATE_ITEM_FOLDL , macro , __VA_ARGS__ ) PP_REPEAT( PP_INSERT_CLOSE_PAREN , _ ,  PP_VA_SIZE( __VA_ARGS__ ) ) ) )
 
 /*!
    \brief Reduce function. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)
@@ -387,7 +385,7 @@
 
    TODO: test , is FOLDL ?
 */
-#define PP_FOLDR(macro, acc, ...) PP_REPEAT( macro PP_CLOSE_PAREN , PP_VA_SIZE( __VA_ARGS__ ) ) ) acc PP_COMMA PP_INVOKE( macro,  ( acc , PP_ITERATE(PP_ITERATE_ITEM_FOLDR, macro, __VA_ARGS__) )
+#define PP_FOLDR(macro, acc, ...) PP_REPEAT( PP_OPEN_FUNC , macro , PP_VA_SIZE( __VA_ARGS__ ) ) ) acc PP_COMMA PP_INVOKE( macro ,  ( acc , PP_ITERATE( PP_ITERATE_ITEM_FOLDR , macro , __VA_ARGS__ ) )
 
 /*!
    \brief Reduce function. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)
