@@ -100,13 +100,13 @@
 /*!
    \brief Short entry for arguments skip testing.
    If there is at least \a one non-empty argument then return not empty terms, else return comma.
-   If \a one argument non-empty but in parentheses then return nothing (this is implementation specific, since parentheses are control characters).
+   If \a one argument is empty parentheses then return comma (this is implementation specific, since parentheses are control characters).
    Used for skip empty arguments in macros.
    \param one first non-empty argument
    \param __VA_ARGS__ anything
-   \returns comma, not empty code or nothing
+   \returns comma or not empty code
 */
-#define PP_COMMA_TEST(one, ...) PP_INVOKE(  PP_SKIP_OR_CHOOSE, (PP_INVOKE( PP_INSERT_COMMA,  one), PP_INVOKE( PP_INSERT_COMMA one, () )) )
+#define PP_COMMA_TEST(one, ...) PP_INVOKE( PP_INSERT_COMMA PP_INVOKE( PP_SKIP_OR_CHOOSE, ( PP_LEAD_COMMA one, one ) ), ())
 
 /*!
    \brief Opening parentheses literal, replace to '('
@@ -148,11 +148,18 @@
 #define PP_PAREN(...) PP_INVOKE( PP_SKIP_OR_CHOOSE, (PP_COMMA_TEST( __VA_ARGS__ ) , ( __VA_ARGS__ )) )
 
 /*!
+   \brief Checks if arguments are in parentheses. if yes, it returns a non-empty code, otherwise nothing
+   \param arg argument for parentheses test
+   \returns non-empty code or nothing
+*/
+#define PP_IS_IN_PAREN(arg) PP_INVOKE( PP_SKIP_OR_CHOOSE, ( PP_LEAD_COMMA arg true , ) )
+
+/*!
    \brief Unwraps list with commas in parentheses to list without parentheses. If \a inparen empty, then return nothing
    \param inparen arguments in parentheses
    \returns list with commas without parentheses or nothing
 */
-#define PP_UNPAREN(inparen) PP_SKIP_OR_CHOOSE( PP_LEAD_COMMA inparen , inparen )
+#define PP_UNPAREN(inparen) PP_INVOKE( PP_APPLY, PP_INVOKE( PP_SKIP_OR_CHOOSE, ( PP_COMMA_TEST(PP_IS_IN_PAREN( inparen )) ( inparen ), (PP_APPLY inparen) ) ) )
 
 /*!
    \brief Concatenate two lists with commas in parentheses
