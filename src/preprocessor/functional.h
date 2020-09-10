@@ -471,16 +471,23 @@
 PP_UNPAREN( PP_INVOKE( PP_HEAD, ( __VA_ARGS__ ) ) ) ) ) )
 
 /*!
+   \brief Add one item from list \a items to one list from \a lists. Maximum size of lists and elements is PP_VA_MAXARGS.
+   \param lists arguments list of lists in parentheses
+   \param elements list of elements to append
+   \returns list of \a lists in parentheses with appended by one elements from \a elements list
+*/
+#define PP_MASS_APPEND( lists, elements ) PP_ZIP(lists, elements)
+
+/*!
    \brief Binary opreator for store piars with elements of two lists in accumulator when used in reduce. Used in PP_ZIP
    \param acc accumulator to store piars with elements of two lists
    \param lists pair of two lists in parentheses
    \param __VA_ARGS__ arguments list
    \returns pair of accumulator with new element and pair with \a lists tails
 */
-#define PP_UNZIP_PART(acc, pair) ( PP_HEAD( acc ) ) PP_COMMA ( PP_INVOKE( PP_LISTS_HEADS, lists ) ) ) PP_COMMA ( PP_INVOKE( PP_LISTS_TAILS, lists ))
+//#define PP_UNZIP_PART(acc, pair) ( PP_HEAD( acc ) ) PP_COMMA ( PP_INVOKE( PP_LISTS_HEADS, lists ) ) ) PP_COMMA ( PP_INVOKE( PP_LISTS_TAILS, lists ))
 
-// todo: filter, zip, unzip
-// todo: filter to condition ?
+// todo: unzip
 
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_FUNCTIONAL_H__

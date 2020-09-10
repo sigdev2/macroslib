@@ -118,7 +118,7 @@
 */
 #define PP_TO_BOOL(c) PP_IF( c , true, false )
 
-// todo: COND
+// todo: filter, COND, all, one 
 
 // BOOL OPERATORS
 
