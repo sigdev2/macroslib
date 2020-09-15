@@ -119,18 +119,25 @@
 #define PP_CLOSE_PAREN )
 
 /*!
-   \brief A function macro that, when called, inserts a opening parenthesis because it is a control character.
+   \brief A functional macro that, when called, inserts a opening parenthesis because it is a control character.
    \param __VA_ARGS__ anything
    \returns opening parentheses literal
 */
 #define PP_INSERT_OPEN_PAREN(...) PP_OPEN_PAREN
 
 /*!
-   \brief A function macro that, when called, inserts a closing parenthesis because it is a control character.
+   \brief A functional macro that, when called, inserts a closing parenthesis because it is a control character.
    \param __VA_ARGS__ anything
    \returns closing parentheses literal
 */
 #define PP_INSERT_CLOSE_PAREN(...) PP_CLOSE_PAREN
+
+/*!
+   \brief A functional macro that, when called, inserts a opening and closing parenthesis because it is a control character.
+   \param __VA_ARGS__ anything
+   \returns opening an closing parentheses literals
+*/
+#define PP_INSERT_EMPTY_LIST(...) PP_OPEN_PAREN PP_CLOSE_PAREN
 
 /*!
    \brief Inserting function name and opening parenthesis.
