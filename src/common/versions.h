@@ -90,7 +90,6 @@
     More predefined macroses you may check in https://sourceforge.net/projects/predef/
     For Visual Studio check this page https://docs.microsoft.com/ru-ru/cpp/preprocessor/predefined-macros?view=vs-2019
     And of course take a look at the standard С++ https://en.cppreference.com/w/cpp/preprocessor/replace#Predefined_macros
-
 */
 
 #if __cplusplus >= 199711L

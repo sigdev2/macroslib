@@ -10,7 +10,6 @@
     \brief Language depend utils. C/C++
 */
 
-
 /*!
    \brief Apply \a macro to every item of arguments list and append semicolon. Maximum iterate is PP_VA_MAXARGS arguments.
    \param macro functional macro take one argument - list item

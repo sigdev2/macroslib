@@ -308,5 +308,14 @@
 */
 #define PP_VA_GEN_A_N(NUM) PP_CAT(PP_VA_GEN_A_, NUM )
 
+// VA_OPT
+
+#define PP_HAS_VA_OPT_CHECK(...) PP_SKIP_OR_CHOOSE(__VA_OPT__(,), , true)
+/*!
+   \brief Check _VA_OPT_ support
+   \returns true or nothing
+*/
+#define PP_HAS_VA_OPT PP_HAS_VA_OPT_CHECK(?)
+
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_VARIADIC_H__
