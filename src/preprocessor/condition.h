@@ -7,11 +7,12 @@
 #define __HAS_MACROS_LIB_CONDITION_H__
 
 /*! \file condition.h
-    \brief Realization of conditions
+    \brief Macros with conditions. Crosslanguage.
     
     Depend from:
      - /preprocessor/utils.h
      - /preprocessor/variadic.h
+     - /preprocessor/functional.h
 */
 
 #include "utils.h"
@@ -59,6 +60,20 @@
 */
 #define PP_TRUE true
 
+/*!
+   \brief Convert any arguments to PP_TRUE
+   \param __VA_ARGS__ any
+   \returns PP_TRUE
+*/
+#define PP_TO_TRUE( ... ) PP_TRUE
+
+/*!
+   \brief Convert any arguments to PP_FALSE
+   \param __VA_ARGS__ any
+   \returns PP_FALSE
+*/
+#define PP_TO_FALSE( ... ) PP_FALSE
+
 
 // IF
 
@@ -69,7 +84,7 @@
 #define PP_BOOL_TO_T PP_TRUE
 #define PP_BOOL_TO_t PP_TRUE
 #define PP_BOOL_TO_0 PP_FALSE
-#define PP_BOOL_TO_T PP_FALSE
+#define PP_BOOL_TO_F PP_FALSE
 #define PP_BOOL_TO_f PP_FALSE
 #define PP_BOOL_TO_false PP_FALSE
 #define PP_BOOL_TO_False PP_FALSE
@@ -118,7 +133,39 @@
 */
 #define PP_TO_BOOL(c) PP_IF( c , true, false )
 
-// todo: filter, COND, all, one 
+/*!
+   \brief Iteration modifier which use \a macro applied on \a item with expand parentheses before as condition for PP_IF and return comma leaded \a item if condition true or nothing.
+   Use as default macro argument for PP_ITERATE.
+   \param macro functional macro passed as data argument in PP_ITERATE which accept one argument and return boolean value for use as condition
+   \param item iterable item
+   \returns comma leaded \a item if \a macro condition true or nothing.
+*/
+#define PP_FILTER_PART(macro, item) PP_IF( PP_INVOKE( macro , ( PP_UNPAREN( item ) ) ) , PP_COMMA item , )
+
+/*!
+   \brief Use \a macro applied on items from arguments list with expand parentheses before as condition. If condition false then item remove from arguments list. Maximum count of arguments list is PP_VA_MAXARGS.
+   \param macro functional macro passed as data argument in PP_ITERATE which accept one argument and return boolean value for use as condition
+   \param __VA_ARGS__ iterable item
+   \returns list with commas without filtred values
+*/
+#define PP_FILTER(macro, ... ) PP_INVOKE( macro , ( PP_UNPAREN( PP_INVOKE( PP_HEAD, ( __VA_ARGS__ ) ) ) ) ) , PP_INVOKE( PP_HEAD, ( __VA_ARGS__ ) ) , ) PP_INVOKE( PP_ITERATE , (PP_FILTER_PART, macro , PP_INVOKE( PP_TAIL, ( __VA_ARGS__ ) ) ) )
+
+/*!
+   \brief Iteration modifier which use \a item list head as condition for PP_IF and return \a item list tail if condition true or nothing. Without closing parentheses and possible to add the else case.
+   Use as default macro argument for PP_ITERATE.
+   \param data data passed in PP_ITERATE
+   \param item iterable item as list in parentheses
+   \returns if condotion without closing parentheses
+*/
+#define PP_COND_PART(data, item) PP_IF PP_INSERT_OPEN_PAREN PP_HEAD_PAREN( item ) , PP_TAIL_PAREN( item ) ,
+
+/*!
+   \brief Use as switch-case construction. Every list of arguments is list in parentheses with head as condition and tail as case. Maximum count of arguments list is PP_VA_MAXARGS.
+   \param __VA_ARGS__ arguments list of lists with head as condition and tail as case
+   \returns first case with true condition or nothing
+*/
+#define PP_COND( ... ) PP_INVOKE( PP_ITERATE , (PP_COND_PART, _ , __VA_ARGS__ ) ) PP_EMPTY PP_REPEAT( PP_INSERT_CLOSE_PAREN , _ ,  PP_VA_SIZE( __VA_ARGS__ ), )
+
 
 // BOOL OPERATORS
 
@@ -152,6 +199,20 @@
    \return boolean value
 */
 #define PP_XOR(a, b) PP_IF( a , PP_IF( b , PP_FALSE, PP_TRUE), PP_IF( b , PP_TRUE, PP_FALSE))
+
+/*! 
+   \brief True if all arguments is true 
+   \param __VA_ARGS__ boolean values
+   \return boolean value
+*/
+#define PP_ALL( ... ) PP_INVOKE( PP_FOLDL , (PP_AND, true, __VA_ARGS__ ) )
+
+/*! 
+   \brief True if at least one argument is true 
+   \param __VA_ARGS__ boolean values
+   \return boolean value
+*/
+#define PP_ONE( ... ) PP_INVOKE( PP_FOLDL , (PP_OR, true, __VA_ARGS__ ) )
 
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_CONDITION_H__

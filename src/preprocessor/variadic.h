@@ -7,7 +7,7 @@
 #define __HAS_MACROS_LIB_VARIADIC_H__
 
 /*! \file variadic.h
-    \brief Variadic macros. Operations on arguments list
+    \brief Variadic macros. Crosslanguage.
     
     Depend from:
      - /preprocessor/utils.h

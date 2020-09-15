@@ -7,7 +7,7 @@
 #define __HAS_MACROS_LIB_FUNCTIONAL_H__
 
 /*! \file functional.h
-    \brief functional macros
+    \brief Functional programming on macros. Crosslanguage.
     
     Depend from:
      - /preprocessor/utils.h
@@ -16,6 +16,7 @@
 
 #include "utils.h"
 #include "variadic.h"
+
 
 // RECURSION
 
@@ -362,7 +363,7 @@
    \param __VA_ARGS__ arguments list
    \returns arguments list separated by \a separator
 */
-#define PP_SEPARATE_LIST(separator, ...) PP_INVOKE( PP_HEAD, (__VA_ARGS__)) separator PP_ITERATE( PP_ITERATE_ITEM_SEP , separator, PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) )
+#define PP_SEPARATE_LIST(separator, ...) PP_INVOKE( PP_HEAD, (__VA_ARGS__)) PP_ITERATE( PP_ITERATE_ITEM_SEP , separator, PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) )
 
 /*!
    \brief A short record of applying a \a macro to each item in the argument list and separating arguments list with \a separator. Maximum iterate is PP_VA_MAXARGS arguments.
@@ -371,7 +372,7 @@
    \param __VA_ARGS__ arguments list
    \returns list separated by \a separator with results of apply \a macro on every item of arguments list
 */
-#define PP_SEPARATE_LIST_M(macro, separator, ... ) PP_INVOKE( macro , (PP_INVOKE( PP_HEAD, (__VA_ARGS__) ))) separator PP_ITERATE( PP_ITERATE_ITEM_MACRO , separator macro , PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) )
+#define PP_SEPARATE_LIST_M(macro, separator, ... ) PP_INVOKE( macro , (PP_INVOKE( PP_HEAD, (__VA_ARGS__) ))) PP_ITERATE( PP_ITERATE_ITEM_MACRO , separator macro , PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) )
 
 /*!
    \brief Append \a item to all lists in arguments. Maximum lists count in arguments is PP_VA_MAXARGS.
@@ -395,7 +396,7 @@
    \param __VA_ARGS__ arguments list
    \returns list with commas of result apply \a macro on every item of arguments list
 */
-#define PP_MAP(macro, ...) PP_INVOKE( macro , (PP_INVOKE( PP_HEAD, (__VA_ARGS__) ))) PP_COMMA PP_ITERATE( PP_ITERATE_ITEM_COMMA , macro, PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) )
+#define PP_MAP(macro, ...) PP_INVOKE( macro , (PP_INVOKE( PP_HEAD, (__VA_ARGS__) ))) PP_ITERATE( PP_ITERATE_ITEM_COMMA , macro, PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) )
 
 /*!
    \brief Short alias for PP_SEPARATE_LIST_M. Applying a \a macro to each item in the argument list and separating arguments list with \a separator. Maximum iterate is PP_VA_MAXARGS arguments.
@@ -535,9 +536,9 @@ PP_UNPAREN( PP_INVOKE( PP_HEAD, ( __VA_ARGS__ ) ) ) ) ) )
 #define PP_MASS_PREPEND( lists, ... ) PP_MAP(PP_CAT_PAREN, PP_ZIP( ( __VA_ARGS__ ) , lists ) )
 
 /*!
-   \brief Binary opreator for store piars with elements of two lists in accumulator when used in reduce. Used in PP_ZIP
-   \param __VA_ARGS__ list of lists to unzip
-   \returns pair of accumulator with new element and pair with \a lists tails
+   \brief Unzip list of lists to list with by one item from each list. Maximum size list of lists and items counts in lists is PP_VA_MAXARGS.  Example: (a), (b), (c) >>> a, b, c
+   \param __VA_ARGS__ list of lists in parentheses to unzip
+   \returns list contains by one item from each list from list of lists
 */
 #define PP_UNZIP( first, ... ) PP_INVOKE( PP_FOLDL, (PP_MASS_APPEND, ( PP_REPEAT(PP_INSERT_EMPTY_LIST, _, PP_VA_SIZE( first ) ) ) , first, __VA_ARGS__ ) )
 
