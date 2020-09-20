@@ -1,5 +1,3 @@
-[ru_RU](./README.ru_RU.md)
-
 <p align="center">
     <img src="https://raw.githubusercontent.com/sigdev2/macroslib/master/docs/icon.png" alt="Logo" width="80" height="80">
     <h3 align="center">MacrosLib</h3>
