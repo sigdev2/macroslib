@@ -62,34 +62,32 @@
 #define PP_TAIL( head , ... ) __VA_ARGS__
 
 /*!
-   \brief Return head of \a list in parentheses
-   \param list list in parentheses
-   \returns head of \a list
+   \brief Return head of list in parentheses or not
+   \param __VA_ARGS__ list
+   \returns head of list
 */
-#define PP_HEAD_PAREN( list ) PP_INVOKE( PP_HEAD, PP_UNPAREN( list ) )
+#define PP_HEAD_PAREN( ... ) PP_INVOKE( PP_HEAD, PP_PAREN( __VA_ARGS__ ) )
 
 /*!
-   \brief Return tail of \a list in parentheses
-   \param list list in parentheses
-   \returns tail of \a list in parentheses
+   \brief Return tail in parentheses of list in parentheses or not
+   \param __VA_ARGS__ list
+   \returns tail of list in parentheses
 */
-#define PP_TAIL_PAREN( list ) ( PP_INVOKE( PP_TAIL, PP_UNPAREN( list ) ) )
+#define PP_TAIL_PAREN( ... ) PP_PAREN( PP_INVOKE( PP_TAIL, PP_PAREN( __VA_ARGS__ ) ) )
 
 /*!
-   \brief Return \a head of arguments list. Lisp style PP_HEAD alias
-   \param head head of arguments list.
+   \brief Return \a head of arguments list. Lisp style PP_HEAD_PAREN alias
    \param __VA_ARGS__ tail of arguments list.
    \returns \a head of arguments list.
 */
-#define PP_CAR( ... ) PP_HEAD( __VA_ARGS__ )
+#define PP_CAR( ... ) PP_HEAD_PAREN( __VA_ARGS__ )
 
 /*!
-   \brief Return tail of arguments list. Lisp style PP_TAIL alias
-   \param head head of arguments list.
+   \brief Return tail of arguments list. Lisp style PP_TAIL_PAREN alias
    \param __VA_ARGS__ tail of arguments list.
    \returns tail of arguments list
 */
-#define PP_CDR( ... ) PP_TAIL( __VA_ARGS__ )
+#define PP_CDR( ... ) PP_TAIL_PAREN( __VA_ARGS__ )
 
 /*!
    \brief Lisp style short entry PP_HEAD and PP_TAIL conbinations:
@@ -126,34 +124,34 @@
    \param __VA_ARGS__ arguments list.
    \returns head-head of arguments list.
 */
-#define PP_CAAR( ... ) PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) )
-#define PP_CADR( ... ) PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) )
-#define PP_CDAR( ... ) PP_INVOKE(PP_HEAD, ( PP_TAIL( __VA_ARGS__ ) ) )
-#define PP_CDDR( ... ) PP_INVOKE(PP_TAIL, ( PP_TAIL( __VA_ARGS__ ) ) )
-#define PP_CAAAR( ... ) PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) ) ) ) )
-#define PP_CAADR( ... ) PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) ) ) ) )
-#define PP_CADAR( ... ) PP_INVOKE(PP_HEAD, ( PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) ) ) )
-#define PP_CDAAR( ... ) PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_TAIL( __VA_ARGS__ ) ) ) ) ) )
-#define PP_CADDR( ... ) PP_INVOKE(PP_TAIL, ( PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) ) ) )
-#define PP_CDDAR( ... ) PP_INVOKE(PP_HEAD, ( PP_INVOKE(PP_TAIL, ( PP_TAIL( __VA_ARGS__ ) ) ) ) )
-#define PP_CDADR( ... ) PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_TAIL( __VA_ARGS__ ) ) ) ) ) )
-#define PP_CDDDR( ... ) PP_INVOKE(PP_TAIL, ( PP_INVOKE(PP_TAIL, ( PP_TAIL( __VA_ARGS__ ) ) ) ) )
-#define PP_CAAAAR( ... ) PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) ) ) ) ) ) ) )
-#define PP_CDDDDR( ... ) PP_INVOKE(PP_TAIL, ( PP_INVOKE(PP_TAIL, ( PP_INVOKE(PP_TAIL, ( PP_TAIL( __VA_ARGS__ ) ) ) ) ) ) )
-#define PP_CAAADR( ... ) PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) ) ) ) ) ) ) )
-#define PP_CAADAR( ... ) PP_INVOKE(PP_HEAD, ( PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) ) ) ) ) ) )
-#define PP_CADAAR( ... ) PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) ) ) ) ) ) )
-#define PP_CDAAAR( ... ) PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_TAIL( __VA_ARGS__ ) ) ) ) ) ) ) ) )
-#define PP_CAADDR( ... ) PP_INVOKE(PP_TAIL, ( PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) ) ) ) ) ) )
-#define PP_CADADR( ... ) PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) ) ) ) ) ) )
-#define PP_CDADAR( ... ) PP_INVOKE(PP_HEAD, ( PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_TAIL( __VA_ARGS__ ) ) ) ) ) ) ) )
-#define PP_CADDAR( ... ) PP_INVOKE(PP_HEAD, ( PP_INVOKE(PP_TAIL, ( PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) ) ) ) ) )
-#define PP_CDAADR( ... ) PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_TAIL( __VA_ARGS__ ) ) ) ) ) ) ) ) )
-#define PP_CDDAAR( ... ) PP_INVOKE(PP_HEAD, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_INVOKE(PP_TAIL, ( PP_TAIL( __VA_ARGS__ ) ) ) ) ) ) ) )
-#define PP_CADDDR( ... ) PP_INVOKE(PP_TAIL, ( PP_INVOKE(PP_TAIL, ( PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_HEAD( __VA_ARGS__ ) ) ) ) ) ) ) )
-#define PP_CDADDR( ... ) PP_INVOKE(PP_TAIL, ( PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_TAIL( __VA_ARGS__ ) ) ) ) ) ) ) ) )
-#define PP_CDDADR( ... ) PP_INVOKE(PP_TAIL, ( PP_UNPAREN( PP_INVOKE(PP_HEAD, ( PP_INVOKE(PP_TAIL, ( PP_TAIL( __VA_ARGS__ ) ) ) ) ) ) ) )
-#define PP_CDDDAR( ... ) PP_INVOKE(PP_HEAD, ( PP_INVOKE(PP_TAIL, ( PP_INVOKE(PP_TAIL, ( PP_TAIL( __VA_ARGS__ ) ) ) ) ) ) )
+#define PP_CAAR( ... ) PP_CAR( PP_CAR( __VA_ARGS__ ) )
+#define PP_CADR( ... ) PP_CDR( PP_CAR( __VA_ARGS__ ) )
+#define PP_CDAR( ... ) PP_CAR( PP_CDR( __VA_ARGS__ ) )
+#define PP_CDDR( ... ) PP_CDR( PP_CDR( __VA_ARGS__ ) )
+#define PP_CAAAR( ... ) PP_CAR( PP_CAAR( __VA_ARGS__ ) )
+#define PP_CAADR( ... ) PP_CDR( PP_CAAR( __VA_ARGS__ ) )
+#define PP_CADAR( ... ) PP_CAR( PP_CADR( __VA_ARGS__ ) )
+#define PP_CDAAR( ... ) PP_CAR( PP_CDAR( __VA_ARGS__ ) )
+#define PP_CADDR( ... ) PP_CDR( PP_CADR( __VA_ARGS__ ) )
+#define PP_CDDAR( ... ) PP_CAR( PP_CDDR( __VA_ARGS__ ) )
+#define PP_CDADR( ... ) PP_CDR( PP_CDAR( __VA_ARGS__ ) )
+#define PP_CDDDR( ... ) PP_CDR( PP_CDDR( __VA_ARGS__ ) )
+#define PP_CAAAAR( ... ) PP_CAR( PP_CAAAR( __VA_ARGS__ ) )
+#define PP_CDDDDR( ... ) PP_CDR( PP_CDDDR( __VA_ARGS__ ) )
+#define PP_CAAADR( ... ) PP_CDR( PP_CAAAR( __VA_ARGS__ ) )
+#define PP_CAADAR( ... ) PP_CAR( PP_CAADR( __VA_ARGS__ ) )
+#define PP_CADAAR( ... ) PP_CAR( PP_CADAR( __VA_ARGS__ ) )
+#define PP_CDAAAR( ... ) PP_CAR( PP_CDAAR( __VA_ARGS__ ) )
+#define PP_CAADDR( ... ) PP_CDR( PP_CAADR( __VA_ARGS__ ) )
+#define PP_CADADR( ... ) PP_CDR( PP_CADAR( __VA_ARGS__ ) )
+#define PP_CDADAR( ... ) PP_CAR( PP_CDADR( __VA_ARGS__ ) )
+#define PP_CADDAR( ... ) PP_CAR( PP_CADDR( __VA_ARGS__ ) )
+#define PP_CDAADR( ... ) PP_CDR( PP_CDAAR( __VA_ARGS__ ) )
+#define PP_CDDAAR( ... ) PP_CAR( PP_CDDAR( __VA_ARGS__ ) )
+#define PP_CADDDR( ... ) PP_CDR( PP_CADDR( __VA_ARGS__ ) )
+#define PP_CDADDR( ... ) PP_CDR( PP_CDADR( __VA_ARGS__ ) )
+#define PP_CDDADR( ... ) PP_CDR( PP_CDDAR( __VA_ARGS__ ) )
+#define PP_CDDDAR( ... ) PP_CAR( PP_CDDDR( __VA_ARGS__ ) )
 
 /*!
    \brief Return fisrt element of arguments list. PP_HEAD alias
@@ -199,7 +197,7 @@
    \param __VA_ARGS__ arguments list.
    \returns last element of arguments list
 */
-#define PP_TAKE( position , ...) PP_INVOKE(PP_CAT( PP_VA_GET_POS_ , position ), (__VA_ARGS__))
+#define PP_TAKE( position , ... ) PP_INVOKE(PP_CAT( PP_VA_GET_POS_ , position ), ( __VA_ARGS__ ))
 
 /*!
    \brief Return last element of arguments list. Arguments list must be not more than PP_VA_MAXARGS
@@ -221,11 +219,11 @@
 // BASIC ITERATION
 
 #define PP_ITERATE_0(m, d, ...)
-#define PP_ITERATE_1(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ )))
-#define PP_ITERATE_2(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_1, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_3(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_2, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_4(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_3, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_5(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_4, ( m, d, PP_TAIL( __VA_ARGS__ )))
+#define PP_ITERATE_1(m, d, ...)
+#define PP_ITERATE_2(m, d, ...)
+#define PP_ITERATE_3(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ )))
+#define PP_ITERATE_4(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_ITERATE_3( m, d, PP_TAIL( __VA_ARGS__ ))
+#define PP_ITERATE_5(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_ITERATE_4( m, d, PP_TAIL( __VA_ARGS__ ))
 #define PP_ITERATE_6(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_5, ( m, d, PP_TAIL( __VA_ARGS__ )))
 #define PP_ITERATE_7(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_6, ( m, d, PP_TAIL( __VA_ARGS__ )))
 #define PP_ITERATE_8(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_7, ( m, d, PP_TAIL( __VA_ARGS__ )))
@@ -253,6 +251,8 @@
 #define PP_ITERATE_30(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_29, ( m, d, PP_TAIL( __VA_ARGS__ )))
 #define PP_ITERATE_31(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_30, ( m, d, PP_TAIL( __VA_ARGS__ )))
 #define PP_ITERATE_32(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_31, ( m, d, PP_TAIL( __VA_ARGS__ )))
+#define PP_ITERATE_33(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_32, ( m, d, PP_TAIL( __VA_ARGS__ )))
+#define PP_ITERATE_34(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_33, ( m, d, PP_TAIL( __VA_ARGS__ )))
 
 /*!
    \brief Basic iteration functional macro. Iterate elements with apply \a macro with \a data as first argument and arguments list elment as second argument. Maximum is PP_VA_MAXARGS arguments iterate.
