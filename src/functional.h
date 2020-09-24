@@ -219,40 +219,38 @@
 // BASIC ITERATION
 
 #define PP_ITERATE_0(m, d, ...)
-#define PP_ITERATE_1(m, d, ...)
-#define PP_ITERATE_2(m, d, ...)
-#define PP_ITERATE_3(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ )))
-#define PP_ITERATE_4(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_ITERATE_3( m, d, PP_TAIL( __VA_ARGS__ ))
-#define PP_ITERATE_5(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_ITERATE_4( m, d, PP_TAIL( __VA_ARGS__ ))
-#define PP_ITERATE_6(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_5, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_7(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_6, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_8(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_7, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_9(m, d, ...)  PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_8, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_10(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_9, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_11(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_10, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_12(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_11, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_13(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_12, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_14(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_13, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_15(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_14, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_16(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_15, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_17(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_16, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_18(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_17, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_19(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_18, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_20(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_19, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_21(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_20, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_22(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_21, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_23(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_22, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_24(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_23, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_25(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_24, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_26(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_25, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_27(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_26, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_28(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_27, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_29(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_28, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_30(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_29, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_31(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_30, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_32(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_31, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_33(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_32, ( m, d, PP_TAIL( __VA_ARGS__ )))
-#define PP_ITERATE_34(m, d, ...) PP_INVOKE( m , ( d , PP_HEAD( __VA_ARGS__ ))) PP_INVOKE( PP_ITERATE_33, ( m, d, PP_TAIL( __VA_ARGS__ )))
+#define PP_ITERATE_1(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) )
+#define PP_ITERATE_2(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_1 ( m, d, PP_APPLY(PP_TAIL ( __VA_ARGS__ )) )
+#define PP_ITERATE_3(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_2 ( m, d, PP_APPLY(PP_TAIL ( __VA_ARGS__ )) )
+#define PP_ITERATE_4(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_3 ( m, d, PP_APPLY(PP_TAIL ( __VA_ARGS__ )) )
+#define PP_ITERATE_5(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_4 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_6(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_5 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_7(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_6 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_8(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_7 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_9(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_8 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_10(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_9 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_11(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_10 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_12(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_11 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_13(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_12 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_14(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_13 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_15(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_14 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_16(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_15 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_17(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_16 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_18(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_17 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_19(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_18 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_20(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_19 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_21(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_20 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_22(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_21 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_23(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_22 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_24(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_23 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_25(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_24 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_26(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_25 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_27(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_26 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_28(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_27 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_29(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_28 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_30(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_29 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_31(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_30 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
+#define PP_ITERATE_32(m, d, ...) m ( d , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) PP_ITERATE_31 ( m, d, PP_APPLY(PP_TAIL( __VA_ARGS__ )) )
 
 /*!
    \brief Basic iteration functional macro. Iterate elements with apply \a macro with \a data as first argument and arguments list elment as second argument. Maximum is PP_VA_MAXARGS arguments iterate.
@@ -261,7 +259,7 @@
    \param __VA_ARGS__ arguments to iterate
    \returns result of \a macro call on every arguments
 */
-#define PP_ITERATE(macro, data, ...) PP_VA_FUNC(PP_ITERATE, macro, data, __VA_ARGS__)
+#define PP_ITERATE(macro, data, ...) PP_APPLY(PP_CAT( PP_ITERATE_ , PP_VA_SIZE( __VA_ARGS__ )) ( macro, data, __VA_ARGS__ ))
 
 
 // ITERATION MODIFIERS
@@ -275,7 +273,7 @@
 #define PP_ITERATE_ITEM(data, item) item
 
 /*!
-   \brief Iteration modifier which returns data argument passed in PP_ITERATE. Use as default macro argument for PP_ITERATE.
+   \brief Iteration modifier which returns \a data argument passed in PP_ITERATE. Use as default macro argument for PP_ITERATE.
    \param data data passed in PP_ITERATE
    \param item iterable item
    \returns \a data
@@ -283,20 +281,28 @@
 #define PP_ITERATE_ITEM_DATA(data, item) data
 
 /*!
-   \brief Iteration modifier which returns list in parentheses argument passed in PP_ITERATE as data with appended item separated from comma. Use as default macro argument for PP_ITERATE.
-   \param list list in parentheses argument passed in PP_ITERATE as data
+   \brief Iteration modifier which returns comma leaded \a data argument passed in PP_ITERATE. Use as default macro argument for PP_ITERATE.
+   \param data data passed in PP_ITERATE
    \param item iterable item
-   \returns \a list with appended \a item
+   \returns comma leaded \a data
 */
-#define PP_ITERATE_ITEM_APPEND(list, item) PP_CAT_PAREN( list , item )
+#define PP_ITERATE_ITEM_DATA_COMMA(data, item) PP_COMMA data
 
 /*!
-   \brief Iteration modifier which returns list in parentheses argument passed in PP_ITERATE as data with prepended item separated from comma. Use as default macro argument for PP_ITERATE.
-   \param list list in parentheses argument passed in PP_ITERATE as data
+   \brief An iteration modifier that returns a comma-separated parenthesized list containing the item passed to PP_ITERATE as \a data appended to the \a item to iterate over. Use as default macro argument for PP_ITERATE.
+   \param data data passed in PP_ITERATE
    \param item iterable item
-   \returns \a list with prepended \a item
+   \returns parenthesized list from \a item with appended \a data
 */
-#define PP_ITERATE_ITEM_PREPEND(list, item) PP_CAT_PAREN( item , list )
+#define PP_ITERATE_ITEM_APPEND(data, item) PP_CAT_PAREN( item , data )
+
+/*!
+   \brief An iteration modifier that returns a comma-separated parenthesized list containing the item passed to PP_ITERATE as \a data prepended to the \a item to iterate over. Use as default macro argument for PP_ITERATE.
+   \param data data passed in PP_ITERATE
+   \param item iterable item
+   \returns parenthesized list from \a item with prepended \a data
+*/
+#define PP_ITERATE_ITEM_PREPEND(data, item) PP_CAT_PAREN( data , item )
 
 /*!
    \brief Iteration modifier used if data argument for PP_ITERATE is functional macro which accept one argument. Returning result of \a macro applied on \a item with expand parentheses before. Use as default macro argument for PP_ITERATE.
@@ -364,7 +370,7 @@
    \param __VA_ARGS__ arguments list
    \returns arguments list separated by \a separator
 */
-#define PP_SEPARATE_LIST(separator, ...) PP_INVOKE( PP_HEAD, (__VA_ARGS__)) PP_ITERATE( PP_ITERATE_ITEM_SEP , separator, PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) )
+#define PP_SEPARATE_LIST(separator, ...) PP_INVOKE( PP_HEAD, (__VA_ARGS__)) PP_ITERATE( PP_ITERATE_ITEM_SEP , separator, PP_INVOKE( PP_TAIL, (__VA_ARGS__) ) )
 
 /*!
    \brief A short record of applying a \a macro to each item in the argument list and separating arguments list with \a separator. Maximum iterate is PP_VA_MAXARGS arguments.
@@ -373,7 +379,7 @@
    \param __VA_ARGS__ arguments list
    \returns list separated by \a separator with results of apply \a macro on every item of arguments list
 */
-#define PP_SEPARATE_LIST_M(macro, separator, ... ) PP_INVOKE( macro , (PP_INVOKE( PP_HEAD, (__VA_ARGS__) ))) PP_ITERATE( PP_ITERATE_ITEM_MACRO , separator macro , PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) )
+#define PP_SEPARATE_LIST_M(macro, separator, ... ) PP_INVOKE( macro , (PP_INVOKE( PP_HEAD, (__VA_ARGS__) ))) PP_ITERATE( PP_ITERATE_ITEM_MACRO , separator macro , PP_INVOKE( PP_TAIL, (__VA_ARGS__) ) )
 
 /*!
    \brief Append \a item to all lists in arguments. Maximum lists count in arguments is PP_VA_MAXARGS.
@@ -381,7 +387,7 @@
    \param __VA_ARGS__ lists in parentheses
    \returns lists in parentheses with an \a item appended to each list
 */
-#define PP_APPEND_ALL(item, ... ) PP_INVOKE( PP_ITERATE , (PP_ITERATE_ITEM_APPEND, item , __VA_ARGS__) )
+#define PP_APPEND_ALL(item, ... ) PP_ITERATE(PP_ITERATE_ITEM_APPEND, item , __VA_ARGS__)
 
 /*!
    \brief Prepend \a item to all lists in arguments. Maximum lists count in arguments is PP_VA_MAXARGS.
@@ -389,7 +395,7 @@
    \param __VA_ARGS__ lists in parentheses
    \returns lists in parentheses with an \a item prepended to each list
 */
-#define PP_PREPEND_ALL(item, ... ) PP_INVOKE( PP_ITERATE , (PP_ITERATE_ITEM_PREPEND, item , __VA_ARGS__) )
+#define PP_PREPEND_ALL(item, ... ) PP_ITERATE(PP_ITERATE_ITEM_PREPEND, item , __VA_ARGS__)
 
 /*!
    \brief Apply \a macro to every item of arguments list. Maximum iterate is PP_VA_MAXARGS arguments.
@@ -397,7 +403,7 @@
    \param __VA_ARGS__ arguments list
    \returns list with commas of result apply \a macro on every item of arguments list
 */
-#define PP_MAP(macro, ...) PP_INVOKE( macro , (PP_INVOKE( PP_HEAD, (__VA_ARGS__) ))) PP_ITERATE( PP_ITERATE_ITEM_COMMA , macro, PP_INVOKE( PP_VA_TAIL, (__VA_ARGS__) ) )
+#define PP_MAP(macro, ...) PP_INVOKE( macro , (PP_INVOKE( PP_HEAD, (__VA_ARGS__) ))) PP_ITERATE( PP_ITERATE_ITEM_COMMA , macro, PP_INVOKE( PP_TAIL, (__VA_ARGS__) ) )
 
 /*!
    \brief Short alias for PP_SEPARATE_LIST_M. Applying a \a macro to each item in the argument list and separating arguments list with \a separator. Maximum iterate is PP_VA_MAXARGS arguments.
@@ -406,13 +412,13 @@
    \param __VA_ARGS__ arguments list
    \returns list separated by \a separator with results of apply \a macro on every item of arguments list
 */
-#define PP_MAP_SEP(macro, separator, ... )  PP_INVOKE( PP_SEPARATE_LIST_M, ( macro , separator, __VA_ARGS__ ) )
+#define PP_MAP_SEP(macro, separator, ... )  PP_SEPARATE_LIST_M( macro , separator, __VA_ARGS__ )
 
 #define PP_REPEAT_0
 #define PP_REPEAT_1
-#define PP_REPEAT_2(value, count) PP_INVOKE( macro , value ) PP_COMMA PP_ITERATE( PP_ITERATE_ITEM_DATA , PP_INVOKE( macro , ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_INVOKE( PP_VA_DECREMENT, ( count )) ) ) )
-#define PP_REPEAT_3(macro, value, count) PP_INVOKE( macro , value ) PP_COMMA PP_ITERATE( PP_ITERATE_ITEM_DATA , PP_INVOKE( macro , ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_INVOKE( PP_VA_DECREMENT, ( count )) ) ) )
-#define PP_REPEAT_4(macro, value, count, seporator) PP_INVOKE( macro , value ) seporator PP_ITERATE( PP_ITERATE_ITEM_DATA , separator PP_INVOKE( macro , ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_INVOKE( PP_VA_DECREMENT, ( count )) ) ) )
+#define PP_REPEAT_2(value, count) value PP_ITERATE( PP_ITERATE_ITEM_DATA_COMMA , value, PP_INVOKE( PP_VA_GEN_A_N, ( PP_VA_DECREMENT( count ) ) ) )
+#define PP_REPEAT_3(macro, value, count) PP_APPLY( macro ( value ) ) PP_ITERATE( PP_ITERATE_ITEM_DATA_COMMA , PP_INVOKE( macro, ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_VA_DECREMENT( count ) ) ) )
+#define PP_REPEAT_4(macro, value, count, separator) PP_APPLY( macro ( value ) ) PP_ITERATE( PP_ITERATE_ITEM_DATA , separator PP_INVOKE( macro, ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_VA_DECREMENT( count ) ) ) )
 /*!
    \brief Repeat some code or value passed in \a value \a count times with applying \a macro to every time and separate with \a separator. Maximum is PP_VA_MAXARGS times.
    \param macro [optional, if 3 agruments (macro, value, count)] functional macro take one argument - \a value
@@ -430,7 +436,7 @@
    \param __VA_ARGS__ arguments list
    \returns result of reduce arguments list from end
 */
-#define PP_FOLDR(macro, acc, ...) PP_ITERATE( PP_ITERATE_ITEM_FOLDR , macro , __VA_ARGS__ ) PP_COMMA acc PP_REPEAT( PP_INSERT_CLOSE_PAREN , _ ,  PP_VA_SIZE( __VA_ARGS__ ), ) ) )
+#define PP_FOLDR(macro, acc, ...) PP_ITERATE( PP_ITERATE_ITEM_FOLDR , macro , __VA_ARGS__ ) PP_COMMA acc PP_REPEAT ( PP_INSERT_CLOSE_PAREN , _ ,  PP_VA_SIZE( __VA_ARGS__ ), )
 
 /*!
    \brief Reduce arguments list from begin. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)

@@ -1,8 +1,5 @@
 #include "../src/functional.h"
 
-
-PP_INVOKE( m , ( d , PP_HEAD( 1, 2 ))) PP_ITERATE_3( m, d, PP_TAIL( 1, 2 ))
-
 PP_REC_EVAL(MACRO, 1, 2, 3)
 
 PP_HEAD(1, 2, 3) = 1
@@ -59,10 +56,11 @@ PP_LAST(1, 2, 3, 4, 5, 6) = 6
 
 PP_SWAP(1, 2, 3, 4) = 2, 1, 3, 4
 
-PP_ITERATE(PP_ITERATE_ITEM, ddd, 1, 2, 3) = 123
-PP_ITERATE(PP_ITERATE_ITEM_DATA, ddd, 1, 2, 3) = ddddddddd
-PP_ITERATE(PP_ITERATE_ITEM_APPEND, (a, b, c), 1, 2, 3) = (a, b, c, 1, 2, 3)
-PP_ITERATE(PP_ITERATE_ITEM_PREPEND, (a, b, c), 1, 2, 3) = (1, 2, 3, a, b, c)
+PP_ITERATE(PP_ITERATE_ITEM, ddd, 1, 2, 3) = 1 2 3
+PP_ITERATE(PP_ITERATE_ITEM_DATA, ddd, 1, 2, 3) = ddd ddd ddd
+PP_ITERATE(PP_ITERATE_ITEM_DATA, ddd, PP_VA_GEN_NUMLIST_MAX) = ddd ddd ddd
+PP_ITERATE(PP_ITERATE_ITEM_APPEND, 1, (a, b, c), (a, b, c), (a, b, c)) = (a, b, c, 1) (a, b, c, 1) (a, b, c, 1)
+PP_ITERATE(PP_ITERATE_ITEM_PREPEND, 1, (a, b, c), (a, b, c), (a, b, c)) = (1, a, b, c) (1, a, b, c) (1, a, b, c)
 PP_ITERATE(PP_ITERATE_ITEM_MACRO, MACRO, 1, 2, 3) = MACRO(1)MACRO(2)MACRO(3)
 PP_ITERATE(PP_ITERATE_ITEM_SEP, SEP, 1, 2, 3) = SEP 1 SEP 2 SEP 3
 PP_ITERATE(PP_ITERATE_ITEM_COMMA, MACRO, 1, 2, 3) = , MACRO(1) , MACRO(2) , MACRO(3)

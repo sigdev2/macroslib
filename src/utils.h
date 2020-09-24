@@ -87,13 +87,29 @@
 
 /*!
    \brief Concat two values in args with two parts:
-    - expansion of argument values, even if they are macros
+    - expansion of argument values, even if they are macros, because the preprocessor does not expand on its own for ##
     - call PP_CAT_A with ## operator
    \param x first value.
    \param y second value.
-   \returns Concat value of extended \a x and \a y args
+   \returns Concated value of extended \a x and \a y args
 */
 #define PP_CAT(x, y) PP_CAT_A(x, y)
+
+/*!
+   \brief Simple convert argument to string.
+   \param x value
+   \returns \a x value as string in double quotes 
+*/
+#define PP_STR_A(x) #x
+
+/*!
+   \brief Convert argument to string with two parts:
+    - expansion of argument values, even if they are macros, because the preprocessor does not expand on its own for #
+    - call PP_STR_A with # operator
+   \param x value
+   \returns Extended \a x value as string in double quotes 
+*/
+#define PP_STR(x) PP_STR_A(x)
 
 /*! 
    \brief Generate code uniq var name like ___some_value_<line_number>

@@ -239,7 +239,7 @@
    \param __VA_ARGS__ arguments list
    \returns size of arguments list
 */
-#define PP_VA_SIZE(...) PP_INVOKE(PP_CAT, (PP_VA_SIZE_, PP_VA_GET( __VA_ARGS__ , PP_VA_SIZE_CHOOSER, _) )) (,__VA_ARGS__)
+#define PP_VA_SIZE(...) PP_APPLY(PP_CAT(PP_VA_SIZE_, PP_VA_GET( __VA_ARGS__ , PP_VA_SIZE_CHOOSER, _)) (,__VA_ARGS__))
 
 
 // VA_GEN_NUMLIST VARIADIC
@@ -269,7 +269,7 @@
    \param __VA_ARGS__ arguments list
    \returns call functional macro
 */
-#define PP_VA_FUNC(name, ...) PP_INVOKE(PP_CAT( name##_ , PP_VA_SIZE(__VA_ARGS__)), (__VA_ARGS__))
+#define PP_VA_FUNC(name, ...) PP_APPLY(PP_CAT( PP_CAT( name , _ ) , PP_VA_SIZE( __VA_ARGS__ )) ( __VA_ARGS__ ))
 
 
 // VA_INCREMENT
