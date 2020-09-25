@@ -123,6 +123,8 @@
 
    \param __VA_ARGS__ arguments list.
    \returns head-head of arguments list.
+
+   to-do optimizate this
 */
 #define PP_CAAR( ... ) PP_CAR( PP_CAR( __VA_ARGS__ ) )
 #define PP_CADR( ... ) PP_CDR( PP_CAR( __VA_ARGS__ ) )
@@ -288,6 +290,13 @@
 */
 #define PP_ITERATE_ITEM_DATA_COMMA(data, item) PP_COMMA data
 
+
+#define PP_ITERATE_ITEM_DATA_PAIR(pair, item) PP_INVOKE( PP_CAR( pair ) , PP_CDR( pair ) )
+
+
+#define PP_ITERATE_ITEM_DATA_PAIR_COMMA(pair, item) PP_COMMA PP_INVOKE( PP_CAR( pair ) , PP_CDR( pair ) )
+
+
 /*!
    \brief An iteration modifier that returns a comma-separated parenthesized list containing the item passed to PP_ITERATE as \a data appended to the \a item to iterate over. Use as default macro argument for PP_ITERATE.
    \param data data passed in PP_ITERATE
@@ -417,8 +426,8 @@
 #define PP_REPEAT_0
 #define PP_REPEAT_1
 #define PP_REPEAT_2(value, count) value PP_ITERATE( PP_ITERATE_ITEM_DATA_COMMA , value, PP_INVOKE( PP_VA_GEN_A_N, ( PP_VA_DECREMENT( count ) ) ) )
-#define PP_REPEAT_3(macro, value, count) PP_APPLY( macro ( value ) ) PP_ITERATE( PP_ITERATE_ITEM_DATA_COMMA , PP_INVOKE( macro, ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_VA_DECREMENT( count ) ) ) )
-#define PP_REPEAT_4(macro, value, count, separator) PP_APPLY( macro ( value ) ) PP_ITERATE( PP_ITERATE_ITEM_DATA , separator PP_INVOKE( macro, ( value )), PP_INVOKE( PP_VA_GEN_A_N, ( PP_VA_DECREMENT( count ) ) ) )
+#define PP_REPEAT_3(macro, value, count) PP_APPLY( macro ( value ) ) PP_ITERATE( PP_ITERATE_ITEM_DATA_PAIR_COMMA , ( macro, value ), PP_INVOKE( PP_VA_GEN_A_N, ( PP_VA_DECREMENT( count ) ) ) )
+#define PP_REPEAT_4(macro, value, count, separator) PP_APPLY( macro ( value ) ) PP_ITERATE( PP_ITERATE_ITEM_DATA_PAIR , ( separator macro, value ), PP_INVOKE( PP_VA_GEN_A_N, ( PP_VA_DECREMENT( count ) ) ) )
 /*!
    \brief Repeat some code or value passed in \a value \a count times with applying \a macro to every time and separate with \a separator. Maximum is PP_VA_MAXARGS times.
    \param macro [optional, if 3 agruments (macro, value, count)] functional macro take one argument - \a value
