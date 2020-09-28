@@ -24,7 +24,7 @@ PP_CAADR(((1, 2, 3), 2, 3), 2, 3) = ( 2, 3 )
 PP_CADAR(((1, 2, 3), 2, 3), 2, 3) = 2
 PP_CDAAR(1, (1, 2, 3), 3) = 1
 PP_CADDR((1, 2, 3), 2, 3) = ( 3 )
-PP_CDDAR(1, 2, (1, 2, 3)) = 1
+PP_CDDAR(1, 2, (1, 2, 3)) = (1, 2, 3)
 PP_CDADR(1, (1, 2, 3), 3) = ( 2, 3 )
 PP_CDDDR(0, 1, 2, 3) = ( 3 )
 PP_CAAAAR((((1, 2, 3), 2, 3), 2, 3), 2, 3) = 1
@@ -38,11 +38,11 @@ PP_CADADR((1, (1, 2, 3), 3), 2, 3) = ( 2, 3 )
 PP_CDADAR(1, (1, 2, 3), 3) = 2
 PP_CADDAR((1, 2, 3), 2, 3) = 3
 PP_CDAADR(1, ((1, 2, 3), 2, 3), 3) = ( 2, 3 )
-PP_CDDAAR(1, 2, ((1, 2, 3), 2, 3)) = 1
+PP_CDDAAR(1, 2, ((1, 2, 3), 2, 3)) = (1, 2, 3)
 PP_CADDDR((1, 2, 3, 4), 2, 3) = ( 4 )
 PP_CDADDR(1, (1, 2, 3), 3) = ( 3 )
 PP_CDDADR(1, 2, ((1, 2, 3), 2, 3)) = ( 2, 3 )
-PP_CDDDAR(1, 2, 3, (1, 2, 3)) = 1
+PP_CDDDAR(1, 2, 3, (1, 2, 3)) = (1, 2, 3)
 
 PP_FIRST(1, 2, 3, 4) = 1
 PP_SECOND(1, 2, 3, 4) = 2
@@ -59,8 +59,8 @@ PP_SWAP(1, 2, 3, 4) = 2, 1, 3, 4
 PP_ITERATE(PP_ITERATE_ITEM, ddd, 1, 2, 3) = 1 2 3
 PP_ITERATE(PP_ITERATE_ITEM_DATA, ddd, 1, 2, 3) = ddd ddd ddd
 PP_ITERATE(PP_ITERATE_ITEM_DATA, ddd, PP_VA_GEN_NUMLIST_MAX) = ddd ddd ddd
-PP_ITERATE(PP_ITERATE_ITEM_APPEND, 1, (a, b, c), (a, b, c), (a, b, c)) = (a, b, c, 1) (a, b, c, 1) (a, b, c, 1)
-PP_ITERATE(PP_ITERATE_ITEM_PREPEND, 1, (a, b, c), (a, b, c), (a, b, c)) = (1, a, b, c) (1, a, b, c) (1, a, b, c)
+PP_ITERATE(PP_ITERATE_ITEM_APPEND, 1, (a, b, c), (a, b, c), (a, b, c)) = , (a, b, c, 1), (a, b, c, 1), (a, b, c, 1)
+PP_ITERATE(PP_ITERATE_ITEM_PREPEND, 1, (a, b, c), (a, b, c), (a, b, c)) = , (1, a, b, c), (1, a, b, c), (1, a, b, c)
 PP_ITERATE(PP_ITERATE_ITEM_MACRO, MACRO, 1, 2, 3) = MACRO(1)MACRO(2)MACRO(3)
 PP_ITERATE(PP_ITERATE_ITEM_SEP, SEP, 1, 2, 3) = SEP 1 SEP 2 SEP 3
 PP_ITERATE(PP_ITERATE_ITEM_COMMA, MACRO, 1, 2, 3) = , MACRO(1) , MACRO(2) , MACRO(3)
@@ -75,9 +75,9 @@ PP_SEPARATE_LIST(SEP, 1, 2, 3) = 1 SEP 2 SEP 3
 
 PP_SEPARATE_LIST_M(MACRO, SEP, 1, 2, 3) = MACRO(1) SEP MACRO(2) SEP MACRO(3)
 
-PP_APPEND_ALL(4, (1, 2, 3), (1, 2, 3), (1, 2, 3)) = (1, 2, 3, 4), (1, 2, 3, 4), (1, 2, 3, 4)
+PP_APPEND_ALL(4, (1, 2, 3), (1, 2, 3), (1, 2, 3)) = ((1, 2, 3, 4), (1, 2, 3, 4), (1, 2, 3, 4))
 
-PP_PREPEND_ALL(4, (1, 2, 3), (1, 2, 3), (1, 2, 3)) = (4, 1, 2, 3), (4, 1, 2, 3), (4, 1, 2, 3)
+PP_PREPEND_ALL(4, (1, 2, 3), (1, 2, 3), (1, 2, 3)) = ((4, 1, 2, 3), (4, 1, 2, 3), (4, 1, 2, 3))
 
 PP_MAP(MACRO, 1, 2, 3) = MACRO(1), MACRO(2), MACRO(3)
 

@@ -185,14 +185,14 @@
    \param arg argument for parentheses test
    \returns non-empty code or nothing
 */
-#define PP_IS_IN_PAREN(...) PP_INVOKE( PP_INVERSE_CHOOSE, (PP_CAT(PP_ , PP_INVOKE( PP_CHOOSE_FIRST, (PP_COMMA_WORD PP_REMOVE __VA_ARGS__ ()))), true, ))
+#define PP_IS_IN_PAREN(...) PP_INVOKE(PP_INVERSE_CHOOSE, (PP_CAT(PP_ , PP_CHOOSE_FIRST(PP_COMMA_WORD PP_REMOVE __VA_ARGS__ ())), true, ))
 
 /*!
    \brief Wraps the argument list with commas to parentheses. If \a __VA_ARGS__ already in parentheses then is returning not changed. Note this is not just parenthesis wrapping!
    \param __VA_ARGS__ arguments to wrap
    \returns list with commas in parentheses
 */
-#define PP_PAREN(...) PP_INVOKE(PP_APPLY, PP_INVOKE(PP_SKIP_OR_CHOOSE, (PP_APPLY(PP_INSERT_COMMA PP_IS_IN_PAREN(__VA_ARGS__) ()) ((__VA_ARGS__)), (__VA_ARGS__))))
+#define PP_PAREN(...) PP_INVOKE(PP_APPLY, PP_INVOKE(PP_SKIP_OR_CHOOSE, (PP_APPLY(PP_INSERT_COMMA PP_IS_IN_PAREN( __VA_ARGS__ ) ()) ((__VA_ARGS__)), (__VA_ARGS__))))
 
 /*!
    \brief Short entry for arguments skip testing.
@@ -223,7 +223,7 @@
    \param __VA_ARGS__ arguments in parentheses
    \returns list with commas without parentheses or nothing
 */
-#define PP_UNPAREN(...) PP_INVOKE( PP_APPLY, PP_PAREN(__VA_ARGS__))
+#define PP_UNPAREN(...) PP_INVOKE(PP_APPLY, PP_PAREN(__VA_ARGS__))
 
 /*!
    \brief Concatenate two lists with commas in parentheses
