@@ -62,6 +62,44 @@
 #define PP_TAIL( head , ... ) __VA_ARGS__
 
 /*!
+   \brief Return fisrt element of arguments list. PP_HEAD alias
+   \param head head of arguments list.
+   \param __VA_ARGS__ tail of arguments list.
+   \returns fisrt element of arguments list
+*/
+#define PP_FIRST( ... ) PP_HEAD( __VA_ARGS__ )
+
+/*!
+   \brief Return second element of arguments list. Is simplification of PP_CDAR.
+   \param f first element of arguments list
+   \param s second element of arguments list
+   \param __VA_ARGS__ tail of arguments list.
+   \returns second element of arguments list
+*/
+#define PP_SECOND(f, s, ... ) s
+
+/*!
+   \brief Return third element of arguments list. Is simplification of PP_CDDAR.
+   \param f first element of arguments list
+   \param s second element of arguments list
+   \param t third element of arguments list
+   \param __VA_ARGS__ tail of arguments list.
+   \returns third element of arguments list
+*/
+#define PP_THIRD(f, s, t, ... ) t
+
+/*!
+   \brief Return fourth element of arguments list. Is simplification of PP_CDDDAR.
+   \param f first element of arguments list
+   \param s second element of arguments list
+   \param t third element of arguments list
+   \param fh fourth element of arguments list
+   \param __VA_ARGS__ tail of arguments list.
+   \returns fourth element of arguments list
+*/
+#define PP_FOURTH(f, s, t, fh, ... ) fh
+
+/*!
    \brief Return head of list in parentheses or not
    \param __VA_ARGS__ list
    \returns head of list
@@ -123,75 +161,35 @@
 
    \param __VA_ARGS__ arguments list.
    \returns head-head of arguments list.
-
-   to-do optimizate this
 */
 #define PP_CAAR( ... ) PP_CAR( PP_CAR( __VA_ARGS__ ) )
 #define PP_CADR( ... ) PP_CDR( PP_CAR( __VA_ARGS__ ) )
-#define PP_CDAR( ... ) PP_CAR( PP_CDR( __VA_ARGS__ ) )
-#define PP_CDDR( ... ) PP_CDR( PP_CDR( __VA_ARGS__ ) )
+#define PP_CDAR( ... ) PP_INVOKE( PP_SECOND, PP_PAREN( __VA_ARGS__ ) )
+#define PP_CDDR( ... ) ( PP_INVOKE( PP_TAIL, PP_CDR( __VA_ARGS__ ) ) )
 #define PP_CAAAR( ... ) PP_CAR( PP_CAAR( __VA_ARGS__ ) )
 #define PP_CAADR( ... ) PP_CDR( PP_CAAR( __VA_ARGS__ ) )
-#define PP_CADAR( ... ) PP_CAR( PP_CADR( __VA_ARGS__ ) )
+#define PP_CADAR( ... ) PP_INVOKE( PP_HEAD, PP_CADR( __VA_ARGS__ ) )
 #define PP_CDAAR( ... ) PP_CAR( PP_CDAR( __VA_ARGS__ ) )
-#define PP_CADDR( ... ) PP_CDR( PP_CADR( __VA_ARGS__ ) )
-#define PP_CDDAR( ... ) PP_CAR( PP_CDDR( __VA_ARGS__ ) )
+#define PP_CADDR( ... ) ( PP_INVOKE( PP_TAIL, PP_CADR( __VA_ARGS__ ) ) )
+#define PP_CDDAR( ... ) PP_INVOKE( PP_THIRD, PP_PAREN( __VA_ARGS__ ) )
 #define PP_CDADR( ... ) PP_CDR( PP_CDAR( __VA_ARGS__ ) )
-#define PP_CDDDR( ... ) PP_CDR( PP_CDDR( __VA_ARGS__ ) )
+#define PP_CDDDR( ... ) ( PP_INVOKE( PP_TAIL, PP_CDDR( __VA_ARGS__ ) ) )
 #define PP_CAAAAR( ... ) PP_CAR( PP_CAAAR( __VA_ARGS__ ) )
-#define PP_CDDDDR( ... ) PP_CDR( PP_CDDDR( __VA_ARGS__ ) )
+#define PP_CDDDDR( ... ) ( PP_INVOKE( PP_TAIL, PP_CDDDR( __VA_ARGS__ ) ) )
 #define PP_CAAADR( ... ) PP_CDR( PP_CAAAR( __VA_ARGS__ ) )
-#define PP_CAADAR( ... ) PP_CAR( PP_CAADR( __VA_ARGS__ ) )
+#define PP_CAADAR( ... ) PP_INVOKE( PP_HEAD, PP_CAADR( __VA_ARGS__ ) )
 #define PP_CADAAR( ... ) PP_CAR( PP_CADAR( __VA_ARGS__ ) )
 #define PP_CDAAAR( ... ) PP_CAR( PP_CDAAR( __VA_ARGS__ ) )
-#define PP_CAADDR( ... ) PP_CDR( PP_CAADR( __VA_ARGS__ ) )
+#define PP_CAADDR( ... ) ( PP_INVOKE( PP_TAIL, PP_CAADR( __VA_ARGS__ ) ) )
 #define PP_CADADR( ... ) PP_CDR( PP_CADAR( __VA_ARGS__ ) )
-#define PP_CDADAR( ... ) PP_CAR( PP_CDADR( __VA_ARGS__ ) )
-#define PP_CADDAR( ... ) PP_CAR( PP_CADDR( __VA_ARGS__ ) )
+#define PP_CDADAR( ... ) PP_INVOKE( PP_HEAD, PP_CDADR( __VA_ARGS__ ) )
+#define PP_CADDAR( ... ) PP_INVOKE( PP_HEAD, PP_CADDR( __VA_ARGS__ ) )
 #define PP_CDAADR( ... ) PP_CDR( PP_CDAAR( __VA_ARGS__ ) )
 #define PP_CDDAAR( ... ) PP_CAR( PP_CDDAR( __VA_ARGS__ ) )
-#define PP_CADDDR( ... ) PP_CDR( PP_CADDR( __VA_ARGS__ ) )
-#define PP_CDADDR( ... ) PP_CDR( PP_CDADR( __VA_ARGS__ ) )
+#define PP_CADDDR( ... ) ( PP_INVOKE( PP_TAIL, PP_CADDR( __VA_ARGS__ ) ) )
+#define PP_CDADDR( ... ) ( PP_INVOKE( PP_TAIL, PP_CDADR( __VA_ARGS__ ) ) )
 #define PP_CDDADR( ... ) PP_CDR( PP_CDDAR( __VA_ARGS__ ) )
-#define PP_CDDDAR( ... ) PP_CAR( PP_CDDDR( __VA_ARGS__ ) )
-
-/*!
-   \brief Return fisrt element of arguments list. PP_HEAD alias
-   \param head head of arguments list.
-   \param __VA_ARGS__ tail of arguments list.
-   \returns fisrt element of arguments list
-*/
-#define PP_FIRST( ... ) PP_HEAD( __VA_ARGS__ )
-
-/*!
-   \brief Return second element of arguments list. Is simplification of PP_CDAR.
-   \param f first element of arguments list
-   \param s second element of arguments list
-   \param __VA_ARGS__ tail of arguments list.
-   \returns second element of arguments list
-*/
-#define PP_SECOND(f, s, ... ) s
-
-/*!
-   \brief Return third element of arguments list. Is simplification of PP_CDDAR.
-   \param f first element of arguments list
-   \param s second element of arguments list
-   \param t third element of arguments list
-   \param __VA_ARGS__ tail of arguments list.
-   \returns third element of arguments list
-*/
-#define PP_THIRD(f, s, t, ... ) t
-
-/*!
-   \brief Return fourth element of arguments list. Is simplification of PP_CDDDAR.
-   \param f first element of arguments list
-   \param s second element of arguments list
-   \param t third element of arguments list
-   \param fh fourth element of arguments list
-   \param __VA_ARGS__ tail of arguments list.
-   \returns fourth element of arguments list
-*/
-#define PP_FOURTH(f, s, t, fh, ... ) fh
+#define PP_CDDDAR( ... ) PP_INVOKE( PP_FOURTH, PP_PAREN( __VA_ARGS__ ) )
 
 /*!
    \brief Return element of arguments list by \a position. Arguments list size must be not greater than PP_VA_MAXARGS
