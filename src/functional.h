@@ -352,7 +352,7 @@
    \param item iterable item
    \returns the name of the function macro with an open parenthesis before the \a item
 */
-#define PP_ITERATE_ITEM_FOLDR(fn, item) fn PP_OPEN_PAREN item
+#define PP_ITERATE_ITEM_FOLDR(fn, item) PP_OPEN_FUNC(fn) item PP_COMMA
 
 /*!
    \brief Iteration modifier which returns close parenthesis with comma before the \a item. Used for reduce realization. Use as default macro argument for PP_ITERATE.
@@ -363,7 +363,7 @@
 #define PP_ITERATE_ITEM_FOLDL(data, item) PP_COMMA item PP_CLOSE_PAREN
 
 
-// MAP-REDUCE
+// MAP
 
 /*!
    \brief Strip commas of arguments list. Maximum iterate is PP_VA_MAXARGS arguments.
@@ -447,32 +447,144 @@
 */
 #define PP_REPEAT(...)  PP_VA_FUNC(PP_REPEAT, __VA_ARGS__)
 
+
+// REDUCE
+
+#define PP_REDUCE_0(m, d, ...)
+#define PP_REDUCE_1(m, d, ...) PP_APPLY(PP_HEAD ( __VA_ARGS__ ))
+#define PP_REDUCE_2(m, d, ...) PP_REDUCE_1( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_3(m, d, ...) PP_REDUCE_2( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_4(m, d, ...) PP_REDUCE_3( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_5(m, d, ...) PP_REDUCE_4( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_6(m, d, ...) PP_REDUCE_5( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_7(m, d, ...) PP_REDUCE_6( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_8(m, d, ...) PP_REDUCE_7( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_9(m, d, ...) PP_REDUCE_8( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_10(m, d, ...) PP_REDUCE_9( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_11(m, d, ...) PP_REDUCE_10( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_12(m, d, ...) PP_REDUCE_11( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_13(m, d, ...) PP_REDUCE_12( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_14(m, d, ...) PP_REDUCE_13( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_15(m, d, ...) PP_REDUCE_14( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_16(m, d, ...) PP_REDUCE_15( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_17(m, d, ...) PP_REDUCE_16( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_18(m, d, ...) PP_REDUCE_17( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_19(m, d, ...) PP_REDUCE_18( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_20(m, d, ...) PP_REDUCE_19( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_21(m, d, ...) PP_REDUCE_20( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_22(m, d, ...) PP_REDUCE_21( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_23(m, d, ...) PP_REDUCE_22( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_24(m, d, ...) PP_REDUCE_23( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_25(m, d, ...) PP_REDUCE_24( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_26(m, d, ...) PP_REDUCE_25( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_27(m, d, ...) PP_REDUCE_26( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_28(m, d, ...) PP_REDUCE_27( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_29(m, d, ...) PP_REDUCE_28( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_30(m, d, ...) PP_REDUCE_29( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_31(m, d, ...) PP_REDUCE_30( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_32(m, d, ...) PP_REDUCE_31( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+#define PP_REDUCE_33(m, d, ...) PP_REDUCE_32( m, d, PP_APPLY(m ( d, __VA_ARGS__ )))
+/*!
+   \brief Reduce arguments list with functional \a macro accept \a data, \a accumulator and list of arguments.
+   Result of macro is pushed as accumulator and arguments list to next iteration. Maximum recursion is PP_VA_MAXARGS arguments.
+   \param macro functional macro, accept \a data, \a accumulator and list of arguments
+   \param data data used as first argument of \a macro
+   \param accomulator initial accumulator
+   \param __VA_ARGS__ arguments list
+   \returns result of reduce arguments list from begin
+*/
+#define PP_REDUCE(macro, data, accomulator, ...) PP_APPLY(PP_CAT( PP_REDUCE_ , PP_VA_SIZE( accomulator , __VA_ARGS__ )) ( macro , data , accomulator , __VA_ARGS__ ))
+
+#define PP_RREDUCE_0(m, d, ...)
+#define PP_RREDUCE_1(m, d, ...) __VA_ARGS__
+#define PP_RREDUCE_2(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_1( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_3(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_2( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_4(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_3( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_5(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_4( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_6(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_5( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_7(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_6( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_8(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_7( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_9(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_8( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_10(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_9( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_11(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_10( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_12(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_11( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_13(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_12( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_14(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_13( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_15(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_14( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_16(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_15( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_17(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_16( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_18(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_17( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_19(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_18( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_20(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_19( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_21(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_20( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_22(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_21( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_23(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_22( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_24(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_23( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_25(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_24( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_26(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_25( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_27(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_26( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_28(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_27( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_29(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_28( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_30(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_29( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_31(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_30( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_32(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_31( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+#define PP_RREDUCE_33(m, d, ...) m (d, PP_APPLY(PP_HEAD (__VA_ARGS__)), PP_RREDUCE_32( m, d, PP_APPLY(PP_TAIL (__VA_ARGS__))))
+/*!
+   \brief Reverse reduce arguments list with functional \a macro accept \a data, list of arguments and accumulator at the end.
+   Each next iteration is pushed as third argument to previous macros call when head of list is second angument. Maximum recursion is PP_VA_MAXARGS arguments.
+   \param macro functional macro, accept \a data, list of arguments and accumulator at the end.
+   \param data data used as first argument of \a macro
+   \param __VA_ARGS__ arguments list and accumulator at the end.
+   \returns result of reduce arguments list from end
+*/
+#define PP_RREDUCE(macro, data, ...) PP_APPLY(PP_CAT( PP_RREDUCE_ , PP_VA_SIZE( __VA_ARGS__ )) ( macro , data , __VA_ARGS__ ))
+
+/*!
+   \brief Reduce modifier used as \a macro for PP_REDUCE when data argument is functional \a macro, binary operator witch accept two arguments - first accumulator and second arguments list first item.
+   Maximum is PP_VA_MAXARGS arguments for fold. Use as default macro argument for PP_REDUCE.
+   \param macro functional \a macro, binary operator witch accept two arguments - first accumulator and second arguments list item
+   \param acc reduce accumulator
+   \param __VA_ARGS__ arguments list
+   \returns result of \a macro applied on \a acc and first item of arguments comma separated with tail of arguments list
+*/
+#define PP_REDUCE_FOLDL(macro, acc, ...) PP_APPLY(macro (acc, PP_APPLY(PP_HEAD ( __VA_ARGS__ )))) PP_COMMA PP_APPLY(PP_TAIL ( __VA_ARGS__ ))
+
+/*!
+   \brief Reduce modifier used as \a macro for PP_REDUCE when data argument is list of functional \a macro accept list of arguments in \a acc.
+   Maximum is PP_VA_MAXARGS arguments for fold. Use as default macro argument for PP_REDUCE.
+   \param macro functional \a macro, binary operator witch accept two arguments - first accumulator and second arguments list item
+   \param acc reduce accumulator
+   \param __VA_ARGS__ arguments list
+   \returns result of \a macro applied on \a acc and first item of arguments comma separated with tail of arguments list
+*/
+#define PP_REDUCE_COMPOSE(miss, acc, ...) PP_APPLY(PP_APPLY(PP_HEAD ( __VA_ARGS__ )) (PP_UNPAREN(acc))) PP_COMMA PP_APPLY(PP_TAIL ( __VA_ARGS__ ))
+
+/*!
+   \brief Reverse reduce modifier used as \a macro for PP_RREDUCE when data argument is functional \a macro, binary operator witch accept two arguments - first is first item of arguments list and second accumulator.
+   Maximum is PP_VA_MAXARGS arguments for fold. Use as default macro argument for PP_RREDUCE.
+   \param macro functional \a macro, binary operator witch accept two arguments - first is first item of arguments list and second accumulator
+   \param __VA_ARGS__ arguments list and last reduce accumulator
+   \returns result of \a macro applied on arguments
+*/
+#define PP_RREDUCE_FOLDR(macro, ...) macro ( __VA_ARGS__ )
+
+/*!
+   \brief Reduce arguments list from begin. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)
+   \param macro functional \a macro, binary operator witch accept two arguments - first accumulator and second arguments list item
+   \param acc initial accumulator
+   \param __VA_ARGS__ arguments list
+   \returns result of reduce arguments list from begin
+*/
+#define PP_FOLDL(macro, acc, ...) PP_REDUCE( PP_REDUCE_FOLDL, macro , acc, __VA_ARGS__)
+
 /*!
    \brief Reduce arguments list from end. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDL( m, acc, a, b, c )  >>>  m( a, m( b, m( c, acc ) ) )
-   \param macro functional macro, binary operator witch take two arguments - accumulator and arguments list item
+   \param macro functional \a macro, binary operator witch accept two arguments - first is first item of arguments list and second accumulator
    \param acc initial accumulator
    \param __VA_ARGS__ arguments list
    \returns result of reduce arguments list from end
 */
-#define PP_FOLDR(macro, acc, ...) PP_ITERATE( PP_ITERATE_ITEM_FOLDR , macro , __VA_ARGS__ ) PP_COMMA acc PP_REPEAT( PP_INSERT_CLOSE_PAREN , _ ,  PP_VA_SIZE( __VA_ARGS__ ), )
-
-/*!
-   \brief Reduce arguments list from begin. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)
-   \param macro functional macro, binary operator witch take two arguments - accumulator and arguments list item
-   \param acc initial accumulator
-   \param __VA_ARGS__ arguments list
-   \returns result of reduce arguments list from begin
-*/
-#define PP_FOLDL(macro, acc, ...) PP_REPEAT( PP_OPEN_FUNC , macro , PP_VA_SIZE( __VA_ARGS__ ), ) acc PP_ITERATE( PP_ITERATE_ITEM_FOLDL , _ , __VA_ARGS__ )
-
-/*!
-   \brief Reduce arguments list from begin. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)
-   \param macro functional macro, binary operator witch take two arguments - accumulator and arguments list item
-   \param acc initial accumulator
-   \param __VA_ARGS__ arguments list
-   \returns result of reduce arguments list from begin
-*/
-#define PP_REDUCE(macro, acc, ...) PP_FOLDL(macro, acc, __VA_ARGS__)
+#define PP_FOLDR(macro, acc, ...) PP_RREDUCE( PP_RREDUCE_FOLDR, macro , __VA_ARGS__, acc )
 
 /*!
    \brief Compose applying functional macros. Maximum count PP_VA_MAXARGS functional macros names. Example: a( b( c( \a args ) ) )
@@ -480,7 +592,7 @@
    \param __VA_ARGS__ list of functional macros names
    \returns result of compose applying functional macrols on \a args
 */
-#define PP_COMPOSE(args, ...) PP_ITERATE( PP_ITERATE_ITEM_MACRO, PP_OPEN_FUNC , __VA_ARGS__ ) PP_UNPAREN( args ) PP_REPEAT( PP_INSERT_CLOSE_PAREN , _ ,  PP_VA_SIZE( __VA_ARGS__ ), )
+#define PP_COMPOSE(args, ...) PP_REDUCE( PP_REDUCE_COMPOSE , , args, __VA_ARGS__)
 
 /*!
    \brief Compose applying functional macros to every \a list elements. Maximum count of arguments \a list and functional macros names list is PP_VA_MAXARGS. Example: m1( m2( m3( a ) ) ), m1( m2( m3( b ) ) ), m1( m2( m3( c ) ) )
@@ -488,14 +600,14 @@
    \param __VA_ARGS__ list of functional macros
    \returns list with commas results of compose applying functional macros to every list elements
 */
-#define PP_COMPOSE_MAP(list, ...) PP_ITERATE( PP_ITERATE_ITEM_MACRO, PP_COMPOSE, PP_UNPAREN(PP_APPEND_ALL( ( __VA_ARGS__ ) , PP_UNPAREN( list ) ) ) )
+#define PP_COMPOSE_MAP(list, ...) PP_APPLY(PP_MAP ( PP_COMPOSE, PP_UNPAREN(PP_APPEND_ALL( ( __VA_ARGS__ ) , PP_UNPAREN( list ) ) ) ) )
 
 /*!
    \brief Reverse arguments list. Maximum size of arguments is PP_VA_MAXARGS.
    \param __VA_ARGS__ arguments list
    \returns arguments list in reversed order
 */
-#define PP_REVERSE(...) PP_INVOKE( PP_FOLDR, (PP_SWAP, PP_HEAD( __VA_ARGS__ ), PP_TAIL( __VA_ARGS__ )) )
+#define PP_REVERSE(...) PP_FOLDR(PP_SWAP, __VA_ARGS__ )
 
 /*!
    \brief Binary opreator for store tails list in accumulator when used in reduce. Used in PP_TAILS
@@ -525,7 +637,7 @@
    \param __VA_ARGS__ arguments list of lists in parentheses 
    \returns heads of each list in parentheses in arguments
 */
-#define PP_LISTS_HEADS( ... ) PP_MAP(PP_HEAD_PAREN, __VA_ARGS__)
+#define PP_LISTS_HEADS( ... ) ( PP_MAP(PP_HEAD_PAREN, __VA_ARGS__) )
 
 /*!
    \brief Binary opreator for store piars with elements of two lists in accumulator when used in reduce. Used in PP_ZIP

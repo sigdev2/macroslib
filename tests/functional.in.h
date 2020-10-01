@@ -87,15 +87,14 @@ PP_REPEAT(1, 5) = 1, 1, 1, 1, 1
 PP_REPEAT(MACRO, 1, 5) = MACRO(1), MACRO(1), MACRO(1), MACRO(1), MACRO(1)
 PP_REPEAT(MACRO, 1, 5, SEP) = MACRO(1) SEP MACRO(1) SEP MACRO(1) SEP MACRO(1) SEP MACRO(1)
 
-PP_FOLDR(MACRO, 123, a, b, c) = MACRO( a, MACRO( b, MACRO( c, 123 ) ) )
 PP_FOLDL(MACRO, 123, a, b, c) = MACRO( MACRO( MACRO( 123, a), b), c)
-PP_REDUCE(MACRO, 123, a, b, c) = MACRO( MACRO( MACRO( 123, a), b), c)
+PP_FOLDR(MACRO, 123, a, b, c) = MACRO( a, MACRO( b, MACRO( c, 123 ) ) )
 
 PP_COMPOSE((1, 2, 3), MACRO1, MACRO2, MCARO3) = MACRO1(MACRO2(MACRO3(1, 2, 3)))
 
 PP_COMPOSE_MAP((1, 2, 3), MACRO1, MACRO2, MCARO3) = MACRO1(MACRO2(MACRO3(1))), MACRO1(MACRO2(MACRO3(2))), MACRO1(MACRO2(MACRO3(3)))
 
-PP_REVERSE(1, 2, 3) = 3, 2, 1
+/* PP_REVERSE(1, 2, 3) = 3, 2, 1
 
 PP_TAILS((1, 2, 3), (1, 2, 3), (1, 2, 3)) = (2, 3), (2, 3), (2, 3)
 
@@ -109,4 +108,4 @@ PP_MASS_APPEND(((1, 2, 3), (1, 2, 3), (1, 2, 3)), 4, 4, 4) = (1, 2, 3, 4), (1, 2
 
 PP_MASS_PREPEND(((1, 2, 3), (1, 2, 3), (1, 2, 3)), 4, 4, 4) = (4, 1, 2, 3), (4, 1, 2, 3), (4, 1, 2, 3)
 
-PP_UNZIP((1, 1), (2, 2), (3, 3)) (1, 2, 3), (1, 2, 3)
+PP_UNZIP((1, 1), (2, 2), (3, 3)) (1, 2, 3), (1, 2, 3)*/
