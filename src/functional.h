@@ -395,7 +395,7 @@
    \param __VA_ARGS__ arguments list
    \returns list separated by \a separator with results of apply \a macro on every item of arguments list
 */
-#define PP_SEPARATE_LIST_M(macro, separator, ... ) PP_APPLY( macro (PP_APPLY( PP_HEAD (__VA_ARGS__) ))) PP_ITERATE( PP_ITERATE_ITEM_MACRO , separator macro , PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
+#define PP_SEPARATE_LIST_M(macro, separator, ... ) PP_APPLY( macro ( PP_UNPAREN( PP_APPLY( PP_HEAD (__VA_ARGS__) ) ))) PP_ITERATE( PP_ITERATE_ITEM_MACRO , separator macro , PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
 
 /*!
    \brief Append \a item to all lists in arguments. Maximum lists count in arguments is PP_VA_MAXARGS.
@@ -419,7 +419,7 @@
    \param __VA_ARGS__ arguments list
    \returns list with commas of result apply \a macro on every item of arguments list
 */
-#define PP_MAP(macro, ...) PP_APPLY( macro (PP_APPLY( PP_HEAD (__VA_ARGS__) ))) PP_ITERATE( PP_ITERATE_ITEM_COMMA , macro, PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
+#define PP_MAP(macro, ...) PP_APPLY( macro ( PP_UNPAREN( PP_APPLY( PP_HEAD (__VA_ARGS__) ) ))) PP_ITERATE( PP_ITERATE_ITEM_COMMA , macro, PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
 
 /*!
    \brief Short alias for PP_SEPARATE_LIST_M. Applying a \a macro to each item in the argument list and separating arguments list with \a separator. Maximum iterate is PP_VA_MAXARGS arguments.
@@ -600,7 +600,7 @@
    \param __VA_ARGS__ list of functional macros
    \returns list with commas results of compose applying functional macros to every list elements
 */
-#define PP_COMPOSE_MAP(list, ...) PP_APPLY(PP_MAP ( PP_COMPOSE, PP_UNPAREN(PP_APPEND_ALL( ( __VA_ARGS__ ) , PP_UNPAREN( list ) ) ) ) )
+#define PP_COMPOSE_MAP(list, ...) PP_APPLY(PP_MAP ( PP_COMPOSE, PP_APPEND_ALL( ( __VA_ARGS__ ) , PP_UNPAREN( list ) ) ) )
 
 /*!
    \brief Reverse arguments list. Maximum size of arguments is PP_VA_MAXARGS.
