@@ -197,16 +197,6 @@
 #define PP_VA_GEN_RNUMLIST_MAX PP_CAT( PP_VA_GEN_RNUMLIST_ , PP_VA_MAXARGS )
 
 
-// VA_INVERT
-
-/*!
-   \brief Invert number relatively PP_VA_MAXARGS. Result is PP_VA_MAXARGS + 1 - \a NUM
-   \param NUM numeric value from 1 to PP_VA_MAXARGS
-   \returns inverted \a NUM according to the formula PP_VA_MAXARGS + 1 - \a NUM
-*/
-#define PP_VA_INVERT(NUM) PP_INVOKE(PP_VA_GET_A, (PP_VA_GEN_NUMLIST_N( NUM ) , PP_VA_GEN_NUMLIST_N( PP_VA_MAXARGS )))
-
-
 // VA_GET
 
 /*!
@@ -214,7 +204,7 @@
    \param __VA_ARGS__ minimum PP_VA_MAXARGS + 1 arguments list size
    \returns argument with position PP_VA_MAXARGS + 1
 */
-#define PP_VA_GET(...) PP_INVOKE( PP_VA_GET_A, (__VA_ARGS__) )
+#define PP_VA_GET(...) PP_APPLY( PP_VA_GET_A (__VA_ARGS__) )
 
 /*!
    \brief Take choose with \a NUM position from end of chooses list.
@@ -225,14 +215,23 @@
 #define PP_VA_GET_N(NUM, ...) PP_VA_GET(PP_VA_GEN_NUMLIST_N(PP_VA_INVERT( NUM )), __VA_ARGS__)
 
 
+// VA_INVERT
+
+/*!
+   \brief Invert number relatively PP_VA_MAXARGS. Result is PP_VA_MAXARGS + 1 - \a NUM
+   \param NUM numeric value from 1 to PP_VA_MAXARGS
+   \returns inverted \a NUM according to the formula PP_VA_MAXARGS + 1 - \a NUM
+*/
+#define PP_VA_INVERT(NUM) PP_VA_GET(PP_VA_GEN_NUMLIST_N( NUM ) , PP_VA_GEN_NUMLIST_N( PP_VA_MAXARGS ))
+
+
 // VA_SIZE
 
-#define PP_VA_SPEC_A(...)
 #define PP_VA_SPEC_B(x) PP_CAT(PP_VA_SPEC_, x) ()
 #define PP_VA_SPEC_N0() PP_VA_GEN_NUMLIST_MAX
 
 #define PP_VA_SIZE_1N(_,...) PP_VA_GET( __VA_ARGS__, PP_VA_GEN_RNUMLIST_MAX )
-#define PP_VA_SIZE_01(_,x) PP_VA_GET( PP_INVOKE( PP_VA_SPEC_B, PP_INVOKE(PP_VA_SPEC_A, x (N1)) (N0)), PP_VA_SIZE_ZERO_FIRST, __)
+#define PP_VA_SIZE_01(_,x) PP_VA_GET( PP_APPLY( PP_VA_SPEC_B PP_REMOVE_INVOKE(x (N1)) (N0) ), PP_VA_SIZE_ZERO_FIRST, __)
 
 /*!
    \brief Return size of arguments list with maximum size is PP_VA_MAXARGS
@@ -308,7 +307,7 @@
    \param __VA_ARGS__ arguments list
    \returns list of numeric postfixes with commas
 */
-#define PP_VA_GEN_A(...) PP_INVOKE(PP_VA_GEN_A_N, (PP_VA_SIZE( __VA_ARGS__ )))
+#define PP_VA_GEN_A(...) PP_APPLY(PP_VA_GEN_A_N (PP_VA_SIZE( __VA_ARGS__ )))
 
 
 // VA_OPT
