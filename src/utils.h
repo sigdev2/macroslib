@@ -93,6 +93,13 @@
 #define PP_INVOKE(x, y) PP_APPLY(x y)
 
 /*!
+   \brief Call PP_APPLY macro on argument. Used to apply PP_APPLY macro with avoid recursion with PP_INVOKE
+   \param y macro arguments in parentheses.
+   \returns code with expanded macro PP_APPLY with \a y as arguments.
+*/
+#define PP_INVOKE_APPLY(y) PP_APPLY(PP_APPLY y)
+
+/*!
    \brief Simple concat two values in args with ## operator.
    \param x first value.
    \param y second value.
@@ -112,11 +119,10 @@
 
 /*!
    \brief Invoke PP_CAT with expand arguments. Used to avoid recursion with PP_INVOKE
-   \param x first value.
-   \param y second value.
-   \returns Concated value of extended \a x and \a y args
+   \param y macro arguments in parentheses.
+   \returns code with expanded macro PP_CAT with \a y as arguments.
 */
-#define PP_CAT_INVOKE(x, y) PP_APPLY(PP_CAT (x, y))
+#define PP_CAT_INVOKE(y) PP_APPLY(PP_CAT y)
 
 /*!
    \brief Simple convert argument to string.
@@ -147,6 +153,12 @@
 */
 #define PP_REMOVE(...)
 
+/*!
+   \brief Invoke PP_REMOVE with expand arguments. Used to avoid recursion with PP_INVOKE
+   \param y macro arguments in parentheses.
+   \returns code with expanded macro PP_REMOVE with \a y as arguments.
+*/
+#define PP_REMOVE_INVOKE(y) PP_APPLY(PP_REMOVE y)
 
 // CHOOSERS
 
@@ -160,12 +172,26 @@
 #define PP_SKIP_OR_CHOOSE(skip, choose, ...) choose
 
 /*!
+   \brief Invoke PP_SKIP_OR_CHOOSE with expand arguments. Used to avoid recursion with PP_INVOKE
+   \param y macro arguments in parentheses.
+   \returns code with expanded macro PP_SKIP_OR_CHOOSE with \a y as arguments.
+*/
+#define PP_SKIP_OR_CHOOSE_INVOKE(y) PP_APPLY(PP_SKIP_OR_CHOOSE y)
+
+/*!
    \brief Choose last arguments by \a skip first argument use manipulations with commas.
    \param skip argument for skip
    \param __VA_ARGS__ returned choose
    \returns last choosed arguments
 */
 #define PP_SKIP_OR_ALL(skip, ...) __VA_ARGS__
+
+/*!
+   \brief Invoke PP_SKIP_OR_ALL with expand arguments. Used to avoid recursion with PP_INVOKE
+   \param y macro arguments in parentheses.
+   \returns code with expanded macro PP_SKIP_OR_ALL with \a y as arguments.
+*/
+#define PP_SKIP_OR_ALL_INVOKE(y) PP_APPLY(PP_SKIP_OR_ALL y)
 
 /*!
    \brief Choose third argument by skip first and second arguments use manipulations with commas. Use for inverse chooses
@@ -178,12 +204,26 @@
 #define PP_INVERSE_CHOOSE(_1, _2, choose, ...) choose
 
 /*!
+   \brief Invoke PP_INVERSE_CHOOSE with expand arguments. Used to avoid recursion with PP_INVOKE
+   \param y macro arguments in parentheses.
+   \returns code with expanded macro PP_INVERSE_CHOOSE with \a y as arguments.
+*/
+#define PP_INVERSE_CHOOSE_INVOKE(y) PP_APPLY(PP_INVERSE_CHOOSE y)
+
+/*!
    \brief Choose first argument and skip other.
    \param choose returned choose
    \param _VA_ARGS__ arguments for skip
    \returns choose argument
 */
 #define PP_CHOOSE_FIRST(choose, ...) choose
+
+/*!
+   \brief Invoke PP_CHOOSE_FIRST with expand arguments. Used to avoid recursion with PP_INVOKE
+   \param y macro arguments in parentheses.
+   \returns code with expanded macro PP_CHOOSE_FIRST with \a y as arguments.
+*/
+#define PP_CHOOSE_FIRST_INVOKE(y) PP_APPLY(PP_CHOOSE_FIRST y)
 
 
 // PARENTHESES MANIPULATIONS
@@ -193,14 +233,14 @@
    \param arg argument for parentheses test
    \returns non-empty code or nothing
 */
-#define PP_IS_IN_PAREN(...) PP_INVOKE(PP_INVERSE_CHOOSE, (PP_CAT(PP_ , PP_CHOOSE_FIRST(PP_COMMA_WORD PP_REMOVE __VA_ARGS__ ())), true, ))
+#define PP_IS_IN_PAREN(...) PP_INVERSE_CHOOSE_INVOKE((PP_CAT(PP_ , PP_CHOOSE_FIRST(PP_COMMA_WORD PP_REMOVE __VA_ARGS__ ())), true, ))
 
 /*!
    \brief Wraps the argument list with commas to parentheses. If \a __VA_ARGS__ already in parentheses then is returning not changed. Note this is not just parenthesis wrapping!
    \param __VA_ARGS__ arguments to wrap
    \returns list with commas in parentheses
 */
-#define PP_PAREN(...) PP_INVOKE(PP_APPLY, PP_INVOKE(PP_SKIP_OR_CHOOSE, (PP_APPLY(PP_INSERT_COMMA PP_IS_IN_PAREN( __VA_ARGS__ ) ()) ((__VA_ARGS__)), (__VA_ARGS__))))
+#define PP_PAREN(...) PP_INVOKE_APPLY(PP_SKIP_OR_CHOOSE_INVOKE((PP_APPLY(PP_INSERT_COMMA PP_IS_IN_PAREN( __VA_ARGS__ ) ()) ((__VA_ARGS__)), (__VA_ARGS__))))
 
 /*!
    \brief Short entry for arguments skip testing.
@@ -209,14 +249,14 @@
    \param __VA_ARGS__ test args
    \returns comma or not empty code
 */
-#define PP_COMMA_TEST(...) PP_CAT(PP_ , PP_INVOKE(PP_CHOOSE_FIRST, (PP_INVOKE(PP_REMOVE, PP_APPLY PP_PAREN(__VA_ARGS__) ()) COMMA)))
+#define PP_COMMA_TEST(...) PP_CAT(PP_ , PP_CHOOSE_FIRST_INVOKE((PP_REMOVE_INVOKE(PP_APPLY PP_PAREN(__VA_ARGS__) ()) COMMA)))
 
 /*!
    \brief Checks if arguments are empty. if yes, it returns a non-empty code, otherwise nothing. Empty list equal empty value and returning nothing
    \param __VA_ARGS__ test args
    \returns non-empty code or nothing
 */
-#define PP_IS_EMPTY(...) PP_INVOKE(PP_SKIP_OR_CHOOSE, (PP_COMMA_TEST(__VA_ARGS__) true, ))
+#define PP_IS_EMPTY(...) PP_SKIP_OR_CHOOSE_INVOKE((PP_COMMA_TEST(__VA_ARGS__) true, ))
 
 /*!
    \brief Inserting function name and opening parenthesis.
@@ -231,7 +271,7 @@
    \param __VA_ARGS__ arguments in parentheses
    \returns list with commas without parentheses or nothing
 */
-#define PP_UNPAREN(...) PP_INVOKE(PP_APPLY, PP_PAREN(__VA_ARGS__))
+#define PP_UNPAREN(...) PP_INVOKE_APPLY(PP_PAREN(__VA_ARGS__))
 
 /*!
    \brief Concatenate two lists with commas in parentheses
