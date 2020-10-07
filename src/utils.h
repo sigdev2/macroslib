@@ -77,6 +77,21 @@
 
 // FUNCTIONAL MACROS
 
+/*! 
+   \brief Macro which the retrun arguments. Use for expand macros in arguments.
+   \param __VA_ARGS__ code with macros.
+   \returns code with expanded macros.
+*/
+#define PP_APPLY(...) __VA_ARGS__
+
+/*!
+   \brief Concatenate macros name and argumens. Use for expand macro name from argument and call with expand arguments in other macros. PP_INVOKE(SUM, (1, 2)) is same as SUM(1, 2)
+   \param x functional macro name.
+   \param y macro arguments in parentheses.
+   \returns call of expanded macro with arguments.
+*/
+#define PP_INVOKE(x, y) PP_APPLY(x y)
+
 /*!
    \brief Simple concat two values in args with ## operator.
    \param x first value.
@@ -94,6 +109,14 @@
    \returns Concated value of extended \a x and \a y args
 */
 #define PP_CAT(x, y) PP_CAT_A(x, y)
+
+/*!
+   \brief Invoke PP_CAT with expand arguments. Used to avoid recursion with PP_INVOKE
+   \param x first value.
+   \param y second value.
+   \returns Concated value of extended \a x and \a y args
+*/
+#define PP_CAT_INVOKE(x, y) PP_APPLY(PP_CAT (x, y))
 
 /*!
    \brief Simple convert argument to string.
@@ -123,21 +146,6 @@
    \returns nothing
 */
 #define PP_REMOVE(...)
-
-/*! 
-   \brief Macro which the retrun arguments. Use for expand macros in arguments.
-   \param __VA_ARGS__ code with macros.
-   \returns code with expanded macros.
-*/
-#define PP_APPLY(...) __VA_ARGS__
-
-/*!
-   \brief Concatenate macros name and argumens. Use for expand macro name from argument and call with expand arguments in other macros. PP_INVOKE(SUM, (1, 2)) is same as SUM(1, 2)
-   \param x functional macro name.
-   \param y macro arguments in parentheses.
-   \returns call of expanded macro with arguments.
-*/
-#define PP_INVOKE(x, y) PP_APPLY(x y)
 
 
 // CHOOSERS
