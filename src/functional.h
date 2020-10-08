@@ -215,6 +215,14 @@
 */
 #define PP_SWAP( first, second, ... ) second PP_COMMA first PP_COMMA __VA_ARGS__
 
+/*!
+   \brief Swap order tail with head of arguments list
+   \param head head of arguments list
+   \param __VA_ARGS__ arguments list tail
+   \returns list with comma swapped head and tail
+*/
+#define PP_SWAP_TAIL( head, ... ) __VA_ARGS__ PP_COMMA head
+
 
 // BASIC ITERATION
 
@@ -623,7 +631,7 @@
    \param __VA_ARGS__ arguments list
    \returns arguments list in reversed order
 */
-#define PP_REVERSE(...) PP_FOLDR(PP_SWAP, __VA_ARGS__ )
+#define PP_REVERSE(...) PP_RREDUCE( PP_RREDUCE_FOLDR, PP_SWAP_TAIL , __VA_ARGS__ )
 
 /*!
    \brief Binary opreator for store tails list in accumulator when used in reduce. Used in PP_TAILS
