@@ -555,6 +555,9 @@
 */
 #define PP_RREDUCE(macro, data, ...) PP_APPLY(PP_CAT( PP_RREDUCE_ , PP_VA_SIZE( __VA_ARGS__ )) ( macro , data , __VA_ARGS__ ))
 
+
+// REDUCE MODIFIERS
+
 /*!
    \brief Apply macro \a x to argumens \a y. PP_INVOKE analog for avoid recursion
    \param x functional macro name.
@@ -590,10 +593,12 @@
    \param __VA_ARGS__ arguments list and last reduce accumulator
    \returns result of \a macro applied on arguments
 */
-#define PP_RREDUCE_FOLDR(macro, ...) PP_REDUCE_INVOKE(macro, ( __VA_ARGS__ ))
+#define PP_REDUCE_FOLDR(macro, ...) PP_REDUCE_INVOKE(macro, ( __VA_ARGS__ ))
+
+// FOLDL - FOLDR
 
 /*!
-   \brief Reduce arguments list from begin. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)
+   \brief Reduce arguments list from begin. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDL( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)
    \param macro functional \a macro, binary operator witch accept two arguments - first accumulator and second arguments list item
    \param acc initial accumulator
    \param __VA_ARGS__ arguments list
@@ -602,13 +607,13 @@
 #define PP_FOLDL(macro, acc, ...) PP_REDUCE( PP_REDUCE_FOLDL, macro , acc, __VA_ARGS__)
 
 /*!
-   \brief Reduce arguments list from end. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDL( m, acc, a, b, c )  >>>  m( a, m( b, m( c, acc ) ) )
+   \brief Reduce arguments list from end. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( a, m( b, m( c, acc ) ) )
    \param macro functional \a macro, binary operator witch accept two arguments - first is first item of arguments list and second accumulator
    \param acc initial accumulator
    \param __VA_ARGS__ arguments list
    \returns result of reduce arguments list from end
 */
-#define PP_FOLDR(macro, acc, ...) PP_RREDUCE( PP_RREDUCE_FOLDR, macro , __VA_ARGS__, acc )
+#define PP_FOLDR(macro, acc, ...) PP_RREDUCE( PP_REDUCE_FOLDR, macro , __VA_ARGS__, acc )
 
 /*!
    \brief Compose applying functional macros. Maximum count PP_VA_MAXARGS functional macros names. Example: a( b( c( \a args ) ) )
@@ -631,23 +636,22 @@
    \param __VA_ARGS__ arguments list
    \returns arguments list in reversed order
 */
-#define PP_REVERSE(...) PP_RREDUCE( PP_RREDUCE_FOLDR, PP_SWAP_TAIL , __VA_ARGS__ )
+#define PP_REVERSE(...) PP_RREDUCE( PP_REDUCE_FOLDR, PP_SWAP_TAIL , __VA_ARGS__ )
 
 /*!
    \brief Binary opreator for store tails list in accumulator when used in reduce. Used in PP_TAILS
    \param acc accumulator to store tails
-   \param list list in parentheses
    \param __VA_ARGS__ arguments list
-   \returns pair of accumulator with new element and \a list tail
+   \returns accumulator appended one tail of arguments list in parentheses and tail of arguments list
 */
-#define PP_TAILS_PART(acc, list, ... ) ( PP_UNPAREN( acc ) PP_COMMA PP_TAIL_PAREN( list ) ) PP_COMMA PP_TAIL_PAREN( list )
+#define PP_TAILS_PART(acc, ... ) ( PP_INVOKE_APPLY( acc ) PP_COMMA ( __VA_ARGS__ ) ) PP_COMMA PP_APPLY(PP_TAIL ( __VA_ARGS__ ))
 
 /*!
-   \brief Generated list with tails of arguments list. Maximum size of arguments is PP_VA_MAXARGS.
+   \brief Generated list with all tails of arguments list. Maximum size of arguments is PP_VA_MAXARGS.
    \param __VA_ARGS__ arguments list
-   \returns list with tails of arguments list
+   \returns list with all tails of arguments list
 */
-#define PP_TAILS( ... ) PP_UNPAREN( PP_HEAD( PP_FOLDL(PP_TAILS_PART, ( ( __VA_ARGS__ ) ) PP_COMMA ( __VA_ARGS__ ) , __VA_ARGS__ ) ) )
+#define PP_TAILS( ... ) PP_INVOKE_APPLY( PP_REDUCE( PP_REDUCE_FOLDR, PP_TAILS_PART, ( ( __VA_ARGS__ ) ), PP_APPLY(PP_TAIL ( __VA_ARGS__ )) ) )
 
 /*!
    \brief Generates a list of the tails of each list in parentheses in arguments. Maximum size of arguments is PP_VA_MAXARGS.
