@@ -302,6 +302,13 @@
 #define PP_VA_GEN_A_N(NUM) PP_CAT(PP_VA_GEN_A_, NUM )
 
 /*!
+   \brief Invoke PP_VA_GEN_A_N with expand arguments. Used to avoid recursion with PP_INVOKE
+   \param y macro arguments in parentheses.
+   \returns code with expanded macro PP_VA_GEN_A_N with \a y as arguments.
+*/
+#define PP_VA_GEN_A_N_INVOKE(y) PP_APPLY(PP_VA_GEN_A_N y)
+
+/*!
    \brief Return list of numeric postfixes for functional macros with commas like "_1, _2, _3" by size of arguments list with maximum is PP_VA_MAXARGS.
    This macro use for generate call list of functional macros.
    \param __VA_ARGS__ arguments list

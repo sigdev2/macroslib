@@ -265,6 +265,14 @@
 // ITERATION MODIFIERS
 
 /*!
+   \brief Apply macro \a x to argumens \a y. PP_INVOKE analog for avoid recursion
+   \param x functional macro name.
+   \param y macro arguments in parentheses.
+   \returns call of expanded macro \a x with \a y arguments.
+*/
+#define PP_ITERATE_INVOKE(x, y) PP_APPLY(x y)
+
+/*!
    \brief Iteration modifier which returns the element itself unchanged. Use as default macro argument for PP_ITERATE.
    \param data data passed in PP_ITERATE
    \param item iterable item
@@ -294,7 +302,7 @@
    \param item iterable item
    \returns \a pair first aplayed as functional macro on \a pair second
 */
-#define PP_ITERATE_ITEM_DATA_PAIR(pair, item) PP_APPLY( PP_CAR( pair ) PP_CDR( pair ) )
+#define PP_ITERATE_ITEM_DATA_PAIR(pair, item) PP_ITERATE_INVOKE( PP_CAR( pair ), PP_CDR( pair ) )
 
 /*!
    \brief Iteration modifier which use passed to PP_ITERATE data as \a pair where first is functional macro which accept one argument and second is argument for this macro, result is comma leaded. Use as default macro argument for PP_ITERATE.
@@ -302,7 +310,7 @@
    \param item iterable item
    \returns  comma leaded \a pair first aplayed as functional macro on \a pair second
 */
-#define PP_ITERATE_ITEM_DATA_PAIR_COMMA(pair, item) PP_COMMA PP_APPLY( PP_CAR( pair ) PP_CDR( pair ) )
+#define PP_ITERATE_ITEM_DATA_PAIR_COMMA(pair, item) PP_COMMA PP_ITERATE_INVOKE( PP_CAR( pair ), PP_CDR( pair ) )
 
 /*!
    \brief An iteration modifier that returns comma leaded a comma-separated parenthesized list containing the item passed to PP_ITERATE as \a data appended to the \a item to iterate over. Use as default macro argument for PP_ITERATE.
@@ -326,7 +334,7 @@
    \param item iterable item
    \returns result of \a macro applied on \a item with expand parentheses before
 */
-#define PP_ITERATE_ITEM_MACRO(macro, item) PP_APPLY( macro ( PP_UNPAREN( item )))
+#define PP_ITERATE_ITEM_MACRO(macro, item) PP_ITERATE_INVOKE( macro, ( PP_UNPAREN( item )))
 
 /*!
    \brief Iteration modifier which returns \a item with seporator before \a sep. Use as default macro argument for PP_ITERATE.
@@ -344,7 +352,7 @@
    \param item iterable item
    \returns result of \a macro applied on \a item with expand parentheses before with comma
 */
-#define PP_ITERATE_ITEM_COMMA(macro, item) PP_COMMA PP_APPLY( macro ( PP_UNPAREN( item )))
+#define PP_ITERATE_ITEM_COMMA(macro, item) PP_COMMA PP_ITERATE_INVOKE( macro , ( PP_UNPAREN( item )))
 
 /*!
    \brief Iteration modifier which returns the name of the function macro with an open parenthesis before the \a item. Used for reduce realization. Use as default macro argument for PP_ITERATE.
@@ -395,7 +403,7 @@
    \param __VA_ARGS__ arguments list
    \returns list separated by \a separator with results of apply \a macro on every item of arguments list
 */
-#define PP_SEPARATE_LIST_M(macro, separator, ... ) PP_APPLY( macro ( PP_UNPAREN( PP_APPLY( PP_HEAD (__VA_ARGS__) ) ))) PP_ITERATE( PP_ITERATE_ITEM_MACRO , separator macro , PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
+#define PP_SEPARATE_LIST_M(macro, separator, ... ) PP_ITERATE_INVOKE( macro, ( PP_UNPAREN( PP_APPLY( PP_HEAD (__VA_ARGS__) ) ))) PP_ITERATE( PP_ITERATE_ITEM_MACRO , separator macro , PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
 
 /*!
    \brief Append \a item to all lists in arguments. Maximum lists count in arguments is PP_VA_MAXARGS.
@@ -419,7 +427,7 @@
    \param __VA_ARGS__ arguments list
    \returns list with commas of result apply \a macro on every item of arguments list
 */
-#define PP_MAP(macro, ...) PP_APPLY( macro ( PP_UNPAREN( PP_APPLY( PP_HEAD (__VA_ARGS__) ) ))) PP_ITERATE( PP_ITERATE_ITEM_COMMA , macro, PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
+#define PP_MAP(macro, ...) PP_ITERATE_INVOKE( macro, ( PP_UNPAREN( PP_APPLY( PP_HEAD (__VA_ARGS__) ) ))) PP_ITERATE( PP_ITERATE_ITEM_COMMA , macro, PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
 
 /*!
    \brief Short alias for PP_SEPARATE_LIST_M. Applying a \a macro to each item in the argument list and separating arguments list with \a separator. Maximum iterate is PP_VA_MAXARGS arguments.
@@ -432,9 +440,9 @@
 
 #define PP_REPEAT_0
 #define PP_REPEAT_1
-#define PP_REPEAT_2(value, count) value PP_ITERATE( PP_ITERATE_ITEM_DATA_COMMA , value, PP_INVOKE( PP_VA_GEN_A_N, ( PP_VA_DECREMENT( count ) ) ) )
-#define PP_REPEAT_3(macro, value, count) PP_APPLY( macro ( value ) ) PP_ITERATE( PP_ITERATE_ITEM_DATA_PAIR_COMMA , ( macro, value ), PP_INVOKE( PP_VA_GEN_A_N, ( PP_VA_DECREMENT( count ) ) ) )
-#define PP_REPEAT_4(macro, value, count, separator) PP_APPLY( macro ( value ) ) PP_ITERATE( PP_ITERATE_ITEM_DATA_PAIR , ( separator macro, value ), PP_INVOKE( PP_VA_GEN_A_N, ( PP_VA_DECREMENT( count ) ) ) )
+#define PP_REPEAT_2(value, count) value PP_ITERATE( PP_ITERATE_ITEM_DATA_COMMA , value, PP_VA_GEN_A_N_INVOKE(( PP_VA_DECREMENT( count ) ) ) )
+#define PP_REPEAT_3(macro, value, count) PP_APPLY( macro ( value ) ) PP_ITERATE( PP_ITERATE_ITEM_DATA_PAIR_COMMA , ( macro, value ), PP_VA_GEN_A_N_INVOKE(( PP_VA_DECREMENT( count ) ) ) )
+#define PP_REPEAT_4(macro, value, count, separator) PP_APPLY( macro ( value ) ) PP_ITERATE( PP_ITERATE_ITEM_DATA_PAIR , ( separator macro, value ), PP_VA_GEN_A_N_INVOKE(( PP_VA_DECREMENT( count ) ) ) )
 /*!
    \brief Repeat some code or value passed in \a value \a count times with applying \a macro to every time and separate with \a separator.
    Maximum is PP_VA_MAXARGS times. Be careful - the function \a macro is applied every time to every repetition of the \a value - this is necessary for special characters such as commas and parentheses to be processed normally.
@@ -540,6 +548,14 @@
 #define PP_RREDUCE(macro, data, ...) PP_APPLY(PP_CAT( PP_RREDUCE_ , PP_VA_SIZE( __VA_ARGS__ )) ( macro , data , __VA_ARGS__ ))
 
 /*!
+   \brief Apply macro \a x to argumens \a y. PP_INVOKE analog for avoid recursion
+   \param x functional macro name.
+   \param y macro arguments in parentheses.
+   \returns call of expanded macro \a x with \a y arguments.
+*/
+#define PP_REDUCE_INVOKE(x, y) PP_APPLY(x y)
+
+/*!
    \brief Reduce modifier used as \a macro for PP_REDUCE when data argument is functional \a macro, binary operator witch accept two arguments - first accumulator and second arguments list first item.
    Maximum is PP_VA_MAXARGS arguments for fold. Use as default macro argument for PP_REDUCE.
    \param macro functional \a macro, binary operator witch accept two arguments - first accumulator and second arguments list item
@@ -557,7 +573,7 @@
    \param __VA_ARGS__ arguments list
    \returns result of \a macro applied on \a acc and first item of arguments comma separated with tail of arguments list
 */
-#define PP_REDUCE_COMPOSE(miss, acc, ...) PP_APPLY(PP_APPLY(PP_HEAD ( __VA_ARGS__ )) (PP_UNPAREN(acc))) PP_COMMA PP_APPLY(PP_TAIL ( __VA_ARGS__ ))
+#define PP_REDUCE_COMPOSE(args, acc, ...) PP_REDUCE_INVOKE(PP_APPLY(PP_HEAD ( __VA_ARGS__ )), (PP_UNPAREN(acc))) PP_COMMA PP_APPLY(PP_TAIL ( __VA_ARGS__ ))
 
 /*!
    \brief Reverse reduce modifier used as \a macro for PP_RREDUCE when data argument is functional \a macro, binary operator witch accept two arguments - first is first item of arguments list and second accumulator.
@@ -566,7 +582,7 @@
    \param __VA_ARGS__ arguments list and last reduce accumulator
    \returns result of \a macro applied on arguments
 */
-#define PP_RREDUCE_FOLDR(macro, ...) macro ( __VA_ARGS__ )
+#define PP_RREDUCE_FOLDR(macro, ...) PP_REDUCE_INVOKE(macro, ( __VA_ARGS__ ))
 
 /*!
    \brief Reduce arguments list from begin. Maximum recursion is PP_VA_MAXARGS arguments. Example: PP_FOLDR( m, acc, a, b, c )  >>>  m( m( m( acc, a), b), c)

@@ -85,10 +85,12 @@
 #define PP_APPLY(...) __VA_ARGS__
 
 /*!
-   \brief Concatenate macros name and argumens. Use for expand macro name from argument and call with expand arguments in other macros. PP_INVOKE(SUM, (1, 2)) is same as SUM(1, 2)
+   \brief Apply macro \a x to argumens \a y. Use for expand macro name from argument and call with expand arguments in other macros.
+   To avoid recursion, this macro is best used only in final maсros. For internal macros, it is better to declare a separate macro.
+   PP_INVOKE(SUM, (1, 2)) is same as SUM(1, 2)
    \param x functional macro name.
    \param y macro arguments in parentheses.
-   \returns call of expanded macro with arguments.
+   \returns call of expanded macro \a x with \a y arguments.
 */
 #define PP_INVOKE(x, y) PP_APPLY(x y)
 
