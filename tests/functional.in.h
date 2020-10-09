@@ -100,18 +100,32 @@ PP_COMPOSE_MAP((1, 2, 3), MACRO1) = MACRO1(1), MACRO1(2), MACRO1(3)
 PP_COMPOSE_MAP(1, MACRO1, MACRO2, MCARO3) = MACRO1(MACRO2(MACRO3(1)))
 PP_COMPOSE_MAP((1, 2, 3), MACRO1, MACRO2, MCARO3) = MACRO1(MACRO2(MACRO3(1))), MACRO1(MACRO2(MACRO3(2))), MACRO1(MACRO2(MACRO3(3)))
 
-/* PP_REVERSE(1, 2, 3) = 3, 2, 1
+PP_REVERSE(1, 2, 3) = 3, 2, 1
 
-PP_TAILS((1, 2, 3), (1, 2, 3), (1, 2, 3)) = (2, 3), (2, 3), (2, 3)
+PP_TAILS(1, 2, 3) = (1, 2, 3), (2, 3), (3)
 
-PP_LISTS_TAILS(1, 2, 3) = (1, 2, 3), (2, 3), (1)
+PP_LISTS_TAILS((1, 2, 3), (1, 2, 3), (1, 2, 3)) = (2, 3), (2, 3), (2, 3)
 
 PP_LISTS_HEADS((1, 2, 3), (1, 2, 3), (1, 2, 3)) = (1, 1, 1)
 
-PP_ZIP((1, 2, 3), (1, 2, 3)) = (1, 1), (2, 2), (3, 3)
+PP_ZIP((1, 2, 3), (a, b, c)) = (1, a), (2, b), (3, c)
+
+PP_ZIP((1, 2, 3, 4), (a, b, c, d)) = (1, a), (2, b), (3, c), (4, d)
+
+PP_ZIP((1, 2, 3, 4, 5), (a, b, c, d, e)) = (1, a), (2, b), (3, c), (4, d), (5, e)
+
+PP_ZIP( ((1), (2), (3)) , ( a, b, c ) ) = ((1), a), ((2), b), ((3), c)
+
+PP_ZIP( ((1, 2, 3), (1, 2, 3), (1, 2, 3), (1, 2, 3), (1, 2, 3)) , ( a, b, c, d, f ) ) = ( (1, 2, 3) , a ) , ( (1, 2, 3) , b ) , ( (1, 2, 3) , c ) , ( (1, 2, 3) , d ) , ( (1, 2, 3) , f )
+
+PP_ZIP_PAR1T ( PP_ZIP_PAR1T ( PP_ZIP_PAR1T ( PP_ZIP_PAR1T ( ( ( (1, 2, 3) , a ) ), ((1, 2, 3), (1, 2, 3), (1, 2, 3), (1, 2, 3)) , (b, c, d, f) ) ) ) )
+PP_ZIP_PAR1T ( PP_ZIP_PAR1T ( PP_ZIP_PAR1T ( PP_ZIP_PART ( ( ( (1, 2, 3) , a ) ), ((1, 2, 3), (1, 2, 3), (1, 2, 3), (1, 2, 3)) , (b, c, d, f) ) ) ) )
+PP_ZIP_PAR1T ( PP_ZIP_PART ( PP_ZIP_PART ( PP_ZIP_PART ( ( ( (1, 2, 3) , a ) ), ((1, 2, 3), (1, 2, 3), (1, 2, 3), (1, 2, 3)) , (b, c, d, f) ) ) ) )
+PP_ZIP_PART ( PP_ZIP_PART ( PP_ZIP_PART ( PP_ZIP_PART ( ( ( (1, 2, 3) , a ) ), ((1, 2, 3), (1, 2, 3), (1, 2, 3), (1, 2, 3)) , (b, c, d, f) ) ) ) )
+
 
 PP_MASS_APPEND(((1, 2, 3), (1, 2, 3), (1, 2, 3)), 4, 4, 4) = (1, 2, 3, 4), (1, 2, 3, 4), (1, 2, 3, 4)
 
 PP_MASS_PREPEND(((1, 2, 3), (1, 2, 3), (1, 2, 3)), 4, 4, 4) = (4, 1, 2, 3), (4, 1, 2, 3), (4, 1, 2, 3)
-
+/*
 PP_UNZIP((1, 1), (2, 2), (3, 3)) (1, 2, 3), (1, 2, 3)*/

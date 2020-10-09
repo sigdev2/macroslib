@@ -240,6 +240,13 @@
 */
 #define PP_VA_SIZE(...) PP_APPLY(PP_CAT(PP_VA_SIZE_, PP_VA_GET( __VA_ARGS__ , PP_VA_SIZE_CHOOSER, _)) (,__VA_ARGS__))
 
+/*!
+   \brief Invoke PP_VA_SIZE with expand arguments. Used to avoid recursion with PP_INVOKE
+   \param y macro arguments in parentheses.
+   \returns code with expanded macro PP_VA_SIZE with \a y as arguments.
+*/
+#define PP_VA_SIZE_INVOKE(y) PP_APPLY(PP_VA_SIZE y)
+
 
 // VA_GEN_NUMLIST VARIADIC
 

@@ -342,7 +342,7 @@
    \param item iterable item
    \returns result of \a macro applied on \a item with expand parentheses before
 */
-#define PP_ITERATE_ITEM_MACRO(macro, item) PP_ITERATE_INVOKE( macro, ( PP_UNPAREN( item )))
+#define PP_ITERATE_ITEM_MACRO(macro, item) PP_ITERATE_INVOKE( macro, PP_PAREN( item ))
 
 /*!
    \brief Iteration modifier which returns \a item with seporator before \a sep. Use as default macro argument for PP_ITERATE.
@@ -642,7 +642,7 @@
    \brief Binary opreator for store tails list in accumulator when used in reduce. Used in PP_TAILS
    \param acc accumulator to store tails
    \param __VA_ARGS__ arguments list
-   \returns accumulator appended one tail of arguments list in parentheses and tail of arguments list
+   \returns accumulator in parentheses with appended one tail of arguments list in parentheses and tail of arguments list
 */
 #define PP_TAILS_PART(acc, ... ) ( PP_INVOKE_APPLY( acc ) PP_COMMA ( __VA_ARGS__ ) ) PP_COMMA PP_APPLY(PP_TAIL ( __VA_ARGS__ ))
 
@@ -668,21 +668,19 @@
 #define PP_LISTS_HEADS( ... ) ( PP_MAP(PP_HEAD_PAREN, __VA_ARGS__) )
 
 /*!
-   \brief Binary opreator for store piars with elements of two lists in accumulator when used in reduce. Used in PP_ZIP
-   \param acc accumulator to store piars with elements of two lists
-   \param lists pair of two lists in parentheses
-   \param __VA_ARGS__ arguments list
-   \returns pair of accumulator with new element and pair with \a lists tails
+   \brief Binary opreator for store list with heads of lists in parentheses from arguments in accumulator when used in reduce. Used in PP_ZIP
+   \param acc accumulator to store list with heads of lists in parentheses from arguments
+   \param __VA_ARGS__ arguments list of lists in parentheses
+   \returns accumulator in parentheses with heads of lists in parentheses from arguments and their tails 
 */
-#define PP_ZIP_PART(acc, lists, ...) ( PP_UNPAREN( acc ) PP_COMMA ( PP_INVOKE( PP_LISTS_HEADS, lists ) ) ) PP_COMMA ( PP_INVOKE( PP_LISTS_TAILS, lists ))
+#define PP_ZIP_PART(acc, ...) ( PP_UNPAREN( acc ) PP_COMMA PP_APPLY( PP_LISTS_HEADS ( __VA_ARGS__ ) ) ) PP_COMMA PP_APPLY( PP_LISTS_TAILS ( __VA_ARGS__ ) )
 
 /*!
    \brief Generated list of lists constructed from elements of lists in parentheses from arguments with equals indexes. Length checked by first list. Maximum lists sizes and count of lists is PP_VA_MAXARGS.
    \param __VA_ARGS__ arguments list of lists in parentheses 
    \returns list of lists constructed from elements of lists in parentheses from arguments with equals indexes
 */
-#define PP_ZIP(...) PP_UNPAREN( PP_HEAD( PP_FOLDL(PP_ZIP_PART, ( ( PP_INVOKE( PP_LISTS_HEADS, ( __VA_ARGS__ ) ) ) ) PP_COMMA ( PP_INVOKE( PP_LISTS_TAILS, ( __VA_ARGS__ ) ) ) , \
-PP_UNPAREN( PP_INVOKE( PP_HEAD, ( __VA_ARGS__ ) ) ) ) ) )
+#define PP_ZIP(...) PP_INVOKE_APPLY( PP_CAT( PP_REDUCE_ , PP_VA_SIZE_INVOKE( PP_APPLY(PP_HEAD ( __VA_ARGS__ ) ) ) ) ( PP_REDUCE_FOLDR, PP_ZIP_PART, ( PP_APPLY( PP_LISTS_HEADS ( __VA_ARGS__ ) ) ), PP_APPLY( PP_LISTS_TAILS ( __VA_ARGS__ ) ) ) )
 
 /*!
    \brief Append one item from list of elements to one list from \a lists. Maximum size of lists and elements is PP_VA_MAXARGS. Example: ((), (), ()), a, b, c >>> (a), (b), (c)
