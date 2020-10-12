@@ -116,7 +116,7 @@
    \param b common bool like term
    \returns PP_TRUE or PP_FALSE
 */
-#define PP_BOOL_TO_PP(b) PP_CAT( PP_BOOL_TO_ , PP_CAT( b ,) )
+#define PP_BOOL_TO_PP(b) PP_BOOL_TO_##b
 
 #define PP_IF_(t, f) f
 #define PP_IF_true(t, f) t
@@ -127,7 +127,15 @@
    \param f term if PP_FALSE
    \returns \a t or \a f
 */
-#define PP_IF(cond, t, f) PP_CAT( PP_IF_ , PP_BOOL_TO_PP( cond )) ( t , f )
+#define PP_IF(cond, t, f) PP_APPLY(PP_CAT( PP_IF_ , PP_BOOL_TO_PP( cond )) ( t , f ))
+
+/*!
+   \brief Apply macro \a x to argumens \a y. PP_INVOKE analog for avoid recursion
+   \param x functional macro name.
+   \param y macro arguments in parentheses.
+   \returns call of expanded macro \a x with \a y arguments.
+*/
+#define PP_FILTER_INVOKE(x, y) PP_APPLY(x y)
 
 /*!
    \brief Iteration modifier which use \a macro applied on \a item with expand parentheses before as condition for PP_IF and return comma leaded \a item if condition true or nothing.
@@ -136,7 +144,7 @@
    \param item iterable item
    \returns comma leaded \a item if \a macro condition true or nothing.
 */
-#define PP_FILTER_PART(macro, item) PP_IF( PP_INVOKE( macro , ( PP_UNPAREN( item ) ) ) , PP_COMMA item , )
+#define PP_FILTER_PART(macro, item) PP_IF( PP_FILTER_INVOKE( macro , PP_PAREN( item ) ) , item , )
 
 /*!
    \brief Use \a macro applied on items from arguments list with expand parentheses before as condition. If condition false then item remove from arguments list. Maximum count of arguments list is PP_VA_MAXARGS.
@@ -144,7 +152,7 @@
    \param __VA_ARGS__ iterable item
    \returns list with commas without filtred values
 */
-#define PP_FILTER(macro, ... ) PP_INVOKE( macro , ( PP_UNPAREN( PP_INVOKE( PP_HEAD, ( __VA_ARGS__ ) ) ) ) ) , PP_INVOKE( PP_HEAD, ( __VA_ARGS__ ) ) , ) PP_INVOKE( PP_ITERATE , (PP_FILTER_PART, macro , PP_INVOKE( PP_TAIL, ( __VA_ARGS__ ) ) ) )
+#define PP_FILTER(macro, ... ) PP_IF( PP_FILTER_INVOKE( macro , PP_PAREN( PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) ) , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) , ) PP_ITERATE(PP_FILTER_PART, macro , PP_APPLY( PP_TAIL ( __VA_ARGS__ ) ) )
 
 /*!
    \brief Iteration modifier which use \a item list head as condition for PP_IF and return \a item list tail if condition true or nothing. Without closing parentheses and possible to add the else case.
@@ -201,14 +209,14 @@
    \param __VA_ARGS__ boolean values
    \return boolean value
 */
-#define PP_ALL( ... ) PP_INVOKE( PP_FOLDL , (PP_AND, true, __VA_ARGS__ ) )
+#define PP_ALL( ... ) PP_FOLDL(PP_AND, true, __VA_ARGS__ )
 
 /*! 
    \brief True if at least one argument is true 
    \param __VA_ARGS__ boolean values
    \return boolean value
 */
-#define PP_ONE( ... ) PP_INVOKE( PP_FOLDL , (PP_OR, true, __VA_ARGS__ ) )
+#define PP_ONE( ... ) PP_FOLDL(PP_OR, false, __VA_ARGS__ )
 
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_CONDITION_H__
