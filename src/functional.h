@@ -111,7 +111,7 @@
    \param __VA_ARGS__ list
    \returns tail of list in parentheses
 */
-#define PP_TAIL_PAREN( ... ) PP_PAREN( PP_APPLY( PP_TAIL PP_PAREN( __VA_ARGS__ ) ) )
+#define PP_TAIL_PAREN( ... ) ( PP_APPLY( PP_TAIL PP_PAREN( __VA_ARGS__ ) ) )
 
 /*!
    \brief Return \a head of arguments list. Lisp style PP_HEAD_PAREN alias
@@ -665,7 +665,7 @@
    \param __VA_ARGS__ arguments list of lists in parentheses 
    \returns heads of each list in parentheses in arguments
 */
-#define PP_LISTS_HEADS( ... ) ( PP_MAP(PP_HEAD_PAREN, __VA_ARGS__) )
+#define PP_LISTS_HEADS( ... ) ( PP_MAP(PP_HEAD, __VA_ARGS__) )
 
 /*!
    \brief Binary opreator for store list with heads of lists in parentheses from arguments in accumulator when used in reduce. Used in PP_ZIP
@@ -697,13 +697,6 @@
    \returns list of \a lists with prepended by one elements from elements to each list
 */
 #define PP_MASS_PREPEND( lists, ... ) PP_MAP(PP_CAT_PAREN, PP_ZIP( ( __VA_ARGS__ ) , lists ) )
-
-/*!
-   \brief Unzip list of lists to list with by one item from each list. Maximum size list of lists and items counts in lists is PP_VA_MAXARGS.  Example: (a), (b), (c) >>> a, b, c
-   \param __VA_ARGS__ list of lists in parentheses to unzip
-   \returns list contains by one item from each list from list of lists
-*/
-#define PP_UNZIP( first, ... ) PP_INVOKE( PP_FOLDL, (PP_MASS_APPEND, ( PP_REPEAT(PP_INSERT_EMPTY_LIST, _, PP_VA_SIZE( first ) ) ) , first, __VA_ARGS__ ) )
 
 /////////////////////////////////////////////////////////////////////////////
 #endif // __HAS_MACROS_LIB_FUNCTIONAL_H__
