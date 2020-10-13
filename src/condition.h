@@ -144,7 +144,7 @@
    \param item iterable item
    \returns comma leaded \a item if \a macro condition true or nothing.
 */
-#define PP_FILTER_PART(macro, item) PP_IF( PP_FILTER_INVOKE( macro , PP_PAREN( item ) ) , item , )
+#define PP_FILTER_PART(macro, item) PP_CAT( PP_ , PP_IF( PP_FILTER_INVOKE( macro , PP_PAREN( item ) ) , COMMA , FALSE) ) PP_IF( PP_FILTER_INVOKE( macro , PP_PAREN( item ) ) , item , )
 
 /*!
    \brief Use \a macro applied on items from arguments list with expand parentheses before as condition. If condition false then item remove from arguments list. Maximum count of arguments list is PP_VA_MAXARGS.
