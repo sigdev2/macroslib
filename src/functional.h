@@ -19,30 +19,6 @@
 #include "variadic.h"
 
 
-// RECURSION
-
-#define PP_REC_EVAL_255( macro, ... ) PP_REC_EVAL_127( macro, PP_REC_EVAL_127( macro, __VA_ARGS__ ) )
-#define PP_REC_EVAL_127( macro, ... ) PP_REC_EVAL_63( macro, PP_REC_EVAL_63( macro, __VA_ARGS__ ) )
-#define PP_REC_EVAL_63( macro, ... ) PP_REC_EVAL_31( macro, PP_REC_EVAL_31( macro, __VA_ARGS__ ) )
-#define PP_REC_EVAL_31( macro, ... ) PP_REC_EVAL_15( macro, PP_REC_EVAL_15( macro, __VA_ARGS__ ) )
-#define PP_REC_EVAL_15( macro, ... ) PP_REC_EVAL_7( macro, PP_REC_EVAL_7( macro, __VA_ARGS__ ) )
-#define PP_REC_EVAL_7( macro, ... ) PP_REC_EVAL_3( macro, PP_REC_EVAL_3( macro, __VA_ARGS__ ) )
-#define PP_REC_EVAL_3( macro, ... ) PP_REC_EVAL_1( macro, PP_REC_EVAL_1( macro, __VA_ARGS__ ) )
-#define PP_REC_EVAL_1( macro, ... ) macro ( __VA_ARGS__ )
-
-/*!
-   \brief Causes 256 rounds of evaluation of its arguments in \a macro.
-   This enables a crude form of recursion, with a maximum call-depth of 256.
-   Each recursive macro needs to provide its own recursive stack name in \a macro arguments, because a recursive evaluator can't be used recursively itself.
-   This allows for recursive macros to be implemented with other recursive macros.
-   Please don't use it because it depends on preprocessing behavior of GCC and Clang that may not conform to the ISO standards and it is also slower than calling variadic macros.
-   \param macro recursion stack name, must be defined, functional macro with variadic arguments
-   \param __VA_ARGS__ functional macros to recurtion
-   \returns recursion
-*/
-#define PP_REC_EVAL( macro, ...) PP_REC_EVAL_255( macro, __VA_ARGS__ )
-
-
 // ACCESS OPERATORS
 
 /*!

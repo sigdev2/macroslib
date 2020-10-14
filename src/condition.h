@@ -155,20 +155,19 @@
 #define PP_FILTER(macro, ... ) PP_IF( PP_FILTER_INVOKE( macro , PP_PAREN( PP_APPLY(PP_HEAD ( __VA_ARGS__ )) ) ) , PP_APPLY(PP_HEAD ( __VA_ARGS__ )) , ) PP_ITERATE(PP_FILTER_PART, macro , PP_APPLY( PP_TAIL ( __VA_ARGS__ ) ) )
 
 /*!
-   \brief Iteration modifier which use \a item list head as condition for PP_IF and return \a item list tail if condition true or nothing. Without closing parentheses and possible to add the else case.
-   Use as default macro argument for PP_ITERATE.
-   \param data data passed in PP_ITERATE
-   \param item iterable item as list in parentheses
-   \returns if condotion without closing parentheses
+   \brief Binary opreator for create one  of condition expression when used in reduce in PP_COND.
+   \param first first condition in parentheses.
+   \param __VA_ARGS__ arguments to next chain condition list in parentheses.
+   \returns condition expression and tail of conditions list
 */
-#define PP_COND_PART(data, item) PP_IF PP_INSERT_OPEN_PAREN PP_HEAD_PAREN( item ) , PP_TAIL_PAREN( item ) ,
+#define PP_COND_PART(first, ...) PP_IF(PP_APPLY(PP_HEAD first), PP_APPLY(PP_TAIL first), __VA_ARGS__)
 
 /*!
    \brief Use as switch-case construction. Every list of arguments is list in parentheses with head as condition and tail as case. Maximum count of arguments list is PP_VA_MAXARGS.
    \param __VA_ARGS__ arguments list of lists with head as condition and tail as case
    \returns first case with true condition or nothing
 */
-#define PP_COND( ... ) PP_INVOKE( PP_ITERATE , (PP_COND_PART, _ , __VA_ARGS__ ) ) PP_EMPTY PP_REPEAT( PP_INSERT_CLOSE_PAREN , _ ,  PP_VA_SIZE( __VA_ARGS__ ), )
+#define PP_COND( ... ) PP_RREDUCE(PP_REDUCE_FOLDR, PP_COND_PART, __VA_ARGS__, )
 
 
 // BOOL OPERATORS
