@@ -33,7 +33,7 @@ This project can be viewed as a memo with examples of the implementation of non-
 
 ## Contribution
 
-You can write about issues and errors in [issues](https://github.com/sigdev2/macroslib/issues) and end your fix as a [pull request](https://github.com/sigdev2/macroslib/pulls)
+You can write about issues and errors in [issues](https://github.com/sigdev2/macroslib/issues) and send your fix as a [pull request](https://github.com/sigdev2/macroslib/pulls)
 
 
 ## License
