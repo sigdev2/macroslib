@@ -1,7 +1,7 @@
 <p align="center">
     <img src="https://raw.githubusercontent.com/sigdev2/macroslib/master/icon.png" alt="Logo" width="64" height="64">
     <h3 align="center">MacrosLib</h3>
-    <p align="center">Last version 0.1.0-a1</p>
+    <p align="center">Last version 0.1.0-b3</p>
 </p>
 
 
