@@ -3,7 +3,6 @@
 
 
 
-PP_REC_EVAL(MACRO, 1, 2, 3)
 
 PP_HEAD(1, 2, 3) = 1
 PP_TAIL(1, 2, 3) = 2, 3
