@@ -38,4 +38,4 @@ You can write about issues and errors in [issues](https://github.com/sigdev2/mac
 
 ## License
 
-Distributed under [the MIT License](./LICENSE.MIT).
+Distributed under [the MIT License](./LICENSE).
