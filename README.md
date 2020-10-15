@@ -28,7 +28,7 @@ You can read [The Change history](./CHANGELOG)
 
 If you use this library in the project, then remember that macros may not work correctly in your version of the preprocessor, do first run the [test files](./tests/) in the environment and evaluate the results.
 
-This project can be viewed as a memo with examples of the implementation of non-trivial solutions and other magic. Each macro has a doxygen description, where you can find out what the macro takes and returns, as well as implementation details.
+This project can be viewed as a memo with examples of the implementation of non-trivial solutions and other macros magic. Each macro has a doxygen description, where you can find out what the macro takes and returns, as well as implementation details.
 
 
 ## Contribution
