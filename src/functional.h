@@ -273,6 +273,22 @@
 #define PP_ITERATE_ITEM_DATA(data, item) data
 
 /*!
+   \brief Iteration modifier which returns \a data argument passed in PP_ITERATE before \a item. Use as default macro argument for PP_ITERATE.
+   \param data data passed in PP_ITERATE
+   \param item iterable item
+   \returns \a data \a item
+*/
+#define PP_ITERATE_ITEM_DATA_ITEM(data, item) data item
+
+/*!
+   \brief Iteration modifier which returns comma leaded \a data argument passed in PP_ITERATE before \a item. Use as default macro argument for PP_ITERATE.
+   \param data data passed in PP_ITERATE
+   \param item iterable item
+   \returns comma leaded \a data and \a item
+*/
+#define PP_ITERATE_ITEM_DATA_ITEM_COMMA(data, item) PP_COMMA data item
+
+/*!
    \brief Iteration modifier which returns comma leaded \a data argument passed in PP_ITERATE. Use as default macro argument for PP_ITERATE.
    \param data data passed in PP_ITERATE
    \param item iterable item
@@ -388,6 +404,22 @@
    \returns list separated by \a separator with results of apply \a macro on every item of arguments list
 */
 #define PP_SEPARATE_LIST_M(macro, separator, ... ) PP_ITERATE_INVOKE( macro, ( PP_UNPAREN( PP_APPLY( PP_HEAD (__VA_ARGS__) ) ))) PP_ITERATE( PP_ITERATE_ITEM_MACRO , separator macro , PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
+
+/*!
+   \brief Add \a term before each item form arguments list. Maximum iterate is PP_VA_MAXARGS arguments.
+   \param term data passed in PP_ITERATE
+   \param __VA_ARGS__ arguments list
+   \returns list without commas with added \a term before each item
+*/
+#define PP_LIST_TERM_BEFORE(term, ... ) PP_ITERATE( PP_ITERATE_ITEM_DATA_ITEM , term, __VA_ARGS__ )
+
+/*!
+   \brief Add \a term before each item form arguments list and separate with commas. Maximum iterate is PP_VA_MAXARGS arguments.
+   \param term data passed in PP_ITERATE
+   \param __VA_ARGS__ arguments list
+   \returns list with commas with added \a term before each item
+*/
+#define PP_LIST_TERM_BEFORE_COMMAS(term, ... ) PP_APPLY( PP_HEAD (__VA_ARGS__)) PP_ITERATE( PP_ITERATE_ITEM_DATA_ITEM_COMMA , term, PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
 
 /*!
    \brief Append \a item to all lists in arguments. Maximum lists count in arguments is PP_VA_MAXARGS.
