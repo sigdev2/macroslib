@@ -435,7 +435,7 @@
    \param __VA_ARGS__ arguments list
    \returns list with commas with added \a term before each item
 */
-#define PP_LIST_TERM_BEFORE_COMMAS(term, ... ) PP_APPLY( PP_HEAD (__VA_ARGS__)) PP_ITERATE( PP_ITERATE_ITEM_DATA_ITEM_COMMA , term, PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
+#define PP_LIST_TERM_BEFORE_COMMAS(term, ... ) term PP_APPLY( PP_HEAD (__VA_ARGS__)) PP_ITERATE( PP_ITERATE_ITEM_DATA_ITEM_COMMA , term, PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
 
 /*!
    \brief Add \a term before each result of apply \a macro to item form arguments list. Maximum iterate is PP_VA_MAXARGS arguments.
