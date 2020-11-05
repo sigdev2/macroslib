@@ -294,7 +294,7 @@
    \param item iterable item
    \returns \a pair second and \a pair first applayed as functional macro on \a item
 */
-#define PP_ITERATE_ITEM_DATA_ITEM_M(pair, item) PP_APPLY(PP_TAIL ( pair )) PP_ITERATE_INVOKE( PP_CAR( pair ), item )
+#define PP_ITERATE_ITEM_DATA_ITEM_M(pair, item) PP_APPLY(PP_TAIL pair) PP_ITERATE_INVOKE( PP_CAR( pair ), PP_PAREN( item ) )
 
 /*!
    \brief Iteration modifier which use passed to PP_ITERATE data as \a pair where first is functional macro which accept \a item as argument and second is term for insert before comma leaded result. Use as default macro argument for PP_ITERATE.
@@ -302,7 +302,7 @@
    \param item iterable item
    \returns comma leaded \a pair second and \a pair first applayed as functional macro on \a item
 */
-#define PP_ITERATE_ITEM_DATA_ITEM_COMMA_M(pair, item) PP_COMMA PP_APPLY(PP_TAIL ( pair )) PP_ITERATE_INVOKE( PP_CAR( pair ), item )
+#define PP_ITERATE_ITEM_DATA_ITEM_COMMA_M(pair, item) PP_COMMA PP_APPLY(PP_TAIL pair) PP_ITERATE_INVOKE( PP_CAR( pair ), PP_PAREN( item ) )
 
 /*!
    \brief Iteration modifier which returns comma leaded \a data argument passed in PP_ITERATE. Use as default macro argument for PP_ITERATE.
@@ -453,7 +453,7 @@
    \param __VA_ARGS__ arguments list
    \returns list with commas with added \a term before each result of apply \a macro to item
 */
-#define PP_LIST_TERM_BEFORE_COMMAS_M(macro, term, ... ) PP_ITERATE_INVOKE( macro, PP_PAREN( PP_APPLY( PP_HEAD (__VA_ARGS__) ) )) PP_ITERATE( PP_ITERATE_ITEM_DATA_ITEM_COMMA_M , ( macro, term ), PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
+#define PP_LIST_TERM_BEFORE_COMMAS_M(macro, term, ... ) term PP_ITERATE_INVOKE( macro, PP_PAREN( PP_APPLY( PP_HEAD (__VA_ARGS__) ) )) PP_ITERATE( PP_ITERATE_ITEM_DATA_ITEM_COMMA_M , ( macro, term ), PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
 
 /*!
    \brief Append \a item to all lists in arguments. Maximum lists count in arguments is PP_VA_MAXARGS.
