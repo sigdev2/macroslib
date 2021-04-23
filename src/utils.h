@@ -142,6 +142,13 @@
 */
 #define PP_STR(x) PP_STR_A(x)
 
+/*!
+   \brief Add lead underscore to \a x
+   \param x value
+   \returns \a x value with lead underscore
+*/
+#define PP_UNDERSCORE(x) PP_CAT_A(_, x )
+
 /*! 
    \brief Generate code uniq var name like ___some_value_<line_number>
    \returns ___some_value_<line_number>
