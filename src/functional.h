@@ -469,7 +469,7 @@
    \param __VA_ARGS__ lists in parentheses
    \returns commed list of lists in parentheses with an \a item prepended to each list
 */
-#define PP_PREPEND_ALL(item, ... ) PP_CAT_PAREN( PP_APPLY( PP_HEAD (__VA_ARGS__) ), item ) PP_ITERATE(PP_ITERATE_ITEM_PREPEND, item , PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
+#define PP_PREPEND_ALL(item, ... ) PP_CAT_PAREN( item , PP_APPLY( PP_HEAD (__VA_ARGS__) ) ) PP_ITERATE(PP_ITERATE_ITEM_PREPEND, item , PP_APPLY( PP_TAIL (__VA_ARGS__) ) )
 
 /*!
    \brief Apply \a macro to every item of arguments list. Maximum iterate is PP_VA_MAXARGS arguments.
