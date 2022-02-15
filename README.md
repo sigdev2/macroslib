@@ -38,7 +38,7 @@ Use with CMake:
         if((NOT MACROS_LIB_SOURCE) OR (NOT EXISTS ${MACROS_LIB_SOURCE}))
             execute_process(COMMAND git clone ${GIT_URL} ${CMAKE_CURRENT_SOURCE_DIR}/${GIT_FOLDER}/)
         else()
-            execute_process(COMMAND git push WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${GIT_FOLDER}/)
+            # execute_process(COMMAND git push WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${GIT_FOLDER}/)
             execute_process(COMMAND git pull WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${GIT_FOLDER}/)
         endif()
         target_include_directories(${TARGET} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}${INCLUDE_PATH})
