@@ -33,7 +33,7 @@ This project can be viewed as a memo with examples of the implementation of non-
 Use with CMake:
 
     function(GIT_REPOSITORY TARGET GIT_FOLDER GIT_URL INCLUDE_PATH CHECK_FILE)
-        find_path(MACROS_LIB_SOURCE NAMES macroslib.h PATHS ${CMAKE_CURRENT_SOURCE_DIR}${INCLUDE_PATH})
+        find_path(MACROS_LIB_SOURCE NAMES ${CHECK_FILE} PATHS ${CMAKE_CURRENT_SOURCE_DIR}${INCLUDE_PATH})
 
         if((NOT MACROS_LIB_SOURCE) OR (NOT EXISTS ${MACROS_LIB_SOURCE}))
             execute_process(COMMAND git clone ${GIT_URL} ${CMAKE_CURRENT_SOURCE_DIR}/${GIT_FOLDER}/)
